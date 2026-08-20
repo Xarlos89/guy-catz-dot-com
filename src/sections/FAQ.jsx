@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Reveal from '../components/Reveal'
 
 const faqs = [
   {
@@ -31,22 +32,28 @@ function FAQItem({ q, a }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="border-b border-white/10 last:border-0">
+    <div className="border-b border-stone last:border-0">
       <button
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left"
+        className="w-full flex items-center justify-between gap-6 py-6 text-left group"
       >
-        <span className="font-sans font-semibold text-white text-sm">{q}</span>
-        <svg
-          className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-          fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
+        <span className="font-serif text-lg sm:text-xl text-umber leading-snug group-hover:text-fern transition-colors duration-300">
+          {q}
+        </span>
+        <span
+          aria-hidden="true"
+          className={`shrink-0 w-8 h-8 rounded-full border border-stone flex items-center justify-center transition-transform duration-500 ease-out ${
+            open ? 'rotate-45 bg-sage/25 border-sage' : ''
+          }`}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-        </svg>
+          <svg className="w-3.5 h-3.5 text-umber-soft" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
+            <path strokeLinecap="round" d="M12 5v14M5 12h14" />
+          </svg>
+        </span>
       </button>
       {open && (
-        <p className="font-sans text-sm text-white/50 leading-relaxed pb-5 -mt-1">{a}</p>
+        <p className="font-sans text-[15px] text-umber-soft leading-[1.85] pb-7 pr-12 -mt-1 max-w-2xl">{a}</p>
       )}
     </div>
   )
@@ -54,17 +61,21 @@ function FAQItem({ q, a }) {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="bg-moss py-20 sm:py-28">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8">
-        <div className="text-center mb-10">
-          <p className="label mb-3">FAQ</p>
-          <h2 className="section-heading-light">Good to know</h2>
-        </div>
+    <section id="faq" className="bg-oat pb-24 sm:pb-32">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8">
+        <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-start">
+          <Reveal>
+            <p className="label mb-6">FAQ</p>
+            <h2 className="section-heading">Good to know</h2>
+          </Reveal>
 
-        <div className="max-w-2xl mx-auto bg-moss-light border border-white/5 rounded-2xl px-6">
-          {faqs.map(({ q, a }) => (
-            <FAQItem key={q} q={q} a={a} />
-          ))}
+          <Reveal delay={110}>
+            <div>
+              {faqs.map(({ q, a }) => (
+                <FAQItem key={q} q={q} a={a} />
+              ))}
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -1,76 +1,96 @@
 import { site } from '../siteInfo'
 
 // Drop a file into public/images/ and set this to e.g. '/images/hero.webp'.
-// While it is null the hero falls back to the layered moss gradient below.
+// While it is null the hero rests on the dawn gradient below — which is the
+// intended look, not a fallback: an empty warm field reads calmer than a photo.
 const heroImage = null
+
+const assurances = [
+  'A full private hour',
+  'No referral needed in California',
+  'Out-of-network · superbill provided',
+]
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-end pb-20 overflow-hidden bg-moss">
-      {/* Background */}
-      {heroImage ? (
+    <section
+      id="home"
+      className="relative overflow-hidden min-h-[88vh] sm:min-h-[92vh] flex items-center pt-32 pb-24 sm:pb-28"
+      style={{
+        background:
+          'linear-gradient(180deg, #E4EADF 0%, #F2EFE7 42%, #FBF7F1 100%)',
+      }}
+    >
+      {/* Soft light — two slow-breathing washes rather than a hard image */}
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute -top-32 -left-24 w-[46rem] h-[46rem] rounded-full blur-3xl animate-breathe"
+          style={{ background: 'radial-gradient(circle, rgba(169,184,164,0.55) 0%, rgba(169,184,164,0) 68%)' }}
+        />
+        <div
+          className="absolute -bottom-40 -right-32 w-[42rem] h-[42rem] rounded-full blur-3xl animate-drift"
+          style={{ background: 'radial-gradient(circle, rgba(220,169,123,0.42) 0%, rgba(220,169,123,0) 70%)' }}
+        />
+      </div>
+
+      {heroImage && (
         <img
           src={heroImage}
           alt="Guy Catz guiding a client through a movement session"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover opacity-90"
           fetchpriority="high"
           decoding="async"
         />
-      ) : (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 70% 55% at 78% 18%, rgba(193,113,74,0.38) 0%, rgba(38,51,43,0) 62%),' +
-              'radial-gradient(ellipse 85% 65% at 12% 82%, rgba(143,161,137,0.30) 0%, rgba(38,51,43,0) 60%),' +
-              'linear-gradient(170deg, #2F3E33 0%, #26332B 55%, #1C2620 100%)',
-          }}
-        />
       )}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-moss/90 via-moss/40 to-moss/25" />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-8 w-full [text-shadow:0_2px_16px_rgba(28,38,32,0.45)]">
-        <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-white/70 mb-5">
-          {site.neighborhood} · {site.city}
-        </p>
+      <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 w-full">
+        <div className="max-w-2xl">
+          <p className="label mb-7">{site.neighborhood} · Los Angeles</p>
 
-        <h1 className="font-serif font-bold text-white leading-[1.05] mb-6" style={{ fontSize: 'clamp(2.8rem, 8vw, 5.5rem)' }}>
-          Guy Catz<br />
-          <em>Physical Therapy</em>
-        </h1>
+          <h1
+            className="font-serif font-normal text-umber leading-[1.06] tracking-[-0.02em] mb-8"
+            style={{
+              fontSize: 'clamp(2.9rem, 7.5vw, 5rem)',
+              fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'opsz' 34",
+            }}
+          >
+            Come back to<br />
+            <em className="text-fern">your own body</em>
+          </h1>
 
-        <p className="font-serif italic text-white/90 text-lg sm:text-xl max-w-md leading-snug mb-4">
-          Holistic healing through movement — one hour, one person, no rush.
-        </p>
+          <p className="font-sans text-lg sm:text-xl text-umber-soft leading-[1.7] max-w-xl mb-10">
+            One-to-one physical therapy in {site.neighborhood} — hands-on care,
+            unhurried movement, and the time to work out why the pain arrived in
+            the first place.
+          </p>
 
-        <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-white/60 mb-8">
-          Your body already knows the way back
-        </p>
-
-        <div className="flex flex-wrap items-center gap-4">
-          <a href="#book" className="btn-outline-light text-sm tracking-widest uppercase">
-            Book a free consult →
-          </a>
-          <div className="cta-btn">
-            <span className="cta-btn-ring" />
-            <a
-              href={site.phoneHref}
-              className="relative z-10 inline-flex items-center gap-2 font-sans text-sm font-semibold text-white px-5 py-3 rounded-full bg-clay hover:bg-clay-light transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+          <div className="flex flex-wrap items-center gap-4 mb-14">
+            <a href="#book" className="btn-primary">
+              Book a free consult
+            </a>
+            <a href={site.phoneHref} className="btn-ghost">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
               </svg>
               {site.phone}
             </a>
           </div>
+
+          <ul className="flex flex-wrap gap-x-8 gap-y-3">
+            {assurances.map((item) => (
+              <li key={item} className="flex items-center gap-2.5 font-sans text-[13px] text-umber-soft">
+                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-sage-deep" />
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      {/* Scroll hint */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-        <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/40">Scroll</p>
+      {/* Scroll hint — a slow breath, not a bouncing arrow */}
+      <div aria-hidden="true" className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-3">
+        <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-umber-soft/60">Breathe</span>
+        <span className="w-px h-10 bg-gradient-to-b from-umber-soft/40 to-transparent animate-breathe" />
       </div>
     </section>
   )

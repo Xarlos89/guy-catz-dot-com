@@ -1,4 +1,5 @@
 import Photo from '../components/Photo'
+import Reveal from '../components/Reveal'
 
 const principles = [
   {
@@ -15,55 +16,42 @@ const principles = [
   },
 ]
 
-const photos = [
-  { src: null, alt: 'Hands-on assessment at the treatment table' },
-  { src: null, alt: 'Breathwork on the mat before loading' },
-  { src: null, alt: 'Kettlebell carry across the studio floor' },
-  { src: null, alt: 'Coaching a hip hinge with a dowel' },
-  { src: null, alt: 'Gait retraining barefoot on the turf strip' },
-  { src: null, alt: 'Reviewing the home program together' },
-]
-
 export default function Approach() {
   return (
-    <section id="approach" className="bg-sand py-20 sm:py-28 border-t border-stone">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <p className="label mb-3">The approach · Holistic by habit</p>
-          <h2 className="section-heading mb-5">Healing is not something done to you.</h2>
-          <p className="font-sans text-gray-500 text-sm leading-relaxed">
-            Holistic gets used loosely. Here it means something plain: we treat the
-            person the pain belongs to. That means the hour looks at sleep, stress
-            and the desk you sit at as seriously as it looks at your hip. Hands-on
-            work opens a window; the movement you do in that window is what makes
-            the change stick. You are not a passenger in this — you are the one
-            doing the healing, and the job of this practice is to make the path
-            obvious.
-          </p>
-        </div>
+    <section id="approach" className="bg-fern pt-8 pb-24 sm:pb-32">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8">
+        <Reveal>
+          <div className="max-w-2xl mx-auto text-center mb-16">
+            <p className="label-light mb-6">The approach</p>
+            <h2 className="section-heading-light mb-8">
+              Healing is not something<br className="hidden sm:block" /> done to you.
+            </h2>
+            <p className="lede-light">
+              Holistic gets used loosely. Here it means something plain: we treat
+              the person the pain belongs to. Sleep, stress and the desk you sit
+              at get taken as seriously as your hip. Hands-on work opens a window;
+              the movement you do in that window is what makes the change stick.
+              You are the one doing the healing — this practice just makes the
+              path obvious.
+            </p>
+          </div>
+        </Reveal>
 
-        {/* Feature photo */}
-        <div className="rounded-3xl overflow-hidden shadow-lg aspect-[3/2] mb-3 sm:mb-4">
-          <Photo src={null} alt="A session in progress in the Silver Lake studio" />
-        </div>
+        <Reveal delay={100}>
+          <div className="rounded-[3rem] overflow-hidden aspect-[21/9] mb-16 shadow-lift">
+            <Photo src={null} alt="A session in progress in the studio" tone="dark" />
+          </div>
+        </Reveal>
 
-        {/* Principles */}
-        <div className="grid sm:grid-cols-3 gap-4 mb-10">
+        <div className="grid sm:grid-cols-3 gap-10 sm:gap-8">
           {principles.map(({ title, body }, i) => (
-            <div key={title} className="bg-white rounded-2xl p-6 shadow-sm">
-              <p className="font-serif font-bold text-clay text-2xl leading-none mb-3">0{i + 1}</p>
-              <p className="font-sans font-semibold text-bark text-sm mb-2">{title}</p>
-              <p className="font-sans text-sm text-gray-500 leading-relaxed">{body}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Supporting grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          {photos.map(({ src, alt }) => (
-            <div key={alt} className="aspect-[4/3] rounded-2xl overflow-hidden">
-              <Photo src={src} alt={alt} />
-            </div>
+            <Reveal key={title} delay={i * 110}>
+              <div className={`sm:px-6 ${i > 0 ? 'sm:border-l sm:border-linen/15' : 'sm:pl-0'}`}>
+                <p className="font-serif text-ochre text-2xl leading-none mb-5">0{i + 1}</p>
+                <p className="font-sans font-medium text-linen text-[15px] mb-3">{title}</p>
+                <p className="font-sans text-[15px] text-linen/60 leading-relaxed">{body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -6,7 +6,6 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Programs', href: '#programs' },
   { label: 'Approach', href: '#approach' },
-  { label: 'Services', href: '#services' },
   { label: 'Reviews', href: '#reviews' },
 ]
 
@@ -14,56 +13,50 @@ export default function Navbar() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 60)
+    const onScroll = () => setVisible(window.scrollY > 120)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-sand border-b border-stone transition-opacity duration-300 ${
-        visible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'
       }`}
     >
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between gap-4">
-        <a href="#home" className="font-serif text-lg text-bark leading-none shrink-0">
-          Guy <em>Catz</em>
-        </a>
+      {/* Floating, translucent — no hard bar across the page */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-3 sm:pt-4">
+        <div className="flex items-center justify-between gap-4 rounded-full bg-linen/85 backdrop-blur-md shadow-soft px-5 sm:px-7 h-14">
+          <a href="#home" className="font-serif text-[17px] text-umber leading-none shrink-0">
+            Guy <em className="text-fern">Catz</em>
+          </a>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map(({ label, href }) => (
+          <nav className="hidden md:flex items-center gap-7">
+            {navLinks.map(({ label, href }) => (
+              <a
+                key={href}
+                href={href}
+                className="font-sans text-[13px] text-umber-soft hover:text-fern transition-colors duration-300"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
             <a
-              key={href}
-              href={href}
-              className="font-sans text-xs tracking-widest uppercase text-bark/60 hover:text-bark transition-colors"
+              href={site.phoneHref}
+              className="hidden sm:block font-sans text-[13px] text-umber-soft hover:text-fern transition-colors duration-300"
             >
-              {label}
+              {site.phone}
             </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3 sm:gap-4">
-          <a
-            href={site.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="text-bark/60 hover:text-bark transition-colors"
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-            </svg>
-          </a>
-          <a href={site.phoneHref} aria-label="Call the studio" className="text-bark/60 hover:text-bark transition-colors sm:hidden">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-            </svg>
-          </a>
-          <a href="#book" className="btn-dark text-xs tracking-widest uppercase px-5 py-2.5">
-            Book
-          </a>
+            <a
+              href="#book"
+              className="inline-flex items-center rounded-full bg-terracotta text-linen font-sans font-medium text-[13px] px-5 py-2.5 transition-colors duration-500 hover:bg-terracotta-deep"
+            >
+              Book
+            </a>
+          </div>
         </div>
       </div>
     </header>

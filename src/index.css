@@ -2,83 +2,168 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Self-hosted fonts (latin subset, pulled from Google Fonts).
+   Local files mean no third-party request on page load and no flash of
+   fallback type while a CDN answers. Both faces are variable — Fraunces
+   carries the SOFT and WONK axes we lean on for the headings. */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('/fonts/fraunces-italic-latin.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('/fonts/dmsans-latin.woff2') format('woff2-variations');
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply font-sans text-bark bg-sand;
+    @apply font-sans font-normal text-umber bg-linen antialiased;
+    letter-spacing: 0.005em;
+  }
+
+  /* Fine paper grain across the whole page — applied once, at the page
+     level, so it never leaves a seam where two colour bands meet. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+  }
+
+  /* Fraunces carries a SOFT axis — rounding the terminals is most of the
+     difference between "editorial" and "calm". WONK adds the organic
+     alternates, which we only want at display sizes. */
+  .font-serif {
+    font-variation-settings: 'SOFT' 100, 'WONK' 0, 'opsz' 24;
+  }
+
+  ::selection {
+    background: theme('colors.sage.DEFAULT');
+    color: theme('colors.fern.deep');
   }
 }
 
 @layer components {
+  /* ── Type ──────────────────────────────────────────────── */
   .label {
-    @apply font-sans text-xs font-semibold tracking-[0.18em] uppercase text-clay;
+    @apply font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-terracotta-deep;
   }
 
   .label-light {
-    @apply font-sans text-xs font-semibold tracking-[0.18em] uppercase text-clay-light;
+    @apply font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-ochre;
+  }
+
+  /* Headings stay at 400 — weight is where "clinic" creeps back in */
+  .section-heading,
+  .section-heading-light {
+    @apply font-serif font-normal leading-[1.15] tracking-[-0.015em];
+    font-size: clamp(2rem, 4.4vw, 2.9rem);
+    font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 30;
   }
 
   .section-heading {
-    @apply font-serif font-bold text-3xl sm:text-4xl text-bark leading-tight;
+    @apply text-umber;
   }
 
   .section-heading-light {
-    @apply font-serif font-bold text-3xl sm:text-4xl text-white leading-tight;
+    @apply text-linen;
   }
 
-  .btn-dark {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3
-           bg-bark text-sand font-sans font-medium text-sm tracking-wide
-           rounded-full transition-opacity duration-200 hover:opacity-80;
+  .lede {
+    @apply font-sans text-[15px] sm:text-base text-umber-soft leading-[1.85];
   }
 
-  .btn-clay {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3
-           bg-clay text-white font-sans font-medium text-sm tracking-wide
-           rounded-full transition-colors duration-200 hover:bg-clay-light;
+  .lede-light {
+    @apply font-sans text-[15px] sm:text-base text-linen/70 leading-[1.85];
   }
 
-  .btn-outline-light {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3
-           border border-white/70 text-white font-sans font-medium text-sm tracking-wide
-           rounded-full transition-colors duration-200 hover:bg-white hover:text-bark;
+  /* ── Buttons — pills, never sharp ──────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
+           bg-terracotta text-linen font-sans font-medium text-sm
+           rounded-full shadow-soft
+           transition-all duration-500 ease-out hover:bg-terracotta-deep hover:shadow-lift;
   }
 
-  .info-card {
-    @apply bg-white rounded-2xl p-5 shadow-md;
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
+           border border-stone text-umber font-sans font-medium text-sm
+           rounded-full bg-white/40
+           transition-colors duration-500 ease-out hover:bg-white/80 hover:border-sage;
   }
 
-  .info-card-label {
-    @apply text-[10px] font-sans font-semibold tracking-[0.15em] uppercase text-gray-400 mb-1;
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
+           border border-linen/30 text-linen font-sans font-medium text-sm
+           rounded-full transition-colors duration-500 ease-out hover:bg-linen/10 hover:border-linen/60;
   }
 
-  .info-card-value {
-    @apply font-sans font-semibold text-bark text-sm leading-snug;
+  /* ── Surfaces — soft, borderless, warm shadow ──────────── */
+  .soft-card {
+    @apply bg-white/70 rounded-soft p-7 shadow-soft;
   }
 
-  .cta-btn {
-    position: relative;
+  .soft-card-dark {
+    @apply bg-linen/[0.06] rounded-soft p-7 border border-linen/10;
   }
 
-  .cta-btn-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background-color: theme('colors.clay.DEFAULT');
-    animation: cta-ping 2.4s ease-out infinite;
-    z-index: 0;
+  .hairline {
+    @apply bg-stone;
   }
-}
 
-@keyframes cta-ping {
-  0%   { transform: scale(1);    opacity: 0.45; }
-  100% { transform: scale(1.12); opacity: 0; }
+  /* ── Motion ────────────────────────────────────────────── */
+  .reveal-ready .reveal {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  .reveal-ready .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .cta-btn-ring { animation: none; opacity: 0; }
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-ready .reveal,
+  .reveal-ready .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-breathe,
+  .animate-drift {
+    animation: none !important;
+  }
 }
