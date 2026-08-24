@@ -2,26 +2,25 @@ import Reveal from '../components/Reveal'
 import { site } from '../siteInfo'
 
 const infoCards = [
-  { label: 'Session', value: '60 minutes', sub: 'first visit runs 90' },
+  { label: 'Care', value: 'One-on-one', sub: 'the whole session, every session' },
+  { label: 'Where', value: 'Home · Office · Telehealth', sub: `office in ${site.neighborhood}` },
   { label: 'Hours', value: site.hours, sub: site.hoursNote },
-  { label: 'Studio', value: site.neighborhood, sub: 'in-home visits available' },
-  { label: 'Format', value: 'One-to-one', sub: 'never double-booked' },
+  { label: 'Model', value: 'Out-of-network', sub: 'no insurance-driven limits' },
 ]
 
 const included = [
-  'A full-body movement and posture assessment',
-  'Hands-on manual therapy where it helps',
-  'Breathwork and nervous-system down-regulation',
-  'A home practice short enough that you will do it',
-  'Video walkthroughs of every exercise',
-  'Text access to your therapist between visits',
-  'Written notes after each session',
+  'Time to understand your story before anything is treated',
+  'A full movement, strength and balance assessment',
+  'Hands-on manual therapy — twelve years of it, before the doctorate',
+  'A treatment plan that is both evidence-based and deeply personal',
+  'A home program built around your goals, not a generic handout',
+  'The knowledge and tools to take an active role in your recovery',
 ]
 
 const rates = [
-  { name: 'First visit', detail: '90 minutes · evaluation', price: '$225' },
-  { name: 'Follow-up', detail: '60 minutes · per session', price: '$175' },
-  { name: 'Course of six', detail: 'booked together · save $90', price: '$960' },
+  { name: 'Initial evaluation', detail: '90 minutes', price: '$225' },
+  { name: 'Follow-up visit', detail: '60 minutes', price: '$175' },
+  { name: 'Course of six', detail: 'booked together', price: '$960' },
 ]
 
 export default function Practice() {
@@ -55,11 +54,11 @@ export default function Practice() {
           {/* Included */}
           <Reveal>
             <p className="label mb-5">The practice</p>
-            <h2 className="section-heading mb-7">What an hour holds</h2>
+            <h2 className="section-heading mb-7">What a session holds</h2>
             <p className="lede mb-10 max-w-lg">
-              Every session is the same shape and never the same hour. We start
-              where your week left your body, and finish with something you can
-              carry home.
+              I know what it feels like to wait months for an appointment, to
+              feel unheard, to leave without a clear path forward. Those
+              experiences are why this practice is built the way it is.
             </p>
 
             <ul className="space-y-4">
@@ -89,8 +88,9 @@ export default function Practice() {
               </div>
 
               <p className="font-sans text-[13px] text-umber-soft leading-relaxed mt-7 mb-8">
-                Out-of-network. A superbill for your insurer comes after every
-                visit, and HSA and FSA cards are welcome.
+                Working outside insurance networks is what makes the full
+                one-on-one hour possible. A superbill for your insurer comes
+                after every visit, and HSA and FSA cards are welcome.
               </p>
 
               <a href="#book" className="btn-primary w-full">

@@ -5,11 +5,7 @@ import { site } from '../siteInfo'
 // intended look, not a fallback: an empty warm field reads calmer than a photo.
 const heroImage = null
 
-const assurances = [
-  'A full private hour',
-  'No referral needed in California',
-  'Out-of-network · superbill provided',
-]
+const settings = ['In your home', `${site.neighborhood} office`, 'Telehealth']
 
 export default function Hero() {
   return (
@@ -36,7 +32,7 @@ export default function Hero() {
       {heroImage && (
         <img
           src={heroImage}
-          alt="Guy Catz guiding a client through a movement session"
+          alt={`${site.doctor} guiding a patient through a movement session`}
           className="absolute inset-0 w-full h-full object-cover opacity-90"
           fetchpriority="high"
           decoding="async"
@@ -45,23 +41,23 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 w-full">
         <div className="max-w-2xl">
-          <p className="label mb-7">{site.neighborhood} · Los Angeles</p>
+          <p className="label mb-7">{site.practice} · {site.city}</p>
 
           <h1
             className="font-serif font-normal text-umber leading-[1.06] tracking-[-0.02em] mb-8"
             style={{
-              fontSize: 'clamp(2.9rem, 7.5vw, 5rem)',
+              fontSize: 'clamp(2.6rem, 6.6vw, 4.4rem)',
               fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'opsz' 34",
             }}
           >
-            Come back to<br />
-            <em className="text-fern">your own body</em>
+            Recovery is more than<br />
+            <em className="text-fern">healing an injury</em>
           </h1>
 
           <p className="font-sans text-lg sm:text-xl text-umber-soft leading-[1.7] max-w-xl mb-10">
-            One-to-one physical therapy in {site.neighborhood} — hands-on care,
-            unhurried movement, and the time to work out why the pain arrived in
-            the first place.
+            It's about restoring peace to mind and body — restoring confidence,
+            strength, and quality of life. One-on-one physical therapy with
+            {' '}{site.doctor}, {site.credentials}.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mb-14">
@@ -77,7 +73,7 @@ export default function Hero() {
           </div>
 
           <ul className="flex flex-wrap gap-x-8 gap-y-3">
-            {assurances.map((item) => (
+            {settings.map((item) => (
               <li key={item} className="flex items-center gap-2.5 font-sans text-[13px] text-umber-soft">
                 <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-sage-deep" />
                 {item}

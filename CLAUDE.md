@@ -1,12 +1,14 @@
-# Guy Catz Physical Therapy — Claude Code Guide
+# Healing Path Rehabilitation — Claude Code Guide
 
 ## What this project is
 
-Static marketing website for Guy Catz, a Doctor of Physical Therapy in Los Angeles whose practice is built around holistic healing through movement. Single-page scroll. No backend, no router, no database. Builds to `dist/` and deploys to GitHub Pages via GitHub Actions.
+Static marketing website for **Healing Path Rehabilitation** — the practice of Guy H. Catz, PT, DPT, in Los Angeles. One-on-one physical therapy delivered three ways: in the patient's home, at the West Los Angeles office, or by telehealth. Single-page scroll. No backend, no router, no database. Builds to `dist/` and deploys to GitHub Pages via GitHub Actions.
+
+The domain is `guy-catz.com`; the practice name is Healing Path Rehabilitation. The wordmark reads "Healing Path" — don't "correct" it to the doctor's name.
 
 The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is a calm, mostly-light field with curved seams. See "Bands and seams" below before adding anything.
 
-> **Most copy on this site is placeholder.** See "What's placeholder" at the bottom before showing it to a client.
+> **The words are the client's; the contact details and prices are not.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. See "What's placeholder" at the bottom for what still needs replacing.
 
 ## Commands
 
@@ -38,14 +40,14 @@ src/
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
   sections/          one file per visible scroll section, assembled in App.jsx
     Hero.jsx         light dawn gradient, two breathing washes, no photo needed
-    Practice.jsx     hairline fact row, what an hour holds, rates (#practice)
-    About.jsx        Guy's bio + portrait
-    Programs.jsx     1:1 / small-group / virtual — `tiers` array (#programs)
-    Approach.jsx     philosophy + `principles` array
-    Services.jsx     "reasons people come in" — `services` array
+    Practice.jsx     hairline fact row, what a session holds, rates (#practice)
+    About.jsx        "Meet our doctor" — bio + portrait + `facts` credentials grid
+    Programs.jsx     the three care settings — `tiers` array (#programs)
+    Approach.jsx     the Healing Path approach, `principles`, closing mission quote
+    Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
     Process.jsx      four-step timeline — `steps` array
-    Gallery.jsx      masonry studio grid — `photos` array
-    Reviews.jsx      testimonial pull-quotes — `reviews` array
+    Gallery.jsx      masonry grid of the practice — `photos` array
+    Reviews.jsx      real patient testimonials — `featured` + `reviews`
     FAQ.jsx          accordion — `faqs` array (uses useState per item)
     BookingCTA.jsx   closing call-to-action + map (#book)
   App.jsx            orders the sections and places the dividers between bands
@@ -146,11 +148,12 @@ The Navbar links to `#practice`, `#about`, `#programs`, `#approach`, `#reviews` 
 
 ## Where the content lives
 
-- **Contact details** (phone, email, address, hours, socials) — `src/siteInfo.js`, imported everywhere. `index.html` keeps its own copy for `<meta>` tags and JSON-LD — **update both.**
+- **Practice name, doctor, credentials, contact details** — `src/siteInfo.js`, imported everywhere. `index.html` keeps its own copy for `<meta>` tags and JSON-LD — **update both.**
 - **Rates** — `src/sections/Practice.jsx` — the `rates` array
 - **Session info** — `src/sections/Practice.jsx` — the `infoCards` and `included` arrays
-- **Program tiers and prices** — `src/sections/Programs.jsx` — the `tiers` array
-- **Conditions treated** — `src/sections/Services.jsx` — the `services` array
+- **Care settings** (home / office / telehealth) — `src/sections/Programs.jsx` — the `tiers` array
+- **Specialties and treatments** — `src/sections/Services.jsx` — the `experience` and `provided` arrays
+- **Bio and credentials** — `src/sections/About.jsx` — the prose plus the `facts` array
 - **Intake steps** — `src/sections/Process.jsx` — the `steps` array
 - **FAQ** — `src/sections/FAQ.jsx` — the `faqs` array (mirrored in the `FAQPage` JSON-LD in `index.html`)
 - **Testimonials** — `src/sections/Reviews.jsx` — the `reviews` array
@@ -179,14 +182,17 @@ The Navbar links to `#practice`, `#about`, `#programs`, `#approach`, `#reviews` 
 
 ## What's placeholder / not yet real
 
-Everything below is invented and needs replacing with real details before launch:
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, the three care settings, and all three testimonials.
 
-- **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, the email and street address are made up
-- **All prices** — Practice rates ($225 / $175 / $960) and Programs tiers ($175 / $45 / $120)
-- **Guy's bio and credentials** — `About.jsx`, including "DPT, OCS" and "practising since 2011"
-- **Testimonials** — `Reviews.jsx` is entirely placeholder text and renders a visible "awaiting real client reviews" badge. Replace with real, permissioned reviews and delete the `PlaceholderNote` component
-- **FAQ answers** — plausible but unverified; the insurance, cancellation and direct-access policies must be confirmed
+Still invented and needing replacement before launch:
+
+- **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, and the email and street address are made up. The office is in West Los Angeles; the exact address is not known
+- **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
+- **All prices** — the Practice rates ($225 / $175 / $960), including the superbill / HSA / FSA claims that sit under them. The out-of-network model itself is real (it comes from the client's copy); the numbers are not
+- **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
 - **All photography** — `public/images/` is empty; every slot renders a placeholder
-- **Google Maps embed** — `BookingCTA.jsx` points at a generic Silver Lake search; swap for a real place embed
+- **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
 - **OG image** — `public/og-image.jpg` does not exist, so the `og:image` meta tags are commented out in `index.html` until it does
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
+
+One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission**, and two of the three describe care given at a rehab hospital. Worth confirming the release before launch.

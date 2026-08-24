@@ -6,12 +6,12 @@ import { site } from '../siteInfo'
 // the "photo coming soon" placeholder instead.
 // `tall` gives a slot a portrait crop, which keeps the grid from marching.
 const photos = [
-  { src: null, alt: 'The studio, morning light through the front window', tall: true },
-  { src: null, alt: 'Treatment table and manual therapy corner' },
-  { src: null, alt: 'Racks, kettlebells and the loading area' },
-  { src: null, alt: 'A client working through a loaded carry', tall: true },
-  { src: null, alt: 'Mat work — breath and floor mobility' },
-  { src: null, alt: 'Small-group class in progress' },
+  { src: null, alt: 'The West LA treatment room, morning light', tall: true },
+  { src: null, alt: 'Hands-on manual therapy at the table' },
+  { src: null, alt: 'The strength and loading area' },
+  { src: null, alt: 'A home visit — working with what the room has', tall: true },
+  { src: null, alt: 'Balance and gait retraining' },
+  { src: null, alt: 'Reviewing a home program together' },
 ]
 
 export default function Gallery() {
@@ -24,11 +24,12 @@ export default function Gallery() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <p className="label mb-6">The studio</p>
+            <p className="label mb-6">The practice</p>
             <h2 className="section-heading mb-6">Where the work happens</h2>
             <p className="lede">
-              A quiet room in {site.neighborhood} — no queue, no televisions, no
-              one else booked over the top of your hour.
+              A private room in {site.neighborhood}, or your own front room — no
+              queue, no televisions, and no one else booked over the top of your
+              hour.
             </p>
           </div>
         </Reveal>

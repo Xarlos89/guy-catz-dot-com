@@ -1,18 +1,19 @@
 import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
+import { site } from '../siteInfo'
 
 const principles = [
   {
-    title: 'Look at the whole body',
-    body: 'A cranky shoulder is rarely a shoulder problem. We assess how you breathe, stand, load and rest before touching the sore part.',
+    title: 'Personalized attention',
+    body: 'Time to understand each person\'s story, and a plan shaped around it. Your goals become my goals from the moment we begin working together.',
   },
   {
-    title: 'Load is the medicine',
-    body: 'Tissue gets stronger when it is asked to. Rest has its place, but the road back almost always runs through graded, well-coached movement.',
+    title: 'Effective techniques',
+    body: 'Hands-on care and progressive loading, chosen because the evidence supports them and because they suit you — not because they fill an hour.',
   },
   {
-    title: 'Calm the system',
-    body: 'Pain lives in a nervous system, not just a joint. Breath, tempo and time under tension teach that system it is safe to move again.',
+    title: 'A holistic approach',
+    body: 'Recovery is more than healing an injury. It is restoring peace to mind and body, restoring confidence, strength, and quality of life.',
   },
 ]
 
@@ -22,28 +23,29 @@ export default function Approach() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mx-auto text-center mb-16">
-            <p className="label-light mb-6">The approach</p>
+            <p className="label-light mb-6">The Healing Path approach</p>
             <h2 className="section-heading-light mb-8">
-              Healing is not something<br className="hidden sm:block" /> done to you.
+              Our bodies have an incredible<br className="hidden sm:block" /> capacity to heal.
             </h2>
             <p className="lede-light">
-              Holistic gets used loosely. Here it means something plain: we treat
-              the person the pain belongs to. Sleep, stress and the desk you sit
-              at get taken as seriously as your hip. Hands-on work opens a window;
-              the movement you do in that window is what makes the change stick.
-              You are the one doing the healing — this practice just makes the
-              path obvious.
+              Small changes in how we move can lead to meaningful improvements in
+              our health, and ultimately help us reclaim our independence and
+              well-being. Whether your goal is to return to your favorite sport,
+              get back to work, get stronger after being discharged from
+              hospital, or simply move through daily life with less pain — my
+              focus is on restoring movement and function, reducing pain, and
+              building strength through personalized, results-driven care.
             </p>
           </div>
         </Reveal>
 
         <Reveal delay={100}>
           <div className="rounded-[3rem] overflow-hidden aspect-[21/9] mb-16 shadow-lift">
-            <Photo src={null} alt="A session in progress in the studio" tone="dark" />
+            <Photo src={null} alt={`${site.doctor} working with a patient`} tone="dark" />
           </div>
         </Reveal>
 
-        <div className="grid sm:grid-cols-3 gap-10 sm:gap-8">
+        <div className="grid sm:grid-cols-3 gap-10 sm:gap-8 mb-16">
           {principles.map(({ title, body }, i) => (
             <Reveal key={title} delay={i * 110}>
               <div className={`sm:px-6 ${i > 0 ? 'sm:border-l sm:border-linen/15' : 'sm:pl-0'}`}>
@@ -54,6 +56,21 @@ export default function Approach() {
             </Reveal>
           ))}
         </div>
+
+        {/* The mission, in his own words */}
+        <Reveal>
+          <blockquote className="max-w-2xl mx-auto text-center">
+            <p className="font-serif italic text-linen text-xl sm:text-2xl leading-[1.55] mb-6">
+              “My mission is to empower every patient with the knowledge, tools,
+              and confidence to take an active role in their recovery and enjoy
+              lasting results. I look forward to being a trusted ally on your
+              healing journey.”
+            </p>
+            <footer className="font-sans text-[13px] tracking-[0.16em] uppercase text-ochre">
+              {site.doctor}, {site.credentials}
+            </footer>
+          </blockquote>
+        </Reveal>
       </div>
     </section>
   )

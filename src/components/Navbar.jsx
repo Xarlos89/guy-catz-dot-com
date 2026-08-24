@@ -3,10 +3,10 @@ import { site } from '../siteInfo'
 
 const navLinks = [
   { label: 'Practice', href: '#practice' },
-  { label: 'About', href: '#about' },
-  { label: 'Programs', href: '#programs' },
+  { label: 'Our Doctor', href: '#about' },
+  { label: 'Where', href: '#programs' },
   { label: 'Approach', href: '#approach' },
-  { label: 'Reviews', href: '#reviews' },
+  { label: 'Who I Treat', href: '#services' },
 ]
 
 export default function Navbar() {
@@ -27,8 +27,8 @@ export default function Navbar() {
       {/* Floating, translucent — no hard bar across the page */}
       <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-3 sm:pt-4">
         <div className="flex items-center justify-between gap-4 rounded-full bg-linen/85 backdrop-blur-md shadow-soft px-5 sm:px-7 h-14">
-          <a href="#home" className="font-serif text-[17px] text-umber leading-none shrink-0">
-            Guy <em className="text-fern">Catz</em>
+          <a href="#home" className="font-serif text-[17px] text-umber leading-none shrink-0 whitespace-nowrap">
+            Healing <em className="text-fern">Path</em>
           </a>
 
           <nav className="hidden md:flex items-center gap-7">

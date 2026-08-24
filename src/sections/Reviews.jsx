@@ -1,36 +1,31 @@
 import Reveal from '../components/Reveal'
 
-// PLACEHOLDER — sample copy standing in for real client reviews.
-// Replace with genuine testimonials (with permission) before launch,
-// and remove the <PlaceholderNote /> banner below.
+// Real patient testimonials, supplied by the practice.
+// Keep them verbatim — edit only with the patient's permission.
+const featured = {
+  name: 'Deana',
+  age: 53,
+  text: `Dr. Guy Catz gets a 20 out of 5. He is such an amazing physical therapist and person — I don't even know where to begin. He pushes me, he's attentive. He knows his job and every part of the body so well. He's patient and he listens. Just wonderful. I arrived at the rehab hospital unable to walk or get out of bed, stiff as a board. I was scared. He was the one who got me moving and gave me hope. I said, “Guy, I want to walk out of the hospital”, he looked at me and said “I'm going to get you there”. I told him all of my goals and he actually got me to achieve each and every one of them. I can't be more thankful.`,
+}
+
 const reviews = [
   {
-    name: 'Client name',
-    detail: 'Runner · Echo Park',
-    text: 'Placeholder testimonial — a couple of sentences about what they came in with and what changed.',
+    name: 'Lina',
+    age: 67,
+    text: `Dr. Guy is realms above any PT I have experienced. His expertise, compassion and natural healing ability made such a life-changing impact on me during my treatments. The healing experience I had through him was so profound I shared it with my meditation group. I came into the clinic for my right shoulder, and simply mentioned to him that I had a severe headache. Instead of ignoring it and only focusing on my shoulder, what is covered by insurance, like most PTs would — he told me to close my eyes, he placed his hands on my neck and head, and I could feel he was channeling healing energy. My pain was fading away. I opened my eyes to see that his eyes were closed. This is the intention Guy brings to his patients. Many others will be blessed and so grateful to have experienced his loving, healing energy, and I have no doubt he will make such a difference in so many people's lives on their road to recovery.`,
   },
   {
-    name: 'Client name',
-    detail: 'Post-op knee · Los Feliz',
-    text: 'Placeholder testimonial — something specific about the pace of the sessions and the home program.',
-  },
-  {
-    name: 'Client name',
-    detail: 'Desk worker · Downtown',
-    text: 'Placeholder testimonial — a line about being listened to, and leaving with an explanation.',
-  },
-  {
-    name: 'Client name',
-    detail: 'Weightlifter · Highland Park',
-    text: 'Placeholder testimonial — a note about getting back to training without flare-ups.',
+    name: 'Miriam',
+    age: 74,
+    text: `I was a patient of Guy's in his early days, before he graduated from his DPT program, and he was even the best then. He is a light for all those who have the privilege of working with him.`,
   },
 ]
 
-function PlaceholderNote() {
+function Attribution({ name, age }) {
   return (
-    <p className="font-sans text-[12px] tracking-wide text-terracotta-deep bg-terracotta/10 rounded-full inline-block px-5 py-2">
-      Placeholder copy — awaiting real client reviews
-    </p>
+    <figcaption className="font-sans text-[13px] text-umber-soft">
+      <span className="font-medium text-umber">{name}</span>, {age}
+    </figcaption>
   )
 }
 
@@ -40,28 +35,41 @@ export default function Reviews() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <p className="label mb-6">Reviews</p>
-            <h2 className="section-heading mb-7">In their words</h2>
-            <PlaceholderNote />
+            <p className="label mb-6">Testimonials</p>
+            <h2 className="section-heading">In their words</h2>
           </div>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-12">
-          {reviews.map(({ name, detail, text }, i) => (
-            <Reveal key={i} delay={(i % 2) * 110}>
-              <figure>
-                <span aria-hidden="true" className="block font-serif text-5xl text-sage leading-none mb-4">&rdquo;</span>
-                <blockquote className="font-serif text-xl text-umber leading-[1.55] mb-5">
-                  {text}
-                </blockquote>
-                <figcaption className="font-sans text-[13px] text-umber-soft">
-                  <span className="font-medium text-umber">{name}</span>
-                  <span className="mx-2 text-stone">·</span>
-                  {detail}
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
+        {/* The long one, given room */}
+        <Reveal>
+          <figure className="max-w-3xl mb-16">
+            <span aria-hidden="true" className="block font-serif text-6xl text-sage leading-none mb-4">&rdquo;</span>
+            <blockquote className="font-serif text-xl sm:text-2xl text-umber leading-[1.55] mb-6">
+              {featured.text}
+            </blockquote>
+            <Attribution name={featured.name} age={featured.age} />
+          </figure>
+        </Reveal>
+
+        <div className="grid md:grid-cols-[1.35fr_1fr] gap-x-12 gap-y-12 items-start">
+          <Reveal>
+            <figure>
+              <span aria-hidden="true" className="block font-serif text-5xl text-sage leading-none mb-3">&rdquo;</span>
+              <blockquote className="font-sans text-[15px] text-umber-soft leading-[1.85] mb-5">
+                {reviews[0].text}
+              </blockquote>
+              <Attribution name={reviews[0].name} age={reviews[0].age} />
+            </figure>
+          </Reveal>
+
+          <Reveal delay={110}>
+            <figure className="soft-card sm:p-9 md:mt-10">
+              <blockquote className="font-serif text-lg sm:text-xl text-umber leading-[1.6] mb-5">
+                {reviews[1].text}
+              </blockquote>
+              <Attribution name={reviews[1].name} age={reviews[1].age} />
+            </figure>
+          </Reveal>
         </div>
       </div>
     </section>

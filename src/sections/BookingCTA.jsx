@@ -17,8 +17,9 @@ export default function BookingCTA() {
             <h2 className="section-heading mb-6">Start with a conversation</h2>
             <p className="lede mb-10 max-w-md">
               Fifteen minutes on the phone, no charge and no pitch — just enough
-              to work out whether this is the right place for what you're
-              carrying.
+              to hear your story and work out whether this is the right place for
+              it. I look forward to meeting you and being a trusted ally on your
+              healing journey.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-10">
@@ -38,7 +39,7 @@ export default function BookingCTA() {
 
             <dl className="grid sm:grid-cols-2 gap-8">
               <div>
-                <dt className="label mb-2.5">Studio</dt>
+                <dt className="label mb-2.5">Office</dt>
                 <dd className="font-sans text-[15px] text-umber-soft leading-relaxed">
                   {site.address}<br />{site.addressCity}
                 </dd>
@@ -56,8 +57,8 @@ export default function BookingCTA() {
           <Reveal delay={120}>
             <div className="rounded-[2.5rem] overflow-hidden shadow-lift bg-oat">
               <iframe
-                title={`${site.name} Physical Therapy — ${site.neighborhood}, Los Angeles`}
-                src="https://maps.google.com/maps?q=Silver+Lake,+Los+Angeles,+CA&z=13&output=embed"
+                title={`${site.practice} — ${site.neighborhood}`}
+                src="https://maps.google.com/maps?q=West+Los+Angeles,+CA&z=13&output=embed"
                 width="100%"
                 height="420"
                 style={{ border: 0, display: 'block' }}

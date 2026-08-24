@@ -3,8 +3,12 @@ import Reveal from '../components/Reveal'
 
 const faqs = [
   {
+    q: 'Where do sessions take place?',
+    a: 'Three options: in your own home, at the West Los Angeles office, or by telehealth. Many people mix them — an in-home evaluation, office visits for the strength work, video calls when travel gets in the way.',
+  },
+  {
     q: 'Do you take insurance?',
-    a: 'The practice is out-of-network, which is what makes a full private hour possible. You pay at the visit and receive a superbill to submit to your insurer — many PPO plans reimburse a portion. HSA and FSA cards are accepted.',
+    a: 'The practice works outside insurance networks, which is what makes the full one-on-one session possible and keeps the plan driven by your goals rather than a coverage limit. You pay at the visit and receive a superbill to submit to your insurer — many PPO plans reimburse a portion. HSA and FSA cards are accepted.',
   },
   {
     q: 'Do I need a referral from a doctor?',
@@ -12,15 +16,15 @@ const faqs = [
   },
   {
     q: 'How many sessions will I need?',
-    a: 'Most people are seen weekly for four to six weeks, then taper to every other week. You will get an honest estimate after the evaluation, and it gets revisited as things change.',
+    a: 'Most people are seen weekly at first and taper as things hold. You will get an honest estimate after the evaluation, and it gets revisited as you progress — the aim is for you to need me less, not longer.',
+  },
+  {
+    q: 'I was just discharged from hospital. Is it too soon?',
+    a: 'Usually the opposite. Rebuilding strength and confidence after a hospital stay is a large part of this practice, and in-home visits mean you do not have to travel to start.',
   },
   {
     q: 'What should I wear?',
-    a: 'Whatever you can move in — shorts or leggings and a t-shirt work well. The studio has a changing area if you are coming straight from work.',
-  },
-  {
-    q: 'Do you do in-home or virtual visits?',
-    a: 'Yes to both. In-home visits are available across the east side of Los Angeles for an added travel fee, and virtual sessions are available anywhere in California.',
+    a: 'Whatever you can move in — shorts or leggings and a t-shirt work well. For an in-home visit, clear a little floor space and have any equipment you already own to hand.',
   },
   {
     q: 'What is the cancellation policy?',

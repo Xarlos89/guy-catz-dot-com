@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary meta -->
-    <title>Guy Catz, DPT — Holistic Physical Therapy in Los Angeles</title>
-    <meta name="description" content="Guy Catz, Doctor of Physical Therapy — one-to-one holistic physical therapy in Silver Lake, Los Angeles. Movement-led recovery for back, neck, post-op and running injuries. Free 15-minute consult." />
+    <title>Healing Path Rehabilitation — Guy H. Catz, PT, DPT | Los Angeles</title>
+    <meta name="description" content="Healing Path Rehabilitation — one-on-one physical therapy with Guy H. Catz, PT, DPT. In your home, at the West Los Angeles office, or by telehealth. Orthopedic, neurological, vestibular, cardiac and degenerative conditions. Free 15-minute consult." />
     <link rel="canonical" href="https://guy-catz.com/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="author" content="Guy Catz, DPT" />
+    <meta name="author" content="Guy H. Catz, PT, DPT" />
     <meta name="theme-color" content="#FBF7F1" />
 
     <!-- Icons -->
@@ -17,16 +17,16 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Guy Catz Physical Therapy" />
-    <meta property="og:title" content="Guy Catz, DPT — Holistic Physical Therapy in Los Angeles" />
-    <meta property="og:description" content="One-to-one holistic physical therapy in Silver Lake, Los Angeles. Movement-led recovery, a full private hour, and a home practice you'll actually do." />
+    <meta property="og:site_name" content="Healing Path Rehabilitation" />
+    <meta property="og:title" content="Healing Path Rehabilitation — Guy H. Catz, PT, DPT" />
+    <meta property="og:description" content="Recovery is more than healing an injury. One-on-one physical therapy in your home, at the West Los Angeles office, or by telehealth." />
     <meta property="og:url" content="https://guy-catz.com/" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Guy Catz, DPT — Holistic Physical Therapy in Los Angeles" />
-    <meta name="twitter:description" content="One-to-one holistic physical therapy in Silver Lake, Los Angeles. Movement-led recovery, a full private hour, and a home practice you'll actually do." />
+    <meta name="twitter:title" content="Healing Path Rehabilitation — Guy H. Catz, PT, DPT" />
+    <meta name="twitter:description" content="Recovery is more than healing an injury. One-on-one physical therapy in your home, at the West Los Angeles office, or by telehealth." />
 
     <!-- TODO: add public/og-image.jpg (1200×630) and uncomment:
     <meta property="og:image" content="https://guy-catz.com/og-image.jpg" />
@@ -47,21 +47,26 @@
         {
           "@type": ["PhysicalTherapy", "LocalBusiness"],
           "@id": "https://guy-catz.com/#practice",
-          "name": "Guy Catz Physical Therapy",
+          "name": "Healing Path Rehabilitation",
           "url": "https://guy-catz.com/",
-          "description": "One-to-one holistic physical therapy in Silver Lake, Los Angeles. Movement-led recovery combining manual therapy, strength and breathwork, in a full private hour.",
+          "description": "One-on-one physical therapy with Guy H. Catz, PT, DPT — in your home, at the West Los Angeles office, or via telehealth. Personalized, evidence-based care for adults with orthopedic, neurological, vestibular, cardiac and degenerative conditions.",
           "telephone": "+13235550142",
           "email": "hello@guy-catz.com",
           "priceRange": "$$",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "1200 Placeholder Ave, Suite 3",
+            "streetAddress": "1200 Placeholder Blvd, Suite 3",
             "addressLocality": "Los Angeles",
             "addressRegion": "CA",
-            "postalCode": "90026",
+            "postalCode": "90025",
             "addressCountry": "US"
           },
-          "areaServed": "Los Angeles, California",
+          "areaServed": ["West Los Angeles", "Los Angeles, California", "California"],
+          "availableService": [
+            { "@type": "MedicalTherapy", "name": "In-home physical therapy" },
+            { "@type": "MedicalTherapy", "name": "Outpatient physical therapy" },
+            { "@type": "MedicalTherapy", "name": "Telehealth physical therapy" }
+          ],
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
@@ -70,21 +75,37 @@
               "closes": "18:00"
             }
           ],
-          "founder": {
-            "@type": "Person",
-            "name": "Guy Catz",
-            "jobTitle": "Doctor of Physical Therapy",
-            "honorificSuffix": "DPT"
-          }
+          "founder": { "@id": "https://guy-catz.com/#guy" },
+          "employee": { "@id": "https://guy-catz.com/#guy" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://guy-catz.com/#guy",
+          "name": "Guy H. Catz",
+          "honorificSuffix": "PT, DPT",
+          "jobTitle": "Doctor of Physical Therapy",
+          "worksFor": { "@id": "https://guy-catz.com/#practice" },
+          "alumniOf": [
+            { "@type": "CollegeOrUniversity", "name": "California State University, Northridge" },
+            { "@type": "CollegeOrUniversity", "name": "Russell Sage College" }
+          ],
+          "knowsAbout": [
+            "Orthopedic physical therapy",
+            "Neurological rehabilitation",
+            "Vestibular rehabilitation",
+            "Cardiac rehabilitation",
+            "Manual therapy",
+            "Strength and conditioning"
+          ]
         },
         {
           "@type": "Service",
           "@id": "https://guy-catz.com/#session",
-          "name": "One-to-One Movement Therapy",
+          "name": "One-on-One Physical Therapy",
           "serviceType": "Physical therapy",
-          "description": "A private 60-minute physical therapy session combining movement assessment, manual therapy, loaded movement retraining and a home program. First visit runs 90 minutes.",
+          "description": "A private 60-minute physical therapy session combining assessment, manual therapy, progressive loading and a personalized home program. The initial evaluation runs 90 minutes. Available in-home, at the West Los Angeles office, or by telehealth.",
           "provider": { "@id": "https://guy-catz.com/#practice" },
-          "areaServed": "Los Angeles, California",
+          "areaServed": "California",
           "offers": {
             "@type": "Offer",
             "price": "175",
@@ -99,10 +120,18 @@
           "mainEntity": [
             {
               "@type": "Question",
+              "name": "Where do sessions take place?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three options: in your own home, at the West Los Angeles office, or by telehealth. Many people mix them — an in-home evaluation, office visits for the strength work, video calls when travel gets in the way."
+              }
+            },
+            {
+              "@type": "Question",
               "name": "Do you take insurance?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The practice is out-of-network, which is what makes a full private hour possible. You pay at the visit and receive a superbill to submit to your insurer — many PPO plans reimburse a portion. HSA and FSA cards are accepted."
+                "text": "The practice works outside insurance networks, which is what makes the full one-on-one session possible and keeps the plan driven by your goals rather than a coverage limit. You pay at the visit and receive a superbill to submit to your insurer — many PPO plans reimburse a portion. HSA and FSA cards are accepted."
               }
             },
             {
@@ -118,7 +147,15 @@
               "name": "How many sessions will I need?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Most people are seen weekly for four to six weeks, then taper to every other week. You will get an honest estimate after the evaluation, and it gets revisited as things change."
+                "text": "Most people are seen weekly at first and taper as things hold. You will get an honest estimate after the evaluation, and it gets revisited as you progress."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "I was just discharged from hospital. Is it too soon?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Usually the opposite. Rebuilding strength and confidence after a hospital stay is a large part of this practice, and in-home visits mean you do not have to travel to start."
               }
             },
             {
@@ -126,15 +163,7 @@
               "name": "What should I wear?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Whatever you can move in — shorts or leggings and a t-shirt work well. The studio has a changing area if you are coming straight from work."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do you do in-home or virtual visits?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes to both. In-home visits are available across the east side of Los Angeles for an added travel fee, and virtual sessions are available anywhere in California."
+                "text": "Whatever you can move in — shorts or leggings and a t-shirt work well. For an in-home visit, clear a little floor space and have any equipment you already own to hand."
               }
             },
             {
