@@ -1,0 +1,45 @@
+/**
+ * Renders a photo, or a labelled placeholder when `src` is falsy.
+ * Every image slot on the site goes through this component, so the
+ * page looks finished before the real photography arrives — drop a
+ * file into public/images/ and set `src` to swap one in.
+ */
+export default function Photo({ src, alt, className = '', tone = 'light', imgClassName = '' }) {
+  if (src) {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        className={`w-full h-full object-cover ${imgClassName} ${className}`}
+      />
+    )
+  }
+
+  const dark = tone === 'dark'
+
+  return (
+    <div
+      role="img"
+      aria-label={alt}
+      className={`w-full h-full flex flex-col items-center justify-center gap-3 px-6 text-center ${
+        dark ? 'bg-fern-light' : 'bg-oat'
+      } ${className}`}
+    >
+      {/* A single leaf — the same mark as the favicon */}
+      <svg
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.1}
+        className={`w-8 h-8 ${dark ? 'text-linen/25' : 'text-sage-deep/40'}`}
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c0-5 2.5-9 7-11-1 5.5-3.5 9-7 11zm0 0c0-5-2.5-9-7-11 1 5.5 3.5 9 7 11zm0 0v-6" />
+      </svg>
+      <p className={`font-sans text-[13px] leading-relaxed max-w-[16rem] ${dark ? 'text-linen/45' : 'text-umber-soft/70'}`}>
+        {alt}
+      </p>
+      <p className={`font-sans text-[10px] uppercase tracking-[0.2em] ${dark ? 'text-linen/25' : 'text-umber-soft/40'}`}>
+        Photo coming soon
+      </p>
+    </div>
+  )
+}
