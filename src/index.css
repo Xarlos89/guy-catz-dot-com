@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: 300 500;
   font-display: swap;
-  src: url('/fonts/fraunces-latin.woff2') format('woff2-variations');
+  src: url('../fonts/fraunces-latin.woff2') format('woff2-variations');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-style: italic;
   font-weight: 300 500;
   font-display: swap;
-  src: url('/fonts/fraunces-italic-latin.woff2') format('woff2-variations');
+  src: url('../fonts/fraunces-italic-latin.woff2') format('woff2-variations');
 }
 
 @font-face {
@@ -27,7 +27,7 @@
   font-style: normal;
   font-weight: 300 500;
   font-display: swap;
-  src: url('/fonts/dmsans-latin.woff2') format('woff2-variations');
+  src: url('../fonts/dmsans-latin.woff2') format('woff2-variations');
 }
 
 @layer base {

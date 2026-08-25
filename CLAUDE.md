@@ -21,7 +21,7 @@ npm run preview  # serve dist/ locally
 ## Stack
 
 - **React 18** — UI
-- **Vite 5** — build tool, `base: '/'` in `vite.config.js`
+- **Vite 5** — build tool, `base: './'` in `vite.config.js` (relative, so the build runs from any mount point)
 - **vite-react-ssg** — prerenders the page to static HTML at build time (pinned to `0.9.1`; `0.9.2+` requires Vite 6)
 - **Tailwind CSS 3** — styling via utility classes + component layer in `src/index.css`
 - **No router** — single HTML page, anchor links (`#practice`, `#about`, etc.)
@@ -176,7 +176,8 @@ The Navbar links to `#practice`, `#about`, `#programs`, `#approach`, `#reviews` 
   - Actions pinned to exact versions: `checkout@v6.0.3`, `setup-node@v6.4.0`, `configure-pages@v6.0.0`, `upload-pages-artifact@v5.0.0`, `deploy-pages@v5.0.0`
   - Node 26, `npm ci`, `npm run build`, artifact from `dist/`
   - Enable at: Settings → Pages → Source → GitHub Actions
-  - **`base` is `/`**, which assumes a custom domain. Serving from `https://xarlos89.github.io/guy-catz-dot-com/` instead requires `base: '/guy-catz-dot-com/'` in `vite.config.js` — and the font paths in `@font-face` are absolute, so they need the prefix too
+  - **`base` is `./`** — a relative base, so the same build works both at a custom-domain root (`guy-catz.com/`) and under project pages (`xarlos89.github.io/guy-catz-dot-com/`). This is why the `@font-face` `url()`s are `../fonts/…` (the CSS lands in `/assets/`) and the `index.html` preloads are `./fonts/…`. **Absolute `/…` asset paths silently 404 under the sub-path** — keep new references relative
+  - `configure-pages` runs with `enablement: true`, so the first successful run switches Pages on itself. If it lacks permission, enable it by hand: Settings → Pages → Source → GitHub Actions
   - No `public/CNAME` yet — add one containing `guy-catz.com` once DNS points at Pages (adding it before then breaks the default `*.github.io` URL)
 - **Self-hosted**: see `Caddyfile` — drop `dist/` at `/var/www/guy-catz/`, Caddy handles HTTPS
 
