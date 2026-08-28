@@ -93,7 +93,7 @@ const provided = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-fern pb-24 sm:pb-32">
+    <section id="services" className="bg-fern pt-8 pb-24 sm:pb-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">

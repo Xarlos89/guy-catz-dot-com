@@ -1,75 +1,52 @@
 import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
-import { site } from '../siteInfo'
 
-const principles = [
-  {
-    title: 'Personalized attention',
-    body: 'Time to understand each person\'s story, and a plan shaped around it. Your goals become my goals from the moment we begin working together.',
-  },
-  {
-    title: 'Effective techniques',
-    body: 'Hands-on care and progressive loading, chosen because the evidence supports them and because they suit you — not because they fill an hour.',
-  },
-  {
-    title: 'A holistic approach',
-    body: 'Recovery is more than healing an injury. It is restoring peace to mind and body, restoring confidence, strength, and quality of life.',
-  },
+/**
+ * The client's own copy, in his order, unbroken.
+ * Do not split these paragraphs across cards or move sentences into other
+ * sections — they were written to be read as one piece. See CLAUDE.md.
+ */
+const paragraphs = [
+  `Recovery is more than healing an injury — it's about restoring peace to mind and body, restoring confidence, strength, and quality of life.`,
+  `Healing Path Rehabilitation is based on the belief that exceptional physical therapy requires personalized attention, effective techniques, and a comprehensive, holistic approach. By offering one-on-one care, I am able to treat you in the comfort of your home, at my office in West LA, or via telehealth, and can focus entirely on your goals without the constraints often resulting from insurance-driven care models.`,
+  `I know what it feels like to wait weeks or months for appointments, to feel unheard, to receive fragmented care, or to leave appointments without a clear path forward. Those experiences taught me the importance of taking the time to understand each person's story, and creating treatment plans that are both evidence-based and deeply personalized. Those experiences inspired me to create Healing Path Rehabilitation.`,
+  `Our bodies have an incredible capacity to adapt, heal, and become stronger. Small changes in how we move can lead to meaningful improvements in our health, and ultimately help us reclaim our independence and well-being.`,
+  `Whether your goal is to return to your favorite sport, get back to work, get stronger after being discharged from the hospital, or simply move through daily life with less pain and greater confidence, your goals become my goals from the moment we begin working together. My focus is on restoring movement and function, reducing pain, and building strength through personalized, results-driven care — supporting you every step of the way.`,
+  `I am committed to helping you get there. My mission is to empower every patient with the knowledge, tools, and confidence to take an active role in their recovery and enjoy lasting results.`,
+  `I look forward to meeting you and being a trusted ally on your healing journey.`,
 ]
 
 export default function Approach() {
   return (
-    <section id="approach" className="bg-fern pt-8 pb-24 sm:pb-32">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8">
+    <section id="approach" className="bg-linen py-24 sm:py-32">
+      <div className="max-w-3xl mx-auto px-6 sm:px-8">
         <Reveal>
-          <div className="max-w-2xl mx-auto text-center mb-16">
-            <p className="label-light mb-6">The Healing Path approach</p>
-            <h2 className="section-heading-light mb-8">
-              Our bodies have an incredible<br className="hidden sm:block" /> capacity to heal.
-            </h2>
-            <p className="lede-light">
-              Small changes in how we move can lead to meaningful improvements in
-              our health, and ultimately help us reclaim our independence and
-              well-being. Whether your goal is to return to your favorite sport,
-              get back to work, get stronger after being discharged from
-              hospital, or simply move through daily life with less pain — my
-              focus is on restoring movement and function, reducing pain, and
-              building strength through personalized, results-driven care.
-            </p>
+          <h2 className="section-heading mb-12">The Healing Path Approach</h2>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="rounded-[3rem] overflow-hidden aspect-[21/9] mb-14 shadow-soft">
+            <Photo src={null} alt="Guy Catz working with a patient" />
           </div>
         </Reveal>
 
-        <Reveal delay={100}>
-          <div className="rounded-[3rem] overflow-hidden aspect-[21/9] mb-16 shadow-lift">
-            <Photo src={null} alt={`${site.doctor} working with a patient`} tone="dark" />
+        {/* One measure, generous spacing — readability comes from typography,
+            not from chopping the text into cards. */}
+        <Reveal delay={120}>
+          <div className="space-y-7">
+            {paragraphs.map((text, i) => (
+              <p
+                key={i}
+                className={
+                  i === 0
+                    ? 'font-serif text-xl sm:text-2xl text-fern leading-[1.5]'
+                    : 'font-sans text-[16px] sm:text-[17px] text-umber-soft leading-[1.85]'
+                }
+              >
+                {text}
+              </p>
+            ))}
           </div>
-        </Reveal>
-
-        <div className="grid sm:grid-cols-3 gap-10 sm:gap-8 mb-16">
-          {principles.map(({ title, body }, i) => (
-            <Reveal key={title} delay={i * 110}>
-              <div className={`sm:px-6 ${i > 0 ? 'sm:border-l sm:border-linen/15' : 'sm:pl-0'}`}>
-                <p className="font-serif text-ochre text-2xl leading-none mb-5">0{i + 1}</p>
-                <p className="font-sans font-medium text-linen text-[15px] mb-3">{title}</p>
-                <p className="font-sans text-[15px] text-linen/60 leading-relaxed">{body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* The mission, in his own words */}
-        <Reveal>
-          <blockquote className="max-w-2xl mx-auto text-center">
-            <p className="font-serif italic text-linen text-xl sm:text-2xl leading-[1.55] mb-6">
-              “My mission is to empower every patient with the knowledge, tools,
-              and confidence to take an active role in their recovery and enjoy
-              lasting results. I look forward to being a trusted ally on your
-              healing journey.”
-            </p>
-            <footer className="font-sans text-[13px] tracking-[0.16em] uppercase text-ochre">
-              {site.doctor}, {site.credentials}
-            </footer>
-          </blockquote>
         </Reveal>
       </div>
     </section>

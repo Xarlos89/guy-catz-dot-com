@@ -17,9 +17,8 @@ export default function BookingCTA() {
             <h2 className="section-heading mb-6">Start with a conversation</h2>
             <p className="lede mb-10 max-w-md">
               Fifteen minutes on the phone, no charge and no pitch — just enough
-              to hear your story and work out whether this is the right place for
-              it. I look forward to meeting you and being a trusted ally on your
-              healing journey.
+              to hear your story and work out whether this is the right place
+              for it.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-10">

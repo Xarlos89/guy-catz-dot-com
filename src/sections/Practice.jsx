@@ -8,19 +8,14 @@ const infoCards = [
   { label: 'Model', value: 'Out-of-network', sub: 'no insurance-driven limits' },
 ]
 
-const included = [
-  'Time to understand your story before anything is treated',
-  'A full movement, strength and balance assessment',
-  'Hands-on manual therapy — twelve years of it, before the doctorate',
-  'A treatment plan that is both evidence-based and deeply personal',
-  'A home program built around your goals, not a generic handout',
-  'The knowledge and tools to take an active role in your recovery',
-]
-
+// Confirmed by the practice: $250 evaluation, $200 treatment, +$50 outside the
+// local area. Telehealth at $150 and the package discounts are NOT yet final —
+// see CLAUDE.md before quoting them anywhere else.
 const rates = [
-  { name: 'Initial evaluation', detail: '90 minutes', price: '$225' },
-  { name: 'Follow-up visit', detail: '60 minutes', price: '$175' },
-  { name: 'Course of six', detail: 'booked together', price: '$960' },
+  { name: 'Initial evaluation', price: '$250' },
+  { name: 'Treatment session', price: '$200' },
+  { name: 'Telehealth session', price: '$150' },
+  { name: 'Travel outside the local area', price: '+$50' },
 ]
 
 export default function Practice() {
@@ -50,55 +45,36 @@ export default function Practice() {
 
         <div className="h-px hairline my-16 sm:my-20" />
 
-        <div className="grid lg:grid-cols-[1.15fr_1fr] gap-14 lg:gap-20 items-start">
-          {/* Included */}
-          <Reveal>
-            <p className="label mb-5">The practice</p>
-            <h2 className="section-heading mb-7">What a session holds</h2>
-            <p className="lede mb-10 max-w-lg">
-              I know what it feels like to wait months for an appointment, to
-              feel unheard, to leave without a clear path forward. Those
-              experiences are why this practice is built the way it is.
+        {/* Rates */}
+        <Reveal>
+          <div className="max-w-2xl">
+            <p className="label mb-6">Rates</p>
+            <h2 className="section-heading mb-10">Simple and transparent</h2>
+
+            <div className="divide-y divide-stone mb-8">
+              {rates.map(({ name, price }) => (
+                <div key={name} className="flex items-baseline justify-between gap-6 py-5 first:pt-0">
+                  <p className="font-sans text-umber text-[16px]">{name}</p>
+                  <p className="font-serif text-2xl text-fern shrink-0">{price}</p>
+                </div>
+              ))}
+              <div className="flex items-baseline justify-between gap-6 py-5">
+                <p className="font-sans text-umber text-[16px]">Four- and eight-session packages</p>
+                <p className="font-sans text-[15px] text-umber-soft shrink-0">discounted</p>
+              </div>
+            </div>
+
+            <p className="lede mb-10">
+              Working outside insurance networks is what makes the full one-on-one
+              session possible, and keeps the plan driven by your goals rather
+              than a coverage limit.
             </p>
 
-            <ul className="space-y-4">
-              {included.map((item) => (
-                <li key={item} className="flex items-start gap-4 font-sans text-[15px] text-umber-soft leading-relaxed">
-                  <span aria-hidden="true" className="mt-2 w-1.5 h-1.5 rounded-full bg-sage-deep shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-
-          {/* Rates */}
-          <Reveal delay={120}>
-            <div className="soft-card sm:p-9">
-              <p className="label mb-5">Rates</p>
-              <div className="divide-y divide-stone">
-                {rates.map(({ name, detail, price }) => (
-                  <div key={name} className="flex items-baseline justify-between gap-6 py-5 first:pt-0 last:pb-0">
-                    <div>
-                      <p className="font-sans font-medium text-umber text-[15px]">{name}</p>
-                      <p className="font-sans text-[13px] text-umber-soft mt-1">{detail}</p>
-                    </div>
-                    <p className="font-serif text-2xl text-fern shrink-0">{price}</p>
-                  </div>
-                ))}
-              </div>
-
-              <p className="font-sans text-[13px] text-umber-soft leading-relaxed mt-7 mb-8">
-                Working outside insurance networks is what makes the full
-                one-on-one hour possible. A superbill for your insurer comes
-                after every visit, and HSA and FSA cards are welcome.
-              </p>
-
-              <a href="#book" className="btn-primary w-full">
-                Book a free consult
-              </a>
-            </div>
-          </Reveal>
-        </div>
+            <a href="#book" className="btn-primary">
+              Book a free consult
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
