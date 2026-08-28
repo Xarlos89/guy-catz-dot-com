@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: 'Do you take insurance?',
-    a: 'The practice works outside insurance networks, which is what makes the full one-on-one session possible and keeps the plan driven by your goals rather than a coverage limit. You pay at the visit and receive a superbill to submit to your insurer — many PPO plans reimburse a portion. HSA and FSA cards are accepted.',
+    a: 'The practice works outside insurance networks, which is what makes the full one-on-one session possible and keeps the plan driven by your goals rather than a coverage limit. Payment is due at the time of the visit.',
   },
   {
     q: 'Do I need a referral from a doctor?',

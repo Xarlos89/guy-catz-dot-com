@@ -97,18 +97,19 @@ export default function Services() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <p className="label-light mb-6">Services</p>
-            <h2 className="section-heading-light mb-6">Cared for, heard, understood</h2>
-            <p className="lede-light mb-5">
-              Atmosphere matters. It is of paramount importance to me that every
-              person I work with feels cared for, heard and understood throughout
-              their recovery. After a comprehensive initial evaluation, a curated
-              plan of care is tailored to your goals and needs.
-            </p>
+            <h2 className="section-heading-light mb-8">Services</h2>
+            {/* The client's own paragraph, verbatim — do not split it. */}
             <p className="lede-light">
-              My goal is to get you back to doing what you love — helping you feel
-              your best and improving your quality of life by reducing pain and
-              improving your functional mobility.
+              I provide a holistic, patient-centered approach to ensure peak
+              functional outcomes and facilitate a smooth return to optimal
+              health. Atmosphere matters — this is why it is of paramount
+              importance that every person I work with feels cared for, heard and
+              understood throughout their recovery process. Upon completing a
+              comprehensive initial evaluation, a curated plan of care will be
+              tailored to achieve each patient's goals and needs. My goal is to
+              get you back to doing what you love, helping you feel your best and
+              improving your quality of life by reducing pain and improving your
+              functional mobility.
             </p>
           </div>
         </Reveal>
