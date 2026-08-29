@@ -43,7 +43,7 @@
   }
 
   body {
-    @apply font-sans font-normal text-umber bg-linen antialiased;
+    @apply font-sans font-normal text-ink bg-cream antialiased;
     letter-spacing: 0.005em;
   }
 
@@ -92,49 +92,51 @@
   }
 
   .section-heading {
-    @apply text-umber;
+    @apply text-ink;
   }
 
   .section-heading-light {
-    @apply text-linen;
+    @apply text-cream;
   }
 
   .lede {
-    @apply font-sans text-[15px] sm:text-base text-umber-soft leading-[1.85];
+    @apply font-sans text-[15px] sm:text-base text-ink-soft leading-[1.85];
   }
 
   .lede-light {
-    @apply font-sans text-[15px] sm:text-base text-linen/70 leading-[1.85];
+    @apply font-sans text-[15px] sm:text-base text-cream/80 leading-[1.85];
   }
 
   /* ── Buttons — pills, never sharp ──────────────────────── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
-           bg-terracotta text-linen font-sans font-medium text-sm
+           bg-terracotta text-cream font-sans font-medium text-sm
            rounded-full shadow-soft
            transition-all duration-500 ease-out hover:bg-terracotta-deep hover:shadow-lift;
   }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
-           border border-stone text-umber font-sans font-medium text-sm
-           rounded-full bg-white/60 shadow-soft
-           transition-all duration-500 ease-out hover:bg-white/90 hover:border-sage hover:shadow-lift;
+           border border-line text-ink font-sans font-medium text-sm
+           rounded-full bg-cream/65 shadow-soft
+           transition-all duration-500 ease-out hover:bg-cream hover:border-sage hover:shadow-lift;
   }
 
   .btn-ghost-light {
     @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
-           border border-linen/30 text-linen font-sans font-medium text-sm
-           rounded-full transition-colors duration-500 ease-out hover:bg-linen/10 hover:border-linen/60;
+           border border-cream/30 text-cream font-sans font-medium text-sm
+           rounded-full transition-colors duration-500 ease-out hover:bg-cream/10 hover:border-cream/60;
   }
 
-  /* ── Surfaces — soft, borderless, warm shadow ──────────── */
+  /* ── Surfaces — soft, borderless, cool shadow ──────────── */
+  /* `cream` is the lightest tone on the page, so a card reads as raised
+     without a white panel appearing in the middle of a coloured band. */
   .soft-card {
-    @apply bg-white/80 rounded-soft p-7 shadow-lift;
+    @apply bg-cream rounded-soft p-7 shadow-lift;
   }
 
   .soft-card-dark {
-    @apply bg-linen/[0.07] rounded-soft p-7 border border-linen/10 shadow-deep;
+    @apply bg-cream/[0.07] rounded-soft p-7 border border-cream/10 shadow-deep;
   }
 
   /* Every photo sits on the page rather than in it */
@@ -143,7 +145,7 @@
   }
 
   .hairline {
-    @apply bg-stone;
+    @apply bg-line;
   }
 
   /* svh keeps the hero honest on phones, where 100vh is taller than the

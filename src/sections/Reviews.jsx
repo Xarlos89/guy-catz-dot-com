@@ -23,15 +23,15 @@ const reviews = [
 
 function Attribution({ name, age }) {
   return (
-    <figcaption className="font-sans text-[13px] text-umber-soft">
-      <span className="font-medium text-umber">{name}</span>, {age}
+    <figcaption className="font-sans text-[13px] text-ink-soft">
+      <span className="font-medium text-ink">{name}</span>, {age}
     </figcaption>
   )
 }
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="bg-oat py-24 sm:py-32">
+    <section id="reviews" className="bg-haze py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
@@ -44,7 +44,7 @@ export default function Reviews() {
         <Reveal>
           <figure className="max-w-3xl mb-16">
             <span aria-hidden="true" className="block font-serif text-6xl text-sage leading-none mb-4">&rdquo;</span>
-            <blockquote className="font-serif text-xl sm:text-2xl text-umber leading-[1.55] mb-6">
+            <blockquote className="font-serif text-xl sm:text-2xl text-ink leading-[1.55] mb-6">
               {featured.text}
             </blockquote>
             <Attribution name={featured.name} age={featured.age} />
@@ -55,7 +55,7 @@ export default function Reviews() {
           <Reveal>
             <figure>
               <span aria-hidden="true" className="block font-serif text-5xl text-sage leading-none mb-3">&rdquo;</span>
-              <blockquote className="font-sans text-[15px] text-umber-soft leading-[1.85] mb-5">
+              <blockquote className="font-sans text-[15px] text-ink-soft leading-[1.85] mb-5">
                 {reviews[0].text}
               </blockquote>
               <Attribution name={reviews[0].name} age={reviews[0].age} />
@@ -64,7 +64,7 @@ export default function Reviews() {
 
           <Reveal delay={110}>
             <figure className="soft-card sm:p-9 md:mt-10">
-              <blockquote className="font-serif text-lg sm:text-xl text-umber leading-[1.6] mb-5">
+              <blockquote className="font-serif text-lg sm:text-xl text-ink leading-[1.6] mb-5">
                 {reviews[1].text}
               </blockquote>
               <Attribution name={reviews[1].name} age={reviews[1].age} />

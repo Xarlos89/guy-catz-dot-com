@@ -6,7 +6,7 @@ Static marketing website for **Healing Path Rehabilitation** — the practice of
 
 The domain is `guy-catz.com`; the practice name is Healing Path Rehabilitation. The wordmark reads "Healing Path" — don't "correct" it to the doctor's name.
 
-The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is a calm, mostly-light field with curved seams. See "Bands and seams" below before adding anything.
+The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is a calm **blue-cream** field — cool, soft, and deliberately never white — in bands that alternate, joined by curved seams. See "Bands and seams" below before adding anything.
 
 > **The words are the client's; the contact details and prices are not.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. See "What's placeholder" at the bottom for what still needs replacing.
 
@@ -39,7 +39,7 @@ src/
     Reveal.jsx       scroll-triggered fade-and-rise wrapper
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
   sections/          one file per visible scroll section, assembled in App.jsx
-    Hero.jsx         light dawn gradient, two breathing washes, no photo needed;
+    Hero.jsx         dusk-to-haze dawn gradient, two cool washes, no photo needed;
                      laid out mobile-first — see "Mobile" below
     Practice.jsx     hairline fact row + rates (#practice)
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`)
@@ -67,17 +67,22 @@ public/
 
 **This is the part that makes the page feel calm — don't undo it by accident.**
 
-The page is not eleven alternating light/dark slabs. It is **six colour bands**, each holding one or two sections, joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change.
+The page is not eleven alternating light/dark slabs. It is **six colour bands**, each holding one or two sections, joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change. **No two neighbouring bands share a tone** — that alternation is the point, and it is the first thing to re-check after moving a section.
 
 | Band | Sections | Background |
 |---|---|---|
-| A | Hero, Practice | dawn gradient `mist → linen`, then `linen` |
-| B | About | `oat` |
-| C | Approach | `linen` |
+| A | Hero, Practice | dawn gradient `dusk → haze`, then `haze` |
+| B | About | `cream` |
+| C | Approach | `haze` |
 | D | Services | `fern` — the one grounded, dark moment |
-| E | Gallery | `linen`, warming into `clay` |
-| F | Reviews, FAQ, BookingCTA | `oat`, ending on a gradient into `blush` |
+| E | Gallery | `mist` |
+| F | Reviews, FAQ, BookingCTA | `haze`, deepening on a gradient back into `mist` |
 | — | Footer | `fern-deep` |
+
+`cream` is the lightest tone on the page and only **one** band uses it. That is
+deliberate: the client asked for "way less white", so the lightest tone is
+relief between deeper bands rather than the field they all sit on. His bio is
+the longest read on the site, which is why About gets it.
 
 Approach and About are long-form reading, so both sit on light bands: seven
 paragraphs of light-on-dark body text is a real readability cost, and that is
@@ -86,7 +91,7 @@ why the dark band holds Services alone rather than Approach too.
 The seams are placed in `App.jsx`:
 
 ```jsx
-<Divider from="linen" to="oat" shape="dune" />
+<Divider from="haze" to="cream" shape="dune" />
 ```
 
 `from` **must** match the background of the section above and `to` the section below — the SVG paints `to` over a `from` background, so a mismatch shows as a hard line. Four shapes exist in `Divider.jsx` (`dune`, `bowl`, `crest`, `ripple`), deliberately gentle; steep waves read as energetic, which is the opposite of the brief. **Reordering or inserting a section means re-pairing every divider below it.**
@@ -154,7 +159,8 @@ behind them are unconfirmed anyway.
 Rules of thumb for anything new:
 
 - No `border-t` between sections, and no full-width horizontal rules except the deliberate hairline inside Practice
-- Cards are borderless: `.soft-card` (warm shadow, no outline), never a 1px box
+- Cards are borderless: `.soft-card` (soft shadow, no outline), never a 1px box
+- **Nothing on this page is white.** No `bg-white`, no `#fff`, no white-tinted overlay. A raised surface is `cream` — the lightest band tone — and it separates itself with a shadow, not by being brighter than the palette allows
 - Section padding is generous — `py-24 sm:py-32`, or `pt-8 pb-24 sm:pb-32` for the second section in a band
 - Wrap each block in `<Reveal>` so it rises into view
 
@@ -183,32 +189,42 @@ here, and what the second pass fixed:
 
 ## Design tokens (tailwind.config.js)
 
-Earthy and healthy — warm neutrals carry the page, green grounds it, terracotta is the only saturated colour.
+Cool and quiet — a **blue-cream** neutral ramp carries the page, green grounds
+it, and terracotta is the only warm thing on the site. The client asked for
+"way less white and more blue-cream", so the warm cream field became this cool
+one, and the whole ramp sits low enough that no band reads as paper.
 
-The whole set was taken down a step in a later pass — the client asked for a
-"slightly darker" page. Same hues, less glare, and enough ground under the
-shadows for them to read. If you lighten one of these, lighten the others with
-it or the bands stop matching the dividers.
+The four neutrals are one ramp in four steps, spaced far enough apart that
+neighbouring bands read as *different colours*. **Don't add a fifth step between
+two of them** — a band that is nearly its neighbour looks like a rendering
+fault, not a design. If you shift one, shift them all together and re-run the
+contrast figures below.
 
 | Token | Value | Used for |
 |---|---|---|
-| `linen` | `#F7F2EA` | the lightest field; band A and C |
-| `oat` | `#EDE4D6` | band B and F; light photo placeholders |
-| `clay` | `#E0D2BF` | the warm end of band E (Gallery) |
-| `blush` | `#E9D2B7` | the warm end of band F (Booking) |
-| `mist` | `#D8E0D2` | green-tinted top of the hero gradient |
-| `sage` | `#A9B8A4` | quiet accent, selection colour |
-| `sage-deep` | `#6E8470` | list bullets, hero setting dots |
-| `fern` | `#3F5143` | band D background; serif accent colour on light |
-| `fern-light` | `#4B5D48` | dark photo placeholders |
-| `fern-deep` | `#324136` | footer |
-| `terracotta` | `#A6613D` | primary buttons — carries `linen` text at AA |
+| `cream` | `#E1E8EA` | the lightest tone: band B, every raised surface (`.soft-card`, the navbar pill, ghost buttons), and the text colour on `fern` |
+| `haze` | `#D4DDE0` | bands A, C and F; light photo placeholders |
+| `mist` | `#C4D0D5` | band E, and the close of band F |
+| `dusk` | `#B2C1C8` | the crown of the hero gradient. **No body text on `dusk`** — it is the one tone that fails AA for secondary text |
+| `sage` | `#9FB3AC` | quiet accent, selection colour, quote marks |
+| `sage-deep` | `#6B8279` | list bullets, hero setting dots |
+| `fern` | `#3C4F49` | band D background; serif accent colour on light |
+| `fern-light` | `#485C55` | dark photo placeholders |
+| `fern-deep` | `#2F403B` | footer |
+| `terracotta` | `#94512F` | primary buttons — carries `cream` text at AA |
 | `terracotta-light` | `#C08262` | small dots and marks, never text |
-| `terracotta-deep` | `#8A4E2C` | label text on light, and the button hover |
+| `terracotta-deep` | `#7A4023` | label text on light, and the button hover |
 | `ochre` | `#E6B98C` | label text and icons on `fern` (contrast-safe) |
-| `umber` | `#40382F` | body text |
-| `umber-soft` | `#5D5348` | secondary text |
-| `stone` | `#D9CCBA` | hairlines, ghost-button borders |
+| `ink` | `#2C3A38` | body text — cool, to match the ground |
+| `ink-soft` | `#475654` | secondary text |
+| `line` | `#AEBEC2` | hairlines, ghost-button borders |
+
+Every text/ground pair on the page clears WCAG AA (4.5:1) at these values:
+`ink` runs 7.5–9.6 across the three light bands, `ink-soft` 4.9–6.2,
+`terracotta-deep` 5.2–6.6, `cream` on `terracotta` 4.9, `ochre` on `fern` 4.9.
+Light-on-dark text needs `/80` or higher on `fern` and `/65` or higher on
+`fern-deep`; below that it fails, which is why the footer's opacities are what
+they are.
 
 Contrast note: `terracotta-light` and `ochre` are too light for text on a light
 ground — that is what `terracotta-deep` (on light) and `ochre` (on `fern` only)
@@ -217,9 +233,9 @@ are for. Don't set small text in `terracotta` or `terracotta-light`.
 ### Shadow
 
 Three tokens, each two layers: a close contact shadow so the edge of a surface
-reads, and a wide soft one so it lifts off the page. Warm-black
-(`rgba(52,44,36,…)`), never neutral grey — a grey shadow on these creams turns
-the warmth off.
+reads, and a wide soft one so it lifts off the page. Cool-black
+(`rgba(31,44,43,…)`), matching the ground — a warm or neutral-grey shadow on
+these blues reads as dirt.
 
 | Token | Used for |
 |---|---|
@@ -240,7 +256,7 @@ Both are **self-hosted** from `public/fonts/` (latin subset, variable woff2) wit
 - `.section-heading` / `.section-heading-light` — Fraunces h2 with the soft/wonk variation settings
 - `.lede` / `.lede-light` — the relaxed 1.85 line-height intro paragraph
 - `.btn-primary` — terracotta pill; `.btn-ghost` — outlined pill on light; `.btn-ghost-light` — outlined pill on fern
-- `.soft-card` / `.soft-card-dark` — borderless rounded surface with a warm shadow
+- `.soft-card` / `.soft-card-dark` — borderless rounded surface with a soft shadow. `.soft-card` is solid `cream`, **not** white or a white overlay
 - `.photo-frame` — the clip-and-lift wrapper every photo sits in (`overflow-hidden` + `shadow-lift`)
 - `.hero-height` — the hero's minimum height, in `svh` where supported so mobile browser chrome can't push the buttons off screen
 - `.reveal` — hidden-then-risen state, scoped to `.reveal-ready` so prerendered HTML stays visible without JS

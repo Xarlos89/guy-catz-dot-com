@@ -18,7 +18,7 @@ const paragraphs = [
 
 export default function Approach() {
   return (
-    <section id="approach" className="bg-linen py-24 sm:py-32">
+    <section id="approach" className="bg-haze py-24 sm:py-32">
       <div className="max-w-3xl mx-auto px-6 sm:px-8">
         <Reveal>
           <h2 className="section-heading mb-12">The Healing Path Approach</h2>
@@ -46,7 +46,7 @@ export default function Approach() {
                 className={
                   i === 0
                     ? 'font-serif text-xl sm:text-2xl text-fern leading-[1.5]'
-                    : 'font-sans text-[16px] sm:text-[17px] text-umber-soft leading-[1.85]'
+                    : 'font-sans text-[16px] sm:text-[17px] text-ink-soft leading-[1.85]'
                 }
               >
                 {text}

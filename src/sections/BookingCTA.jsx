@@ -6,7 +6,7 @@ export default function BookingCTA() {
     <section
       id="book"
       className="relative pt-8 pb-24 sm:pb-32"
-      style={{ background: 'linear-gradient(180deg, #EDE4D6 0%, #EBDAC5 55%, #E9D2B7 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #D4DDE0 0%, #CCD7DB 55%, #C4D0D5 100%)' }}
     >
       <div className="relative max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -38,13 +38,13 @@ export default function BookingCTA() {
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <dt className="label mb-2.5">Office</dt>
-                <dd className="font-sans text-[15px] text-umber-soft leading-relaxed">
+                <dd className="font-sans text-[15px] text-ink-soft leading-relaxed">
                   {site.address}<br />{site.addressCity}
                 </dd>
               </div>
               <div>
                 <dt className="label mb-2.5">Hours</dt>
-                <dd className="font-sans text-[15px] text-umber-soft leading-relaxed">
+                <dd className="font-sans text-[15px] text-ink-soft leading-relaxed">
                   {site.hours}<br />{site.hoursNote}
                 </dd>
               </div>
@@ -53,7 +53,7 @@ export default function BookingCTA() {
 
           {/* Map */}
           <Reveal delay={120}>
-            <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep bg-oat">
+            <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep bg-haze">
               <iframe
                 title={`${site.practice} — ${site.neighborhood}`}
                 src="https://maps.google.com/maps?q=West+Los+Angeles,+CA&z=13&output=embed"

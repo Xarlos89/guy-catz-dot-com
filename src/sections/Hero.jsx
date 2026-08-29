@@ -19,18 +19,18 @@ export default function Hero() {
       className="hero-height relative overflow-hidden flex items-center pt-24 pb-16 sm:pt-32 sm:pb-28"
       style={{
         background:
-          'linear-gradient(180deg, #D8E0D2 0%, #EDE7DC 44%, #F7F2EA 100%)',
+          'linear-gradient(180deg, #B2C1C8 0%, #C3CFD4 30%, #D4DDE0 100%)',
       }}
     >
       {/* Soft light — two slow-breathing washes rather than a hard image */}
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
         <div
           className="absolute -top-32 -left-24 w-[34rem] h-[34rem] sm:w-[46rem] sm:h-[46rem] rounded-full blur-3xl animate-breathe"
-          style={{ background: 'radial-gradient(circle, rgba(110,132,112,0.42) 0%, rgba(110,132,112,0) 68%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(107,130,121,0.34) 0%, rgba(107,130,121,0) 68%)' }}
         />
         <div
           className="absolute -bottom-40 -right-32 w-[32rem] h-[32rem] sm:w-[42rem] sm:h-[42rem] rounded-full blur-3xl animate-drift"
-          style={{ background: 'radial-gradient(circle, rgba(166,97,61,0.30) 0%, rgba(166,97,61,0) 70%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(139,161,168,0.50) 0%, rgba(139,161,168,0) 70%)' }}
         />
       </div>
 
@@ -50,7 +50,7 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(120% 75% at 50% 0%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0) 48%), linear-gradient(180deg, rgba(52,44,36,0) 50%, rgba(52,44,36,0.07) 84%, rgba(52,44,36,0) 100%)',
+            'radial-gradient(120% 75% at 50% 0%, rgba(225,232,234,0.28) 0%, rgba(225,232,234,0) 48%), linear-gradient(180deg, rgba(44,58,56,0) 50%, rgba(44,58,56,0.06) 84%, rgba(44,58,56,0) 100%)',
         }}
       />
 
@@ -63,7 +63,7 @@ export default function Hero() {
           </p>
 
           <h1
-            className="font-serif font-normal text-umber text-balance leading-[1.12] sm:leading-[1.06] tracking-[-0.02em] mb-6 sm:mb-8"
+            className="font-serif font-normal text-ink text-balance leading-[1.12] sm:leading-[1.06] tracking-[-0.02em] mb-6 sm:mb-8"
             style={{
               fontSize: 'clamp(2.05rem, 8.4vw, 4.4rem)',
               fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'opsz' 34",
@@ -75,7 +75,7 @@ export default function Hero() {
             healing an injury
           </h1>
 
-          <p className="font-sans text-[17px] sm:text-xl text-umber-soft leading-[1.75] max-w-xl mb-9 sm:mb-10">
+          <p className="font-sans text-[17px] sm:text-xl text-ink-soft leading-[1.75] max-w-xl mb-9 sm:mb-10">
             It's about restoring peace to mind and body — restoring confidence,
             strength, and quality of life. One-on-one physical therapy with
             {' '}{site.doctor}, {site.credentials}.
@@ -97,7 +97,7 @@ export default function Hero() {
           {/* One item per line on a phone, so the dots keep a single edge */}
           <ul className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-3">
             {settings.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 font-sans text-[14px] sm:text-[13px] text-umber-soft">
+              <li key={item} className="flex items-center gap-2.5 font-sans text-[14px] sm:text-[13px] text-ink-soft">
                 <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-sage-deep shrink-0" />
                 {item}
               </li>
@@ -108,7 +108,7 @@ export default function Hero() {
 
       {/* Scroll hint — a slow breath, not a bouncing arrow */}
       <div aria-hidden="true" className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 hidden md:block">
-        <span className="block w-px h-12 bg-gradient-to-b from-umber-soft/45 to-transparent animate-breathe" />
+        <span className="block w-px h-12 bg-gradient-to-b from-ink-soft/45 to-transparent animate-breathe" />
       </div>
     </section>
   )

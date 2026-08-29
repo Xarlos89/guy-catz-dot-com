@@ -28,33 +28,34 @@ export default function App() {
     <>
       <Navbar />
       <main>
-        {/* Band A — dawn */}
+        {/* Band A — dawn: dusk overhead, settling no lighter than haze */}
         <Hero />
         <Practice />
-        <Divider from="linen" to="oat" shape="dune" />
+        <Divider from="haze" to="cream" shape="dune" />
 
-        {/* Band B — oat */}
+        {/* Band B — cream, the one properly light band on the page: his bio
+            is the longest read on it */}
         <About />
-        <Divider from="oat" to="linen" shape="ripple" />
+        <Divider from="cream" to="haze" shape="ripple" />
 
-        {/* Band C — light: the approach is long-form reading, and long-form
-            reading wants dark type on a light ground */}
+        {/* Band C — haze */}
         <Approach />
-        <Divider from="linen" to="fern" shape="bowl" />
+        <Divider from="haze" to="fern" shape="bowl" />
 
         {/* Band D — the one grounded, dark moment */}
         <Services />
-        <Divider from="fern" to="linen" shape="crest" />
+        <Divider from="fern" to="mist" shape="crest" />
 
-        {/* Band E — linen, warming into clay */}
+        {/* Band E — mist, the deepest light band: the photographs sit better
+            on it than on a pale ground */}
         <Gallery />
-        <Divider from="clay" to="oat" shape="ripple" />
+        <Divider from="mist" to="haze" shape="ripple" />
 
-        {/* Band F — oat, closing */}
+        {/* Band F — haze, deepening back into mist as the page closes */}
         <Reviews />
         <FAQ />
         <BookingCTA />
-        <Divider from="blush" to="fernDeep" shape="dune" />
+        <Divider from="mist" to="fernDeep" shape="dune" />
       </main>
       <Footer />
     </>

@@ -28,20 +28,20 @@ export default function Photo({ src, alt, className = '', tone = 'light', imgCla
       role="img"
       aria-label={alt}
       className={`w-full h-full flex flex-col items-center justify-center gap-3 px-6 text-center ${
-        dark ? 'bg-fern-light' : 'bg-oat'
+        dark ? 'bg-fern-light' : 'bg-haze'
       } ${className}`}
     >
       {/* A single leaf — the same mark as the favicon */}
       <svg
         viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.1}
-        className={`w-8 h-8 ${dark ? 'text-linen/25' : 'text-sage-deep/40'}`}
+        className={`w-8 h-8 ${dark ? 'text-cream/25' : 'text-sage-deep/40'}`}
       >
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c0-5 2.5-9 7-11-1 5.5-3.5 9-7 11zm0 0c0-5-2.5-9-7-11 1 5.5 3.5 9 7 11zm0 0v-6" />
       </svg>
-      <p className={`font-sans text-[13px] leading-relaxed max-w-[16rem] ${dark ? 'text-linen/45' : 'text-umber-soft/70'}`}>
+      <p className={`font-sans text-[13px] leading-relaxed max-w-[16rem] ${dark ? 'text-cream/45' : 'text-ink-soft/70'}`}>
         {alt}
       </p>
-      <p className={`font-sans text-[10px] uppercase tracking-[0.2em] ${dark ? 'text-linen/25' : 'text-umber-soft/40'}`}>
+      <p className={`font-sans text-[10px] uppercase tracking-[0.2em] ${dark ? 'text-cream/25' : 'text-ink-soft/40'}`}>
         Photo coming soon
       </p>
     </div>

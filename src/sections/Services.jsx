@@ -121,9 +121,9 @@ export default function Services() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-1 mb-16">
           {experience.map(({ icon, title }, i) => (
             <Reveal key={title} delay={(i % 4) * 80} className="h-full">
-              <div className="flex items-center gap-3.5 py-4 border-b border-linen/10 h-full">
+              <div className="flex items-center gap-3.5 py-4 border-b border-cream/10 h-full">
                 <span className="text-ochre shrink-0">{icon}</span>
-                <p className="font-sans text-linen text-[15px]">{title} rehabilitation</p>
+                <p className="font-sans text-cream text-[15px]">{title} rehabilitation</p>
               </div>
             </Reveal>
           ))}
@@ -135,7 +135,7 @@ export default function Services() {
             <p className="label-light mb-7">What that involves</p>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-3.5">
               {provided.map((item) => (
-                <li key={item} className="flex items-start gap-3 font-sans text-[14px] text-linen/70 leading-relaxed">
+                <li key={item} className="flex items-start gap-3 font-sans text-[14px] text-cream/80 leading-relaxed">
                   <span aria-hidden="true" className="mt-2 w-1 h-1 rounded-full bg-ochre shrink-0" />
                   {item}
                 </li>
