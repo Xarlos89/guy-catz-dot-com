@@ -31,7 +31,7 @@ function Attribution({ name, age }) {
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="bg-oat pt-8 pb-24 sm:pb-32">
+    <section id="reviews" className="bg-oat py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">

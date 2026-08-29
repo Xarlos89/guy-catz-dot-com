@@ -18,7 +18,7 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="pb-24 sm:pb-32 pt-4"
+      className="pt-24 sm:pt-32 pb-24 sm:pb-32"
       style={{ background: 'linear-gradient(180deg, #FBF7F1 0%, #EADFD1 38%, #EADFD1 100%)' }}
     >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">

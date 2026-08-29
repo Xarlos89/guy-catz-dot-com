@@ -42,10 +42,8 @@ src/
     Hero.jsx         light dawn gradient, two breathing washes, no photo needed
     Practice.jsx     hairline fact row + rates (#practice)
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`)
-    Programs.jsx     the three care settings — `tiers` array (#programs)
     Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
     Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
-    Process.jsx      four-step timeline — `steps` array
     Gallery.jsx      masonry grid of the practice — `photos` array
     Reviews.jsx      real patient testimonials — `featured` + `reviews`
     FAQ.jsx          accordion — `faqs` array (uses useState per item)
@@ -73,10 +71,10 @@ The page is not eleven alternating light/dark slabs. It is **six colour bands**,
 | Band | Sections | Background |
 |---|---|---|
 | A | Hero, Practice | dawn gradient `mist → linen`, then `linen` |
-| B | About, Programs | `oat` |
+| B | About | `oat` |
 | C | Approach | `linen` |
 | D | Services | `fern` — the one grounded, dark moment |
-| E | Process, Gallery | `linen`, warming into `clay` |
+| E | Gallery | `linen`, warming into `clay` |
 | F | Reviews, FAQ, BookingCTA | `oat`, ending on a gradient into `blush` |
 | — | Footer | `fern-deep` |
 
@@ -108,6 +106,19 @@ education paragraph into a credentials grid — it belongs at the end of Meet Ou
 Doctor as a paragraph, which is where professionals put it. Readability here
 comes from typography — measure, spacing, a larger opening paragraph — not from
 chopping the text up. Same goes for the testimonials in `Reviews.jsx`.
+
+### Nothing invented — the rule that removed two whole sections
+
+The client reviewed every line and cut both sections that were written *for*
+him rather than *by* him: "Ways to work together" (the three care settings) and
+"How it works" (a four-step intake timeline). His notes were *"Drop it. I don't
+want things off the script"* and *"Again, drop this. Nothing made up."* A
+"Free 15-minute consult" offer went the same way — he had never offered one.
+
+So before adding any section, sentence or figure: it comes from him, or it does
+not go on the site. Plausible is not the standard. Where a detail is genuinely
+unsettled he would rather the page said **"contact for details"** than carried
+a number nobody has agreed to — that is what the packages and travel rows do.
 
 Rules of thumb for anything new:
 
@@ -163,20 +174,18 @@ Texture: a fine SVG grain sits on `body::after` as one fixed, page-wide layer. I
 
 ## Section IDs (for anchor links)
 
-`#home` · `#practice` · `#about` · `#programs` · `#approach` · `#services` · `#process` · `#gallery` · `#reviews` · `#faq` · `#book` · `#contact` (footer)
+`#home` · `#practice` · `#about` · `#approach` · `#services` · `#gallery` · `#reviews` · `#faq` · `#book` · `#contact` (footer)
 
-The Navbar links to `#practice`, `#about`, `#programs`, `#approach`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). The rest exist for the footer and deep linking.
+The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). `#gallery` and `#contact` exist for the footer and deep linking.
 
 ## Where the content lives
 
 - **Practice name, doctor, credentials, contact details** — `src/siteInfo.js`, imported everywhere. `index.html` keeps its own copy for `<meta>` tags and JSON-LD — **update both.**
 - **Rates** — `src/sections/Practice.jsx` — the `rates` array
 - **Session info** — `src/sections/Practice.jsx` — the `infoCards` array
-- **Care settings** (home / office / telehealth) — `src/sections/Programs.jsx` — the `tiers` array
 - **Specialties and treatments** — `src/sections/Services.jsx` — the `experience` and `provided` arrays
 - **Bio** — `src/sections/About.jsx` — the `paragraphs` array (verbatim)
 - **Approach** — `src/sections/Approach.jsx` — the `paragraphs` array (verbatim)
-- **Intake steps** — `src/sections/Process.jsx` — the `steps` array
 - **FAQ** — `src/sections/FAQ.jsx` — the `faqs` array (mirrored in the `FAQPage` JSON-LD in `index.html`)
 - **Testimonials** — `src/sections/Reviews.jsx` — the `reviews` array
 - **Map** — `src/sections/BookingCTA.jsx`
@@ -223,8 +232,8 @@ Confirmed by the practice: **$250** initial evaluation, **$200** treatment,
 **+$50** outside the local area. Still open, and shown on the site anyway:
 
 - **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". If a cheaper guidance-only tier is wanted, it needs its own row
-- **Package pricing** — four- and eight-session bundles are real, but he has not done the math, so the site says "discounted" with no number
-- **The mileage radius** — "outside a certain mileage" needs an actual distance before it means anything to a patient
+- **Package pricing** — four- and eight-session bundles are real, but he has not done the math. At his instruction the row reads "contact for details" rather than a number
+- **The mileage radius** — still undefined; at his instruction the travel row keeps the +$50 and adds "contact for details" instead of naming a boundary
 
 Superbill / HSA / FSA wording was removed: the out-of-network model comes from
 the client's copy, but the billing specifics were invented and are unconfirmed.

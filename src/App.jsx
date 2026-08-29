@@ -5,10 +5,8 @@ import Divider from './components/Divider'
 import Hero from './sections/Hero'
 import Practice from './sections/Practice'
 import About from './sections/About'
-import Programs from './sections/Programs'
 import Approach from './sections/Approach'
 import Services from './sections/Services'
-import Process from './sections/Process'
 import Gallery from './sections/Gallery'
 import Reviews from './sections/Reviews'
 import FAQ from './sections/FAQ'
@@ -37,11 +35,10 @@ export default function App() {
 
         {/* Band B — oat */}
         <About />
-        <Programs />
         <Divider from="oat" to="linen" shape="ripple" />
 
-        {/* Band C — light again: the approach is long-form reading, and
-            long-form reading wants dark type on a light ground */}
+        {/* Band C — light: the approach is long-form reading, and long-form
+            reading wants dark type on a light ground */}
         <Approach />
         <Divider from="linen" to="fern" shape="bowl" />
 
@@ -50,7 +47,6 @@ export default function App() {
         <Divider from="fern" to="linen" shape="crest" />
 
         {/* Band E — linen, warming into clay */}
-        <Process />
         <Gallery />
         <Divider from="clay" to="oat" shape="ripple" />
 

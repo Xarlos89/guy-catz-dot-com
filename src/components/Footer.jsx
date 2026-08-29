@@ -3,10 +3,9 @@ import { site } from '../siteInfo'
 const explore = [
   { label: 'The Practice', href: '#practice' },
   { label: 'Meet Our Doctor', href: '#about' },
-  { label: 'Ways to Work Together', href: '#programs' },
   { label: 'The Approach', href: '#approach' },
-  { label: 'Who I Treat', href: '#services' },
-  { label: 'How It Works', href: '#process' },
+  { label: 'Services', href: '#services' },
+  { label: 'The Studio', href: '#gallery' },
   { label: 'Reviews', href: '#reviews' },
   { label: 'FAQ', href: '#faq' },
 ]
