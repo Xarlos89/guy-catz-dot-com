@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Placeholder illustration of a cat">
-  <rect width="400" height="500" fill="#E1E8EA"/>
-  <g fill="none" stroke="#3C4F49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="400" height="500" fill="#485C55"/>
+  <g fill="none" stroke="#E1E8EA" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
     <!-- tail -->
     <path d="M279 392c44 6 70-16 66-48-3-25-24-33-36-22-10 9-6 25 8 25"/>
     <!-- body -->
@@ -20,5 +20,5 @@
   </g>
   <text x="200" y="452" text-anchor="middle"
         font-family="'DM Sans', system-ui, sans-serif" font-size="15"
-        letter-spacing="3.2" fill="#475654">PORTRAIT COMING SOON</text>
+        letter-spacing="3.2" fill="#E1E8EA" opacity=".6">PORTRAIT COMING SOON</text>
 </svg>

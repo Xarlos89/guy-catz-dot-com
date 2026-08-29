@@ -33,26 +33,32 @@ export default function App() {
         <Hero />
         <Divider from="fern" to="mist" shape="dune" />
 
-        {/* Band B — mist. Both long reads live here: light-on-dark for seven
-            paragraphs is the one thing the two-colour system must not do */}
+        {/* Band B — mist */}
         <Practice />
-        <About />
-        <Approach />
-        <Divider from="mist" to="fern" shape="bowl" />
+        <Divider from="mist" to="fern" shape="ripple" />
 
-        {/* Band C — fern */}
-        <Services />
+        {/* Band C — fern. His bio runs light-on-dark at the client's asking;
+            `.lede`-weight measure and cream/80 body do the work instead */}
+        <About />
         <Divider from="fern" to="mist" shape="crest" />
 
         {/* Band D — mist */}
+        <Approach />
+        <Divider from="mist" to="fern" shape="bowl" />
+
+        {/* Band E — fern */}
+        <Services />
+        <Divider from="fern" to="mist" shape="crest" />
+
+        {/* Band F — mist */}
         <Gallery />
         <Divider from="mist" to="fern" shape="ripple" />
 
-        {/* Band E — fern */}
+        {/* Band G — fern */}
         <Reviews />
-        <Divider from="fern" to="mist" shape="crest" />
+        <Divider from="fern" to="mist" shape="dune" />
 
-        {/* Band F — mist, closing */}
+        {/* Band H — mist, closing */}
         <FAQ />
         <BookingCTA />
         <Divider from="mist" to="fern" shape="dune" />

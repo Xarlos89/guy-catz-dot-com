@@ -19,7 +19,7 @@ const paragraphs = [
 
 export default function About() {
   return (
-    <section id="about" className="bg-mist pt-8 pb-24 sm:pb-32">
+    <section id="about" className="bg-fern py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-start">
 
@@ -36,9 +36,9 @@ export default function About() {
 
           {/* His words, whole */}
           <Reveal delay={120}>
-            <p className="label mb-6">Meet Our Doctor</p>
-            <h2 className="section-heading mb-3">{site.doctor}</h2>
-            <p className="font-sans text-[13px] tracking-[0.18em] uppercase text-ink-soft mb-10">
+            <p className="label-light mb-6">Meet Our Doctor</p>
+            <h2 className="section-heading-light mb-3">{site.doctor}</h2>
+            <p className="font-sans text-[13px] tracking-[0.18em] uppercase text-cream/75 mb-10">
               {site.credentials}
             </p>
 
@@ -48,8 +48,8 @@ export default function About() {
                   key={i}
                   className={
                     i === 0
-                      ? 'font-serif text-xl text-fern leading-[1.55]'
-                      : 'font-sans text-[16px] text-ink-soft leading-[1.85]'
+                      ? 'font-serif text-xl text-cream leading-[1.55]'
+                      : 'font-sans text-[16px] text-cream/80 leading-[1.85]'
                   }
                 >
                   {text}

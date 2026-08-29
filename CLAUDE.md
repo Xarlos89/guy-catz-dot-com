@@ -42,7 +42,8 @@ src/
     Hero.jsx         a flat `fern` band — no photo, no gradient, light-on-dark;
                      laid out mobile-first — see "Mobile" below
     Practice.jsx     hairline fact row + rates (#practice)
-    About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`)
+    About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`);
+                     a `fern` band, so light-on-dark
     Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
     Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
     Gallery.jsx      masonry grid of the practice — `photos` array
@@ -67,7 +68,7 @@ public/
 
 **This is the part that makes the page feel calm — don't undo it by accident.**
 
-The page is not eleven alternating light/dark slabs. It is **six colour bands** plus the footer, joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change.
+The page is not eleven alternating light/dark slabs. It is **eight colour bands** plus the footer, joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change.
 
 **There are two background colours on this page and there is no third.** The
 client's instruction was literal — *"I only want to see two background colors
@@ -79,19 +80,17 @@ alternating.
 | Band | Sections | Background |
 |---|---|---|
 | A | Hero | `fern` |
-| B | Practice, About, Approach | `mist` |
-| C | Services | `fern` |
-| D | Gallery | `mist` |
-| E | Reviews | `fern` |
-| F | FAQ, BookingCTA | `mist` |
+| B | Practice | `mist` |
+| C | About | `fern` |
+| D | Approach | `mist` |
+| E | Services | `fern` |
+| F | Gallery | `mist` |
+| G | Reviews | `fern` |
+| H | FAQ, BookingCTA | `mist` |
 | — | Footer | `fern` |
 
-Band B is the long one on purpose. Both of the client's long-form sections —
-his bio and the Approach — are in it, because seven paragraphs of light-on-dark
-body text is a readability cost the two-colour system must not pay. That
-constraint, plus the terracotta button (below), is what fixes which sections
-can go dark: Hero, Services, Reviews, Footer, and nothing else without a
-rethink.
+One section per band, apart from the closing pair — the colour changes at
+every seam.
 
 **`cream` is never a band background.** It is the surface tone — cards, the
 navbar pill, ghost buttons, light photo placeholders — and nothing else. An
@@ -100,13 +99,23 @@ Reviews *"look so bright, why??"*: they were the two lightest areas on the
 page. If a section needs to feel different, the alternation already does that;
 don't reach for a third background.
 
-### Two things that decide which sections can be dark
+### What decides which sections can be dark
 
-1. **The terracotta button.** `.btn-primary` on `fern` sits at **1.4:1** — the
-   pill all but vanishes. Any section carrying a primary CTA (Practice,
-   BookingCTA) therefore stays on `mist`. The Hero is dark and uses
-   `.btn-primary-light`, the cream inversion, instead.
-2. **Long-form copy.** The client's own paragraphs stay on `mist`.
+**The terracotta button.** `.btn-primary` on `fern` sits at **1.4:1** — the pill
+all but vanishes, and no shade of terracotta both separates from `fern` and
+carries `cream` text at AA. Any section with a primary CTA (Practice,
+BookingCTA) therefore stays on `mist`. The Hero is dark and uses
+`.btn-primary-light`, the cream inversion, instead. This is the one hard
+constraint on the alternation.
+
+**Long-form copy is not a constraint — the client decided that.** An earlier
+pass kept his bio and the Approach on `mist`, on the reasoning that seven
+paragraphs of light-on-dark is a readability cost worth avoiding. He asked for
+Meet Our Doctor on the dark band anyway, so that is where it is. The cost is
+paid down with type rather than colour: a `62ch` measure, `1.85` line height,
+`cream` for the serif opening paragraph and `cream/80` for the body. If the
+Approach ever moves to `fern` too, do the same there — and note that the two of
+them can never both be dark while alternation holds, since they are neighbours.
 
 A dark section also needs its light-on-dark variants throughout —
 `.label-light`, `.section-heading-light`, `text-cream`, `text-cream/80` for
@@ -223,7 +232,7 @@ on the site and all the louder for it.
 
 | Token | Value | Used for |
 |---|---|---|
-| `fern` | `#3C4F49` | the dark band — Hero, Services, Reviews, Footer |
+| `fern` | `#3C4F49` | the dark band — Hero, About, Services, Reviews, Footer |
 | `mist` | `#C4D0D5` | the light band — everything else |
 
 They sit 5.5:1 apart, so the alternation is unmistakable. Adding a third
@@ -344,7 +353,7 @@ Still invented and needing replacement before launch:
 - **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, and the email and street address are made up. The office is in West Los Angeles; the exact address is not known
 - **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
-- **The portrait** — `About.jsx` shows `portrait-placeholder.svg`, a drawn cat captioned "portrait coming soon", standing in until the real headshots arrive. Swap the `src` and the alt text when they do
+- **The portrait** — `About.jsx` shows `portrait-placeholder.svg`, a drawn cat captioned "portrait coming soon", standing in until the real headshots arrive. Swap the `src` and the alt text when they do. The SVG is drawn for the dark band (a `fern-light` ground with a `cream` line); if About ever moves back to `mist`, recolour it or it becomes a dark block on a light ground
 - **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
 
