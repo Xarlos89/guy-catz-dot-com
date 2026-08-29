@@ -197,7 +197,7 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
    - Hero background — the `heroImage` const at the top of `src/sections/Hero.jsx`. Note the hero is *designed* to work without one; a photo there changes the section's character, so check the contrast of the headline over it
    - Portrait — the `<Photo>` in `src/sections/About.jsx`
    - Approach feature — the `<Photo>` in `src/sections/Approach.jsx` (use `tone="dark"`, it sits on fern)
-   - Studio grid — the `photos` array in `src/sections/Gallery.jsx`; `tall: true` gives a slot a portrait crop, which is what keeps the masonry from marching in step
+   - Studio grid — the `photos` array in `src/sections/Gallery.jsx`. Slots render at the photo's own aspect ratio (`natural` on `<Photo>`), so the masonry staggers by itself — a fixed ratio cropped faces and hands out of frame
 3. Any slot with a falsy `src` renders the labelled "photo coming soon" placeholder via `src/components/Photo.jsx`, so partial photography is fine
 4. Push to `main` — Actions builds and deploys automatically
 
@@ -214,16 +214,16 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
 
 ## What's placeholder / not yet real
 
-Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, the three care settings, and all three testimonials.
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, and the photography — five treatment-room frames in the gallery plus the feature photo in Approach, resized to webp under 400 KB. `public/og-image.jpg` is cut from the same set.
 
 Still invented and needing replacement before launch:
 
 - **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, and the email and street address are made up. The office is in West Los Angeles; the exact address is not known
 - **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
-- **All photography** — `public/images/` is empty; every slot renders a placeholder
+- **The portrait** — `About.jsx` shows `portrait-placeholder.svg`, a drawn cat captioned "portrait coming soon", standing in until the real headshots arrive. Swap the `src` and the alt text when they do
+- **The hero** — still the dawn gradient, by design rather than for want of a photo; see "Adding photos"
 - **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
-- **OG image** — `public/og-image.jpg` does not exist, so the `og:image` meta tags are commented out in `index.html` until it does
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
 
 ### Rates — partly confirmed

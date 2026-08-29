@@ -26,7 +26,11 @@ export default function About() {
           {/* Portrait */}
           <Reveal>
             <div className="rounded-[3rem] overflow-hidden aspect-[4/5] shadow-lift md:sticky md:top-24">
-              <Photo src={null} alt={`Portrait of ${site.doctor}, ${site.credentials}`} />
+              {/* PLACEHOLDER — swap for the real headshot when it arrives. */}
+              <Photo
+                src="/images/portrait-placeholder.svg"
+                alt={`Placeholder illustration — portrait of ${site.doctor}, ${site.credentials}, coming soon`}
+              />
             </div>
           </Reveal>
 

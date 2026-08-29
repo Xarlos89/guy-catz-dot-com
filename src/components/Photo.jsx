@@ -4,15 +4,17 @@
  * page looks finished before the real photography arrives — drop a
  * file into public/images/ and set `src` to swap one in.
  */
-export default function Photo({ src, alt, className = '', tone = 'light', imgClassName = '' }) {
+export default function Photo({ src, alt, className = '', tone = 'light', imgClassName = '', natural = false }) {
   if (src) {
+    // `natural` keeps the photo's own aspect ratio — used by the masonry
+    // grid, where cropping to a fixed ratio cut off faces and hands.
     return (
       <img
         src={src}
         alt={alt}
         loading="lazy"
         decoding="async"
-        className={`w-full h-full object-cover ${imgClassName} ${className}`}
+        className={`${natural ? 'block w-full h-auto' : 'w-full h-full object-cover'} ${imgClassName} ${className}`}
       />
     )
   }
