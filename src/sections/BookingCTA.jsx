@@ -6,7 +6,7 @@ export default function BookingCTA() {
     <section
       id="book"
       className="relative pt-8 pb-24 sm:pb-32"
-      style={{ background: 'linear-gradient(180deg, #F4EDE3 0%, #F6E7D5 55%, #F3E0CB 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #EDE4D6 0%, #EBDAC5 55%, #E9D2B7 100%)' }}
     >
       <div className="relative max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -20,14 +20,14 @@ export default function BookingCTA() {
               is the right place for what you are dealing with.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-10">
-              <a href={site.phoneHref} className="btn-primary">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10">
+              <a href={site.phoneHref} className="btn-primary w-full sm:w-auto">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                 </svg>
                 Call {site.phone}
               </a>
-              <a href={site.emailHref} className="btn-ghost">
+              <a href={site.emailHref} className="btn-ghost w-full sm:w-auto">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
@@ -35,7 +35,7 @@ export default function BookingCTA() {
               </a>
             </div>
 
-            <dl className="grid sm:grid-cols-2 gap-8">
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <dt className="label mb-2.5">Office</dt>
                 <dd className="font-sans text-[15px] text-umber-soft leading-relaxed">
@@ -53,13 +53,13 @@ export default function BookingCTA() {
 
           {/* Map */}
           <Reveal delay={120}>
-            <div className="rounded-[2.5rem] overflow-hidden shadow-lift bg-oat">
+            <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep bg-oat">
               <iframe
                 title={`${site.practice} — ${site.neighborhood}`}
                 src="https://maps.google.com/maps?q=West+Los+Angeles,+CA&z=13&output=embed"
                 width="100%"
-                height="420"
-                style={{ border: 0, display: 'block' }}
+                className="block w-full h-[300px] sm:h-[380px] lg:h-[420px]"
+                style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

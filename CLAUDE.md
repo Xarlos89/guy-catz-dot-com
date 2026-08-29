@@ -39,7 +39,8 @@ src/
     Reveal.jsx       scroll-triggered fade-and-rise wrapper
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
   sections/          one file per visible scroll section, assembled in App.jsx
-    Hero.jsx         light dawn gradient, two breathing washes, no photo needed
+    Hero.jsx         light dawn gradient, two breathing washes, no photo needed;
+                     laid out mobile-first — see "Mobile" below
     Practice.jsx     hairline fact row + rates (#practice)
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`)
     Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
@@ -120,6 +121,36 @@ not go on the site. Plausible is not the standard. Where a detail is genuinely
 unsettled he would rather the page said **"contact for details"** than carried
 a number nobody has agreed to — that is what the packages and travel rows do.
 
+### Voice — plain, not clever
+
+The client's second note was about the writing *around* his copy:
+
+> *"Our tone is relaxing, healing and caring. Stop using Claude like language
+> where you try to be too 'catch line-y'."*
+
+So the site's own words — headings, subtitles, FAQ answers, the small print
+under a fact — are written the way you would say them to a patient, and nothing
+is written to land a line. What that ruled out, and what replaced it:
+
+| Cut | Now reads |
+|---|---|
+| "the whole session, every session" | "you have my full attention" |
+| "Out-of-network" / "no insurance-driven limits" | "Without insurance" / "paid at the time of the visit" |
+| "Simple and transparent" (rates heading) | "What a session costs" |
+| "no queue, no televisions, and no one else booked over the top of your hour" | "wherever you are most comfortable moving" |
+| "the aim is for you to need me less, not longer" | "and it is revisited as you go" |
+| "Breathe" over the scroll hint | the hairline alone, no caption |
+
+Two tests before a sentence goes in: could he say it out loud to a patient
+without wincing, and does it tell them something true rather than sell them
+the idea of it? Note that the "televisions" line also broke the
+nothing-invented rule — the punchy sentences are usually the invented ones.
+
+**Insurance wording:** the practice does not bill insurance. Say that, in those
+words. "Out-of-network", "private pay", "cash-based" and "superbill" are
+industry terms that a patient reads as a hedge — and the billing specifics
+behind them are unconfirmed anyway.
+
 Rules of thumb for anything new:
 
 - No `border-t` between sections, and no full-width horizontal rules except the deliberate hairline inside Practice
@@ -127,30 +158,74 @@ Rules of thumb for anything new:
 - Section padding is generous — `py-24 sm:py-32`, or `pt-8 pb-24 sm:pb-32` for the second section in a band
 - Wrap each block in `<Reveal>` so it rises into view
 
+### Mobile
+
+Design the phone layout first; the wide one is the variation. What that means
+here, and what the second pass fixed:
+
+- **One left edge.** Label, heading, body, buttons and lists all start on the
+  same margin at every width. Nothing centres on mobile and left-aligns on
+  desktop
+- **Buttons stack full width** below `sm` (`w-full sm:w-auto`) — two pills of
+  different widths on one row is the ragged look this page is trying to avoid
+- **No hard line breaks below `sm`.** The hero's `<br>` is `hidden sm:block`;
+  the heading wraps on its own, with `text-balance` keeping the lines even
+- **Rows become stacks.** The Practice fact row is stacked with a hairline
+  *above* each item on a phone, two columns at `sm`, four with a hairline to the
+  *left* at `lg`. The Gallery is one column below `sm` — two columns of 155px
+  photos is not showing anyone the work
+- **Viewport units are `svh`, not `vh`,** anywhere a section is sized to the
+  screen. `100vh` on a phone is taller than the screen until the address bar
+  collapses, which pushes the call-to-action out of reach
+- Check 320px as well as 390px, and check that
+  `document.documentElement.scrollWidth` still equals `clientWidth` — one
+  overflowing element gives the whole page a horizontal scroll
+
 ## Design tokens (tailwind.config.js)
 
 Earthy and healthy — warm neutrals carry the page, green grounds it, terracotta is the only saturated colour.
 
+The whole set was taken down a step in a later pass — the client asked for a
+"slightly darker" page. Same hues, less glare, and enough ground under the
+shadows for them to read. If you lighten one of these, lighten the others with
+it or the bands stop matching the dividers.
+
 | Token | Value | Used for |
 |---|---|---|
-| `linen` | `#FBF7F1` | the lightest field; band A and D |
-| `oat` | `#F4EDE3` | band B and E; light photo placeholders |
-| `clay` | `#EADFD1` | the warm end of band D (Gallery) |
-| `blush` | `#F3E0CB` | the warm end of band F (Booking) |
-| `mist` | `#E4EADF` | green-tinted top of the hero gradient |
+| `linen` | `#F7F2EA` | the lightest field; band A and C |
+| `oat` | `#EDE4D6` | band B and F; light photo placeholders |
+| `clay` | `#E0D2BF` | the warm end of band E (Gallery) |
+| `blush` | `#E9D2B7` | the warm end of band F (Booking) |
+| `mist` | `#D8E0D2` | green-tinted top of the hero gradient |
 | `sage` | `#A9B8A4` | quiet accent, selection colour |
-| `sage-deep` | `#7C917B` | list bullets, timeline dots |
-| `fern` | `#46584A` | band C background; serif accent colour on light |
-| `fern-light` | `#53664F` | dark photo placeholders |
-| `fern-deep` | `#3A4A3E` | footer |
-| `terracotta` | `#C08262` | primary buttons, small dots |
-| `terracotta-deep` | `#A8623F` | label text on light (contrast-safe), button hover |
-| `ochre` | `#DCA97B` | label text and icons on `fern` (contrast-safe) |
-| `umber` | `#4A4139` | body text |
-| `umber-soft` | `#6B6055` | secondary text |
-| `stone` | `#E6DBCD` | hairlines, ghost-button borders |
+| `sage-deep` | `#6E8470` | list bullets, hero setting dots |
+| `fern` | `#3F5143` | band D background; serif accent colour on light |
+| `fern-light` | `#4B5D48` | dark photo placeholders |
+| `fern-deep` | `#324136` | footer |
+| `terracotta` | `#A6613D` | primary buttons — carries `linen` text at AA |
+| `terracotta-light` | `#C08262` | small dots and marks, never text |
+| `terracotta-deep` | `#8A4E2C` | label text on light, and the button hover |
+| `ochre` | `#E6B98C` | label text and icons on `fern` (contrast-safe) |
+| `umber` | `#40382F` | body text |
+| `umber-soft` | `#5D5348` | secondary text |
+| `stone` | `#D9CCBA` | hairlines, ghost-button borders |
 
-Contrast note: `terracotta` and `ochre` are too light for text on their own backgrounds — that is what `terracotta-deep` (on light) and `ochre` (on `fern` only) are for. Don't set small text in plain `terracotta`.
+Contrast note: `terracotta-light` and `ochre` are too light for text on a light
+ground — that is what `terracotta-deep` (on light) and `ochre` (on `fern` only)
+are for. Don't set small text in `terracotta` or `terracotta-light`.
+
+### Shadow
+
+Three tokens, each two layers: a close contact shadow so the edge of a surface
+reads, and a wide soft one so it lifts off the page. Warm-black
+(`rgba(52,44,36,…)`), never neutral grey — a grey shadow on these creams turns
+the warmth off.
+
+| Token | Used for |
+|---|---|
+| `shadow-soft` | buttons, the small resting state |
+| `shadow-lift` | `.soft-card`, `.photo-frame`, the navbar pill, hover states |
+| `shadow-deep` | the portrait, the map, the dark card on `fern` |
 
 ### Type
 
@@ -166,7 +241,12 @@ Both are **self-hosted** from `public/fonts/` (latin subset, variable woff2) wit
 - `.lede` / `.lede-light` — the relaxed 1.85 line-height intro paragraph
 - `.btn-primary` — terracotta pill; `.btn-ghost` — outlined pill on light; `.btn-ghost-light` — outlined pill on fern
 - `.soft-card` / `.soft-card-dark` — borderless rounded surface with a warm shadow
+- `.photo-frame` — the clip-and-lift wrapper every photo sits in (`overflow-hidden` + `shadow-lift`)
+- `.hero-height` — the hero's minimum height, in `svh` where supported so mobile browser chrome can't push the buttons off screen
 - `.reveal` — hidden-then-risen state, scoped to `.reveal-ready` so prerendered HTML stays visible without JS
+
+`section[id]` and `footer[id]` carry a `scroll-margin-top` in the base layer,
+so an anchor jump stops short of the floating navbar instead of under it.
 
 Motion: `animate-breathe` (11s) and `animate-drift` (16s) on the hero washes, and the reveal transition. All of it is switched off under `prefers-reduced-motion`. There is no pulsing or bouncing anywhere — the whole point is that nothing on this page demands attention.
 
@@ -196,8 +276,8 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
 2. Set the `src` on the relevant slot:
    - Hero background — the `heroImage` const at the top of `src/sections/Hero.jsx`. Note the hero is *designed* to work without one; a photo there changes the section's character, so check the contrast of the headline over it
    - Portrait — the `<Photo>` in `src/sections/About.jsx`
-   - Approach feature — the `<Photo>` in `src/sections/Approach.jsx` (use `tone="dark"`, it sits on fern)
-   - Studio grid — the `photos` array in `src/sections/Gallery.jsx`. Slots render at the photo's own aspect ratio (`natural` on `<Photo>`), so the masonry staggers by itself — a fixed ratio cropped faces and hands out of frame
+   - Approach feature — the `<Photo>` in `src/sections/Approach.jsx` (that band is light, so the default `tone` is right)
+   - Practice grid — the `photos` array in `src/sections/Gallery.jsx`. Slots render at the photo's own aspect ratio (`natural` on `<Photo>`), so the masonry staggers by itself — a fixed ratio cropped faces and hands out of frame. One column below `sm`, three at `md`
 3. Any slot with a falsy `src` renders the labelled "photo coming soon" placeholder via `src/components/Photo.jsx`, so partial photography is fine
 4. Push to `main` — Actions builds and deploys automatically
 

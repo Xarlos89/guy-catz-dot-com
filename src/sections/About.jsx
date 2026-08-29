@@ -25,7 +25,7 @@ export default function About() {
 
           {/* Portrait */}
           <Reveal>
-            <div className="rounded-[3rem] overflow-hidden aspect-[4/5] shadow-lift md:sticky md:top-24">
+            <div className="photo-frame rounded-[2.5rem] sm:rounded-[3rem] aspect-[4/5] shadow-deep md:sticky md:top-24">
               {/* PLACEHOLDER — swap for the real headshot when it arrives. */}
               <Photo
                 src="/images/portrait-placeholder.svg"

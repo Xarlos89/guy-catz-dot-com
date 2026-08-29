@@ -5,7 +5,7 @@ const explore = [
   { label: 'Meet Our Doctor', href: '#about' },
   { label: 'The Approach', href: '#approach' },
   { label: 'Services', href: '#services' },
-  { label: 'The Studio', href: '#gallery' },
+  { label: 'Photos', href: '#gallery' },
   { label: 'Reviews', href: '#reviews' },
   { label: 'FAQ', href: '#faq' },
 ]

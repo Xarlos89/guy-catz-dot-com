@@ -2,11 +2,11 @@
 // The <Divider> component needs real colour strings (they go into inline SVG
 // fills), so the band colours live here too — keep the two files in sync.
 export const palette = {
-  linen: '#FBF7F1',
-  oat: '#F4EDE3',
-  clay: '#EADFD1',
-  blush: '#F3E0CB',
-  mist: '#E4EADF',
-  fern: '#46584A',
-  fernDeep: '#3A4A3E',
+  linen: '#F7F2EA',
+  oat: '#EDE4D6',
+  clay: '#E0D2BF',
+  blush: '#E9D2B7',
+  mist: '#D8E0D2',
+  fern: '#3F5143',
+  fernDeep: '#324136',
 }

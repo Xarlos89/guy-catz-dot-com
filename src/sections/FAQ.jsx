@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: 'Do you take insurance?',
-    a: 'The practice works outside insurance networks, which is what makes the full one-on-one session possible and keeps the plan driven by your goals rather than a coverage limit. Payment is due at the time of the visit.',
+    a: 'No — the practice does not bill insurance, and payment is due at the time of the visit. Working this way is what makes the full one-on-one session possible, and keeps your care guided by your goals rather than by what a plan will cover.',
   },
   {
     q: 'Do I need a referral from a doctor?',
@@ -16,11 +16,11 @@ const faqs = [
   },
   {
     q: 'How many sessions will I need?',
-    a: 'Most people are seen weekly at first and taper as things hold. You will get an honest estimate after the evaluation, and it gets revisited as you progress — the aim is for you to need me less, not longer.',
+    a: 'Most people are seen weekly at first and taper as things settle. You will get an honest estimate after the evaluation, and it is revisited as you go.',
   },
   {
     q: 'I was just discharged from hospital. Is it too soon?',
-    a: 'Usually the opposite. Rebuilding strength and confidence after a hospital stay is a large part of this practice, and in-home visits mean you do not have to travel to start.',
+    a: 'It is often the right time to begin. Rebuilding strength and confidence after a hospital stay is a large part of this practice, and in-home visits mean you do not have to travel to start.',
   },
   {
     q: 'What should I wear?',

@@ -25,11 +25,13 @@ export default function Approach() {
         </Reveal>
 
         <Reveal delay={80}>
-          <div className="rounded-[3rem] overflow-hidden mb-14 shadow-soft">
+          <div className="photo-frame rounded-[2.5rem] sm:rounded-[3rem] mb-12 sm:mb-14">
             <Photo
               src="/images/hip-assessment.webp"
               alt="Guy Catz assessing a patient's hip and pelvis"
               natural
+              width={1800}
+              height={1422}
             />
           </div>
         </Reveal>
