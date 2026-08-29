@@ -18,7 +18,7 @@ const paragraphs = [
 
 export default function Approach() {
   return (
-    <section id="approach" className="bg-haze py-24 sm:py-32">
+    <section id="approach" className="bg-mist pt-8 pb-24 sm:pb-32">
       <div className="max-w-3xl mx-auto px-6 sm:px-8">
         <Reveal>
           <h2 className="section-heading mb-12">The Healing Path Approach</h2>

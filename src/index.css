@@ -43,7 +43,7 @@
   }
 
   body {
-    @apply font-sans font-normal text-ink bg-cream antialiased;
+    @apply font-sans font-normal text-ink bg-mist antialiased;
     letter-spacing: 0.005em;
   }
 
@@ -69,7 +69,7 @@
 
   ::selection {
     background: theme('colors.sage.DEFAULT');
-    color: theme('colors.fern.deep');
+    color: theme('colors.fern.DEFAULT');
   }
 }
 
@@ -120,6 +120,15 @@
            border border-line text-ink font-sans font-medium text-sm
            rounded-full bg-cream/65 shadow-soft
            transition-all duration-500 ease-out hover:bg-cream hover:border-sage hover:shadow-lift;
+  }
+
+  /* The dark-band primary. Terracotta on `fern` sits at 1.4:1 — the pill
+     all but disappears — so on `fern` the primary inverts to cream. */
+  .btn-primary-light {
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
+           bg-cream text-fern font-sans font-medium text-sm
+           rounded-full shadow-lift
+           transition-all duration-500 ease-out hover:bg-white/95;
   }
 
   .btn-ghost-light {

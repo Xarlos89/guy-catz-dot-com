@@ -28,35 +28,34 @@ export default function App() {
     <>
       <Navbar />
       <main>
-        {/* Band A — mist: the page opens on colour, not on a pale field */}
+        {/* Band A — fern. The page opens on the dark tone; the primary
+            button inverts to cream here, see .btn-primary-light */}
         <Hero />
-        <Divider from="mist" to="haze" shape="dune" />
+        <Divider from="fern" to="mist" shape="dune" />
 
-        {/* Band B — haze */}
+        {/* Band B — mist. Both long reads live here: light-on-dark for seven
+            paragraphs is the one thing the two-colour system must not do */}
         <Practice />
-        <Divider from="haze" to="mist" shape="ripple" />
-
-        {/* Band C — mist */}
         <About />
-        <Divider from="mist" to="haze" shape="crest" />
-
-        {/* Band D — haze */}
         <Approach />
-        <Divider from="haze" to="fern" shape="bowl" />
+        <Divider from="mist" to="fern" shape="bowl" />
 
-        {/* Band E — the one grounded, dark moment */}
+        {/* Band C — fern */}
         <Services />
-        <Divider from="fern" to="haze" shape="crest" />
+        <Divider from="fern" to="mist" shape="crest" />
 
-        {/* Band F — haze */}
+        {/* Band D — mist */}
         <Gallery />
-        <Divider from="haze" to="mist" shape="ripple" />
+        <Divider from="mist" to="fern" shape="ripple" />
 
-        {/* Band G — mist, closing */}
+        {/* Band E — fern */}
         <Reviews />
+        <Divider from="fern" to="mist" shape="crest" />
+
+        {/* Band F — mist, closing */}
         <FAQ />
         <BookingCTA />
-        <Divider from="mist" to="fernDeep" shape="dune" />
+        <Divider from="mist" to="fern" shape="dune" />
       </main>
       <Footer />
     </>

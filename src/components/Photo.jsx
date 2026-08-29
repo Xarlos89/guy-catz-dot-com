@@ -28,7 +28,7 @@ export default function Photo({ src, alt, className = '', tone = 'light', imgCla
       role="img"
       aria-label={alt}
       className={`w-full h-full flex flex-col items-center justify-center gap-3 px-6 text-center ${
-        dark ? 'bg-fern-light' : 'bg-haze'
+        dark ? 'bg-fern-light' : 'bg-cream'
       } ${className}`}
     >
       {/* A single leaf — the same mark as the favicon */}

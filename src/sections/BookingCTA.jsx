@@ -52,7 +52,7 @@ export default function BookingCTA() {
 
           {/* Map */}
           <Reveal delay={120}>
-            <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep bg-haze">
+            <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep bg-cream">
               <iframe
                 title={`${site.practice} — ${site.neighborhood}`}
                 src="https://maps.google.com/maps?q=West+Los+Angeles,+CA&z=13&output=embed"

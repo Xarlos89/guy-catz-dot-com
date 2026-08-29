@@ -6,7 +6,7 @@ Static marketing website for **Healing Path Rehabilitation** — the practice of
 
 The domain is `guy-catz.com`; the practice name is Healing Path Rehabilitation. The wordmark reads "Healing Path" — don't "correct" it to the doctor's name.
 
-The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is a calm **blue-cream** field — cool, soft, and deliberately never white — in bands that alternate, joined by curved seams. See "Bands and seams" below before adding anything.
+The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is built from exactly **two background colours** — a deep blue-green and a cool light blue — alternating in bands joined by curved seams. See "Bands and seams" below before adding anything.
 
 > **The words are the client's; the contact details and prices are not.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. See "What's placeholder" at the bottom for what still needs replacing.
 
@@ -39,7 +39,7 @@ src/
     Reveal.jsx       scroll-triggered fade-and-rise wrapper
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
   sections/          one file per visible scroll section, assembled in App.jsx
-    Hero.jsx         a flat `mist` band like any other — no photo, no gradient;
+    Hero.jsx         a flat `fern` band — no photo, no gradient, light-on-dark;
                      laid out mobile-first — see "Mobile" below
     Practice.jsx     hairline fact row + rates (#practice)
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`)
@@ -67,39 +67,57 @@ public/
 
 **This is the part that makes the page feel calm — don't undo it by accident.**
 
-The page is not eleven alternating light/dark slabs. It is **seven colour bands** — one section each, apart from the closing trio — joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change. **No two neighbouring bands share a tone** — that alternation is the point, and it is the first thing to re-check after moving a section.
+The page is not eleven alternating light/dark slabs. It is **six colour bands** plus the footer, joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change.
+
+**There are two background colours on this page and there is no third.** The
+client's instruction was literal — *"I only want to see two background colors
+on the whole page"* — after pointing at the Services band and saying *"when I
+said blue, I meant like the services section"*. So `fern` is that blue-green,
+`mist` is its light companion, and every band is one or the other, strictly
+alternating.
 
 | Band | Sections | Background |
 |---|---|---|
-| A | Hero | `mist` |
-| B | Practice | `haze` |
-| C | About | `mist` |
-| D | Approach | `haze` |
-| E | Services | `fern` — the one grounded, dark moment |
-| F | Gallery | `haze` |
-| G | Reviews, FAQ, BookingCTA | `mist` |
-| — | Footer | `fern-deep` |
+| A | Hero | `fern` |
+| B | Practice, About, Approach | `mist` |
+| C | Services | `fern` |
+| D | Gallery | `mist` |
+| E | Reviews | `fern` |
+| F | FAQ, BookingCTA | `mist` |
+| — | Footer | `fern` |
 
-The light bands are a strict `mist` / `haze` alternation with the dark band in
-the middle. Two tones, taking turns — that regularity *is* the pattern, and
-anything that opts out of it (a gradient, a third light tone, a photo behind a
-section) reads as a different design language bolted onto the page.
+Band B is the long one on purpose. Both of the client's long-form sections —
+his bio and the Approach — are in it, because seven paragraphs of light-on-dark
+body text is a readability cost the two-colour system must not pay. That
+constraint, plus the terracotta button (below), is what fixes which sections
+can go dark: Hero, Services, Reviews, Footer, and nothing else without a
+rethink.
 
 **`cream` is never a band background.** It is the surface tone — cards, the
-navbar pill, ghost buttons — and nothing else. An earlier draft gave About a
-`cream` band and Reviews a `haze` one, and the client's note was that those two
-sections *"look so bright, why??"*: they were the two lightest areas on the
-page. Both now sit on `mist`. If a section ever needs to feel lighter, that is
-what the alternation already does; don't reach for `cream`.
+navbar pill, ghost buttons, light photo placeholders — and nothing else. An
+earlier draft gave About a `cream` band, and the client's note was that it and
+Reviews *"look so bright, why??"*: they were the two lightest areas on the
+page. If a section needs to feel different, the alternation already does that;
+don't reach for a third background.
 
-Approach and About are long-form reading, so both sit on light bands: seven
-paragraphs of light-on-dark body text is a real readability cost, and that is
-why the dark band holds Services alone rather than Approach too.
+### Two things that decide which sections can be dark
+
+1. **The terracotta button.** `.btn-primary` on `fern` sits at **1.4:1** — the
+   pill all but vanishes. Any section carrying a primary CTA (Practice,
+   BookingCTA) therefore stays on `mist`. The Hero is dark and uses
+   `.btn-primary-light`, the cream inversion, instead.
+2. **Long-form copy.** The client's own paragraphs stay on `mist`.
+
+A dark section also needs its light-on-dark variants throughout —
+`.label-light`, `.section-heading-light`, `text-cream`, `text-cream/80` for
+body, `.soft-card-dark`, and `ochre` (not `fern`) for any emphasis, since a
+fern `<em>` on a fern ground is invisible. Hero, Services and Reviews are the
+worked examples.
 
 The seams are placed in `App.jsx`:
 
 ```jsx
-<Divider from="haze" to="cream" shape="dune" />
+<Divider from="fern" to="mist" shape="dune" />
 ```
 
 `from` **must** match the background of the section above and `to` the section below — the SVG paints `to` over a `from` background, so a mismatch shows as a hard line. Four shapes exist in `Divider.jsx` (`dune`, `bowl`, `crest`, `ripple`), deliberately gentle; steep waves read as energetic, which is the opposite of the brief. **Reordering or inserting a section means re-pairing every divider below it.**
@@ -197,42 +215,43 @@ here, and what the second pass fixed:
 
 ## Design tokens (tailwind.config.js)
 
-Cool and quiet — a **blue-cream** neutral ramp carries the page, green grounds
-it, and terracotta is the only warm thing on the site. The client asked for
-"way less white and more blue-cream", so the warm cream field became this cool
-one, and the whole ramp sits low enough that no band reads as paper.
+Two backgrounds, one surface, and a small set of type and accent colours.
+Everything is cool except terracotta and ochre, which are the only warm things
+on the site and all the louder for it.
 
-The four neutrals are one ramp in four steps, spaced far enough apart that
-neighbouring bands read as *different colours*. **Don't add a fifth step between
-two of them** — a band that is nearly its neighbour looks like a rendering
-fault, not a design. If you shift one, shift them all together and re-run the
-contrast figures below.
+**The two backgrounds**
 
 | Token | Value | Used for |
 |---|---|---|
-| `cream` | `#E1E8EA` | the lightest tone. **Surfaces only** — `.soft-card`, the navbar pill, ghost buttons — never a band. Also the text colour on `fern` |
-| `haze` | `#D4DDE0` | bands B, D and F; light photo placeholders |
-| `mist` | `#C4D0D5` | bands A, C and G |
-| `dusk` | `#B2C1C8` | unused on the page as it stands. **No body text on `dusk`** — it is the one tone that fails AA for secondary text |
-| `sage` | `#9FB3AC` | quiet accent, selection colour, quote marks |
-| `sage-deep` | `#6B8279` | list bullets, hero setting dots |
-| `fern` | `#3C4F49` | band D background; serif accent colour on light |
-| `fern-light` | `#485C55` | dark photo placeholders |
-| `fern-deep` | `#2F403B` | footer |
-| `terracotta` | `#94512F` | primary buttons — carries `cream` text at AA |
+| `fern` | `#3C4F49` | the dark band — Hero, Services, Reviews, Footer |
+| `mist` | `#C4D0D5` | the light band — everything else |
+
+They sit 5.5:1 apart, so the alternation is unmistakable. Adding a third
+background is the one change this design does not survive; if a section needs
+to feel different, move it to the other colour.
+
+**Everything else**
+
+| Token | Value | Used for |
+|---|---|---|
+| `cream` | `#E1E8EA` | the surface tone: `.soft-card`, the navbar pill, ghost buttons, `.btn-primary-light`, light photo placeholders. Also the text colour on `fern`. **Never a background** |
+| `fern-light` | `#485C55` | dark photo placeholders only |
+| `sage` | `#9FB3AC` | quiet accent, selection colour |
+| `sage-deep` | `#6B8279` | list bullets on light |
+| `terracotta` | `#94512F` | primary buttons **on `mist` only** — carries `cream` text at AA, but sits at 1.4:1 on `fern` |
 | `terracotta-light` | `#C08262` | small dots and marks, never text |
 | `terracotta-deep` | `#7A4023` | label text on light, and the button hover |
-| `ochre` | `#E6B98C` | label text and icons on `fern` (contrast-safe) |
-| `ink` | `#2C3A38` | body text — cool, to match the ground |
-| `ink-soft` | `#475654` | secondary text |
-| `line` | `#AEBEC2` | hairlines, ghost-button borders |
+| `ochre` | `#E6B98C` | labels, dots and emphasis on `fern` |
+| `ink` | `#2C3A38` | body text on `mist` |
+| `ink-soft` | `#475654` | secondary text on `mist` |
+| `line` | `#A3B5BA` | hairlines, ghost-button borders |
 
-Every text/ground pair on the page clears WCAG AA (4.5:1) at these values:
-`ink` runs 7.5–9.6 across the three light bands, `ink-soft` 4.9–6.2,
-`terracotta-deep` 5.2–6.6, `cream` on `terracotta` 4.9, `ochre` on `fern` 4.9.
-Light-on-dark text needs `/80` or higher on `fern` and `/65` or higher on
-`fern-deep`; below that it fails, which is why the footer's opacities are what
-they are.
+Every text/ground pair clears WCAG AA (4.5:1) at these values. On `mist`: `ink`
+7.5, `ink-soft` 4.9, `terracotta-deep` 5.2, `cream` on the terracotta pill 4.9.
+On `fern`: `cream` 7.0, `cream/80` 5.2, `ochre` 4.9, and `fern` text on a
+`.btn-primary-light` pill 7.0. Light-on-dark text needs **`/75` or higher** on
+`fern` — below that it fails, which is why the footer's opacities are what they
+are.
 
 Contrast note: `terracotta-light` and `ochre` are too light for text on a light
 ground — that is what `terracotta-deep` (on light) and `ochre` (on `fern` only)
@@ -263,7 +282,7 @@ Both are **self-hosted** from `public/fonts/` (latin subset, variable woff2) wit
 - `.label` / `.label-light` — spaced-caps section label (terracotta on light, ochre on fern)
 - `.section-heading` / `.section-heading-light` — Fraunces h2 with the soft/wonk variation settings
 - `.lede` / `.lede-light` — the relaxed 1.85 line-height intro paragraph
-- `.btn-primary` — terracotta pill; `.btn-ghost` — outlined pill on light; `.btn-ghost-light` — outlined pill on fern
+- `.btn-primary` — terracotta pill, **on `mist` only**; `.btn-primary-light` — its cream inversion, the primary on `fern`; `.btn-ghost` — outlined pill on light; `.btn-ghost-light` — outlined pill on fern
 - `.soft-card` / `.soft-card-dark` — borderless rounded surface with a soft shadow. `.soft-card` is solid `cream`, **not** white or a white overlay
 - `.photo-frame` — the clip-and-lift wrapper every photo sits in (`overflow-hidden` + `shadow-lift`)
 - `.hero-height` — the hero's minimum height, in `svh` where supported so mobile browser chrome can't push the buttons off screen

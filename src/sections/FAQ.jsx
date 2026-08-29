@@ -65,7 +65,7 @@ function FAQItem({ q, a }) {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="bg-mist pb-24 sm:pb-32">
+    <section id="faq" className="bg-mist py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-start">
           <Reveal>

@@ -12,13 +12,13 @@ const explore = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-fern-deep text-cream/75 font-sans">
+    <footer id="contact" className="bg-fern text-cream/80 font-sans">
       <div className="max-w-5xl mx-auto px-6 sm:px-8 pt-16 pb-14 grid sm:grid-cols-3 gap-12">
         <div>
           <div className="font-serif text-cream text-xl mb-4">
             Healing Path <em className="text-ochre">Rehabilitation</em>
           </div>
-          <p className="text-[14px] leading-[1.8] text-cream/70 max-w-xs">
+          <p className="text-[14px] leading-[1.8] text-cream/80 max-w-xs">
             {site.doctor}, {site.credentials} · {site.city}. One-on-one physical
             therapy in your home, at the {site.neighborhood} office, or by
             telehealth.
@@ -27,7 +27,7 @@ export default function Footer() {
 
         <div>
           <div className="label-light mb-5">Explore</div>
-          <nav className="flex flex-col gap-2.5 text-[14px] text-cream/75">
+          <nav className="flex flex-col gap-2.5 text-[14px] text-cream/80">
             {explore.map(({ label, href }) => (
               <a key={href} href={href} className="hover:text-cream transition-colors duration-300 w-fit">
                 {label}
@@ -38,14 +38,14 @@ export default function Footer() {
 
         <div>
           <div className="label-light mb-5">Get in touch</div>
-          <ul className="text-[14px] space-y-2.5 text-cream/75">
+          <ul className="text-[14px] space-y-2.5 text-cream/80">
             <li>
               <a href={site.phoneHref} className="hover:text-cream transition-colors duration-300">{site.phone}</a>
             </li>
             <li>
               <a href={site.emailHref} className="hover:text-cream transition-colors duration-300">{site.email}</a>
             </li>
-            <li className="pt-2 leading-[1.8] text-cream/65">
+            <li className="pt-2 leading-[1.8] text-cream/75">
               {site.address}<br />
               {site.addressCity}
             </li>
@@ -68,11 +68,11 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-cream/15 max-w-5xl mx-auto px-6 sm:px-8 py-6 flex flex-wrap gap-x-6 gap-y-2 justify-between">
-        <p className="text-[12px] text-cream/65">
+      <div className="border-t border-cream/20 max-w-5xl mx-auto px-6 sm:px-8 py-6 flex flex-wrap gap-x-6 gap-y-2 justify-between">
+        <p className="text-[12px] text-cream/75">
           © {new Date().getFullYear()} {site.practice}. {site.doctor}, {site.credentials}.
         </p>
-        <p className="text-[12px] text-cream/65">
+        <p className="text-[12px] text-cream/75">
           Physical therapy services. Not a substitute for emergency medical care.
         </p>
       </div>

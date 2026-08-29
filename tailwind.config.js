@@ -7,40 +7,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Blue-cream field — a cool, low-saturation cream. Four steps, far
-        // enough apart that neighbouring bands read as different colours
-        // rather than as the same colour lit differently. Nothing on this
-        // page is white; `cream` is as light as it gets.
-        cream: '#E1E8EA',   // lightest band, and every raised surface
-        haze:  '#D4DDE0',   // one step down
-        mist:  '#C4D0D5',   // two
-        dusk:  '#B2C1C8',   // the deepest light tone — hero crown, page close
+        // TWO BACKGROUND COLOURS. That is the whole system — the page
+        // alternates between `fern` and `mist` and uses nothing else behind a
+        // section. Everything below them is type, surface or accent.
+        fern: {
+          DEFAULT: '#3C4F49',   // the dark band — the "blue" the client means
+          light: '#485C55',     // dark photo placeholders only
+        },
+        mist: '#C4D0D5',        // the light band
 
-        // Greens — the grounded dark band and quiet accents
+        // Surface — raised things (cards, the navbar pill, ghost buttons) and
+        // the text colour on `fern`. Never a section background.
+        cream: '#E1E8EA',
+
+        // Accents
         sage: {
           DEFAULT: '#9FB3AC',
           deep: '#6B8279',
         },
-        fern: {
-          DEFAULT: '#3C4F49',
-          light: '#485C55',
-          deep: '#2F403B',
-        },
-
-        // Warm accents — the only warmth left, and all the louder for it
         terracotta: {
-          DEFAULT: '#94512F',   // buttons — carries cream text at AA
-          light: '#C08262',     // dots and small marks, never text
+          DEFAULT: '#94512F',   // buttons on `mist` — carries cream text at AA
+          light: '#C08262',     // small dots and marks, never text
           deep: '#7A4023',      // label text on light, and the button hover
         },
-        ochre: '#E6B98C',       // label text and icons on fern
+        ochre: '#E6B98C',       // label text and icons on `fern`
 
         // Ink — cool, to match the ground
         ink: {
           DEFAULT: '#2C3A38',
           soft: '#475654',
         },
-        line: '#AEBEC2',        // hairlines, ghost-button borders
+        line: '#A3B5BA',        // hairlines, ghost-button borders
       },
       fontFamily: {
         serif: ['Fraunces', 'Georgia', 'serif'],

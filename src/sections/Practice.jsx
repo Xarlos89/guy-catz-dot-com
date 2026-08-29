@@ -34,7 +34,7 @@ function factClasses(i) {
 
 export default function Practice() {
   return (
-    <section id="practice" className="bg-haze pt-8 pb-24 sm:pb-32">
+    <section id="practice" className="bg-mist py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
 
         {/* Quiet fact row — hairlines instead of boxes */}

@@ -19,7 +19,7 @@ const paragraphs = [
 
 export default function About() {
   return (
-    <section id="about" className="bg-mist py-24 sm:py-32">
+    <section id="about" className="bg-mist pt-8 pb-24 sm:pb-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-start">
 
