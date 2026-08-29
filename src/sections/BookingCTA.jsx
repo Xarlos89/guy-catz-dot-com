@@ -16,9 +16,8 @@ export default function BookingCTA() {
             <p className="label mb-6">Book a session</p>
             <h2 className="section-heading mb-6">Start with a conversation</h2>
             <p className="lede mb-10 max-w-md">
-              Fifteen minutes on the phone, no charge and no pitch — just enough
-              to hear your story and work out whether this is the right place
-              for it.
+              Call or email to ask about availability, rates, or whether this
+              is the right place for what you are dealing with.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-10">

@@ -15,7 +15,8 @@ const rates = [
   { name: 'Initial evaluation', price: '$250' },
   { name: 'Treatment session', price: '$200' },
   { name: 'Telehealth session', price: '$150' },
-  { name: 'Travel outside the local area', price: '+$50' },
+  { name: 'Travel outside the local area', price: '+$50', note: 'contact for details' },
+  { name: 'Four- and eight-session packages', price: 'Contact for details' },
 ]
 
 export default function Practice() {
@@ -52,16 +53,17 @@ export default function Practice() {
             <h2 className="section-heading mb-10">Simple and transparent</h2>
 
             <div className="divide-y divide-stone mb-8">
-              {rates.map(({ name, price }) => (
+              {rates.map(({ name, price, note }) => (
                 <div key={name} className="flex items-baseline justify-between gap-6 py-5 first:pt-0">
-                  <p className="font-sans text-umber text-[16px]">{name}</p>
-                  <p className="font-serif text-2xl text-fern shrink-0">{price}</p>
+                  <div>
+                    <p className="font-sans text-umber text-[16px]">{name}</p>
+                    {note && <p className="font-sans text-[13px] text-umber-soft mt-1">{note}</p>}
+                  </div>
+                  <p className={`shrink-0 ${price.startsWith('$') || price.startsWith('+')
+                    ? 'font-serif text-2xl text-fern'
+                    : 'font-sans text-[15px] text-umber-soft'}`}>{price}</p>
                 </div>
               ))}
-              <div className="flex items-baseline justify-between gap-6 py-5">
-                <p className="font-sans text-umber text-[16px]">Four- and eight-session packages</p>
-                <p className="font-sans text-[15px] text-umber-soft shrink-0">discounted</p>
-              </div>
             </div>
 
             <p className="lede mb-10">
@@ -71,7 +73,7 @@ export default function Practice() {
             </p>
 
             <a href="#book" className="btn-primary">
-              Book a free consult
+              Book a session
             </a>
           </div>
         </Reveal>

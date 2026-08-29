@@ -4,9 +4,9 @@ import { site } from '../siteInfo'
 const navLinks = [
   { label: 'Practice', href: '#practice' },
   { label: 'Our Doctor', href: '#about' },
-  { label: 'Where', href: '#programs' },
   { label: 'Approach', href: '#approach' },
-  { label: 'Who I Treat', href: '#services' },
+  { label: 'Services', href: '#services' },
+  { label: 'Reviews', href: '#reviews' },
 ]
 
 export default function Navbar() {

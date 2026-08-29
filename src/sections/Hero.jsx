@@ -40,7 +40,7 @@ export default function Hero() {
       )}
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 w-full">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <p className="label mb-7">{site.practice} · {site.city}</p>
 
           <h1
@@ -50,8 +50,8 @@ export default function Hero() {
               fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'opsz' 34",
             }}
           >
-            Recovery is more than<br />
-            <em className="text-fern">healing an injury</em>
+            Recovery is <em className="text-fern">more</em> than<br />
+            healing an injury
           </h1>
 
           <p className="font-sans text-lg sm:text-xl text-umber-soft leading-[1.7] max-w-xl mb-10">
@@ -62,7 +62,7 @@ export default function Hero() {
 
           <div className="flex flex-wrap items-center gap-4 mb-14">
             <a href="#book" className="btn-primary">
-              Book a free consult
+              Book a session
             </a>
             <a href={site.phoneHref} className="btn-ghost">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
