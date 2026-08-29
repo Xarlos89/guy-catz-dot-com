@@ -188,8 +188,7 @@
     transition: none;
   }
 
-  .animate-breathe,
-  .animate-drift {
+  .animate-breathe {
     animation: none !important;
   }
 }

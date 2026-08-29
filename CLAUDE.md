@@ -39,7 +39,7 @@ src/
     Reveal.jsx       scroll-triggered fade-and-rise wrapper
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
   sections/          one file per visible scroll section, assembled in App.jsx
-    Hero.jsx         dusk-to-haze dawn gradient, two cool washes, no photo needed;
+    Hero.jsx         a flat `mist` band like any other — no photo, no gradient;
                      laid out mobile-first — see "Mobile" below
     Practice.jsx     hairline fact row + rates (#practice)
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`)
@@ -67,22 +67,30 @@ public/
 
 **This is the part that makes the page feel calm — don't undo it by accident.**
 
-The page is not eleven alternating light/dark slabs. It is **six colour bands**, each holding one or two sections, joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change. **No two neighbouring bands share a tone** — that alternation is the point, and it is the first thing to re-check after moving a section.
+The page is not eleven alternating light/dark slabs. It is **seven colour bands** — one section each, apart from the closing trio — joined by **curved dividers**. Sections inside a band share a background and simply continue into each other with no rule, no border, and no colour change. **No two neighbouring bands share a tone** — that alternation is the point, and it is the first thing to re-check after moving a section.
 
 | Band | Sections | Background |
 |---|---|---|
-| A | Hero, Practice | dawn gradient `dusk → haze`, then `haze` |
-| B | About | `cream` |
-| C | Approach | `haze` |
-| D | Services | `fern` — the one grounded, dark moment |
-| E | Gallery | `mist` |
-| F | Reviews, FAQ, BookingCTA | `haze`, deepening on a gradient back into `mist` |
+| A | Hero | `mist` |
+| B | Practice | `haze` |
+| C | About | `mist` |
+| D | Approach | `haze` |
+| E | Services | `fern` — the one grounded, dark moment |
+| F | Gallery | `haze` |
+| G | Reviews, FAQ, BookingCTA | `mist` |
 | — | Footer | `fern-deep` |
 
-`cream` is the lightest tone on the page and only **one** band uses it. That is
-deliberate: the client asked for "way less white", so the lightest tone is
-relief between deeper bands rather than the field they all sit on. His bio is
-the longest read on the site, which is why About gets it.
+The light bands are a strict `mist` / `haze` alternation with the dark band in
+the middle. Two tones, taking turns — that regularity *is* the pattern, and
+anything that opts out of it (a gradient, a third light tone, a photo behind a
+section) reads as a different design language bolted onto the page.
+
+**`cream` is never a band background.** It is the surface tone — cards, the
+navbar pill, ghost buttons — and nothing else. An earlier draft gave About a
+`cream` band and Reviews a `haze` one, and the client's note was that those two
+sections *"look so bright, why??"*: they were the two lightest areas on the
+page. Both now sit on `mist`. If a section ever needs to feel lighter, that is
+what the alternation already does; don't reach for `cream`.
 
 Approach and About are long-form reading, so both sit on light bands: seven
 paragraphs of light-on-dark body text is a real readability cost, and that is
@@ -202,10 +210,10 @@ contrast figures below.
 
 | Token | Value | Used for |
 |---|---|---|
-| `cream` | `#E1E8EA` | the lightest tone: band B, every raised surface (`.soft-card`, the navbar pill, ghost buttons), and the text colour on `fern` |
-| `haze` | `#D4DDE0` | bands A, C and F; light photo placeholders |
-| `mist` | `#C4D0D5` | band E, and the close of band F |
-| `dusk` | `#B2C1C8` | the crown of the hero gradient. **No body text on `dusk`** — it is the one tone that fails AA for secondary text |
+| `cream` | `#E1E8EA` | the lightest tone. **Surfaces only** — `.soft-card`, the navbar pill, ghost buttons — never a band. Also the text colour on `fern` |
+| `haze` | `#D4DDE0` | bands B, D and F; light photo placeholders |
+| `mist` | `#C4D0D5` | bands A, C and G |
+| `dusk` | `#B2C1C8` | unused on the page as it stands. **No body text on `dusk`** — it is the one tone that fails AA for secondary text |
 | `sage` | `#9FB3AC` | quiet accent, selection colour, quote marks |
 | `sage-deep` | `#6B8279` | list bullets, hero setting dots |
 | `fern` | `#3C4F49` | band D background; serif accent colour on light |
@@ -264,7 +272,7 @@ Both are **self-hosted** from `public/fonts/` (latin subset, variable woff2) wit
 `section[id]` and `footer[id]` carry a `scroll-margin-top` in the base layer,
 so an anchor jump stops short of the floating navbar instead of under it.
 
-Motion: `animate-breathe` (11s) and `animate-drift` (16s) on the hero washes, and the reveal transition. All of it is switched off under `prefers-reduced-motion`. There is no pulsing or bouncing anywhere — the whole point is that nothing on this page demands attention.
+Motion: `animate-breathe` (11s) on the hero's scroll-hint hairline, and the reveal transition. (`animate-drift` went with the hero's blurred washes — if you reintroduce a slow drift, define the keyframes again.) All of it is switched off under `prefers-reduced-motion`. There is no pulsing or bouncing anywhere — the whole point is that nothing on this page demands attention.
 
 Texture: a fine SVG grain sits on `body::after` as one fixed, page-wide layer. It was originally per-section, which left a visible seam wherever two bands met — keep it at the page level.
 
@@ -290,7 +298,7 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
 
 1. Drop the image into `public/images/` (JPG or WebP, keep under 400 KB)
 2. Set the `src` on the relevant slot:
-   - Hero background — the `heroImage` const at the top of `src/sections/Hero.jsx`. Note the hero is *designed* to work without one; a photo there changes the section's character, so check the contrast of the headline over it
+   - **Not the hero.** It takes no photo — the client asked for none, and a photo behind it would break the flat-band pattern the rest of the page keeps. There is no image slot there to fill
    - Portrait — the `<Photo>` in `src/sections/About.jsx`
    - Approach feature — the `<Photo>` in `src/sections/Approach.jsx` (that band is light, so the default `tone` is right)
    - Practice grid — the `photos` array in `src/sections/Gallery.jsx`. Slots render at the photo's own aspect ratio (`natural` on `<Photo>`), so the masonry staggers by itself — a fixed ratio cropped faces and hands out of frame. One column below `sm`, three at `md`
@@ -318,7 +326,6 @@ Still invented and needing replacement before launch:
 - **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
 - **The portrait** — `About.jsx` shows `portrait-placeholder.svg`, a drawn cat captioned "portrait coming soon", standing in until the real headshots arrive. Swap the `src` and the alt text when they do
-- **The hero** — still the dawn gradient, by design rather than for want of a photo; see "Adding photos"
 - **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
 

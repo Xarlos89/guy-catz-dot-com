@@ -1,14 +1,17 @@
 import { site } from '../siteInfo'
 
-// Drop a file into public/images/ and set this to e.g. '/images/hero.webp'.
-// While it is null the hero rests on the dawn gradient below — which is the
-// intended look, not a fallback: an empty warm field reads calmer than a photo.
-const heroImage = null
-
 const settings = ['In your home', `${site.neighborhood} office`, 'Telehealth']
 
 /**
- * Built mobile-first: one left edge that every element lines up on, a
+ * A band like every other band: one flat tone, a curved seam below it, and the
+ * page-level grain for texture. No photograph — the client did not want one
+ * here — and no gradient or blurred washes either: those made the opening read
+ * as a different design language from the eight sections under it.
+ *
+ * `mist` is the deepest of the light tones, so the page opens on colour rather
+ * than on a pale field, and alternates from the first scroll.
+ *
+ * Laid out mobile-first: one left edge that every element lines up on, a
  * headline that wraps on its own below `sm` (the hard break is desktop-only),
  * and full-width stacked buttons so nothing sits ragged on a phone.
  */
@@ -16,44 +19,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="hero-height relative overflow-hidden flex items-center pt-24 pb-16 sm:pt-32 sm:pb-28"
-      style={{
-        background:
-          'linear-gradient(180deg, #B2C1C8 0%, #C3CFD4 30%, #D4DDE0 100%)',
-      }}
+      className="hero-height bg-mist relative flex items-center pt-24 pb-16 sm:pt-32 sm:pb-28"
     >
-      {/* Soft light — two slow-breathing washes rather than a hard image */}
-      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute -top-32 -left-24 w-[34rem] h-[34rem] sm:w-[46rem] sm:h-[46rem] rounded-full blur-3xl animate-breathe"
-          style={{ background: 'radial-gradient(circle, rgba(107,130,121,0.34) 0%, rgba(107,130,121,0) 68%)' }}
-        />
-        <div
-          className="absolute -bottom-40 -right-32 w-[32rem] h-[32rem] sm:w-[42rem] sm:h-[42rem] rounded-full blur-3xl animate-drift"
-          style={{ background: 'radial-gradient(circle, rgba(139,161,168,0.50) 0%, rgba(139,161,168,0) 70%)' }}
-        />
-      </div>
-
-      {heroImage && (
-        <img
-          src={heroImage}
-          alt={`${site.doctor} guiding a patient through a movement session`}
-          className="absolute inset-0 w-full h-full object-cover opacity-90"
-          fetchpriority="high"
-          decoding="async"
-        />
-      )}
-
-      {/* Depth: light gathers at the top, the ground settles toward the seam */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(120% 75% at 50% 0%, rgba(225,232,234,0.28) 0%, rgba(225,232,234,0) 48%), linear-gradient(180deg, rgba(44,58,56,0) 50%, rgba(44,58,56,0.06) 84%, rgba(44,58,56,0) 100%)',
-        }}
-      />
-
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8">
         <div className="max-w-3xl">
           <p className="label mb-5 sm:mb-7 leading-[1.9]">

@@ -63,14 +63,9 @@ export default {
           '0%, 100%': { transform: 'scale(1)', opacity: '0.55' },
           '50%': { transform: 'scale(1.07)', opacity: '0.75' },
         },
-        drift: {
-          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
-          '50%': { transform: 'translate3d(0, -14px, 0)' },
-        },
       },
       animation: {
         breathe: 'breathe 11s ease-in-out infinite',
-        drift: 'drift 16s ease-in-out infinite',
       },
     },
   },

@@ -28,30 +28,31 @@ export default function App() {
     <>
       <Navbar />
       <main>
-        {/* Band A — dawn: dusk overhead, settling no lighter than haze */}
+        {/* Band A — mist: the page opens on colour, not on a pale field */}
         <Hero />
+        <Divider from="mist" to="haze" shape="dune" />
+
+        {/* Band B — haze */}
         <Practice />
-        <Divider from="haze" to="cream" shape="dune" />
+        <Divider from="haze" to="mist" shape="ripple" />
 
-        {/* Band B — cream, the one properly light band on the page: his bio
-            is the longest read on it */}
+        {/* Band C — mist */}
         <About />
-        <Divider from="cream" to="haze" shape="ripple" />
+        <Divider from="mist" to="haze" shape="crest" />
 
-        {/* Band C — haze */}
+        {/* Band D — haze */}
         <Approach />
         <Divider from="haze" to="fern" shape="bowl" />
 
-        {/* Band D — the one grounded, dark moment */}
+        {/* Band E — the one grounded, dark moment */}
         <Services />
-        <Divider from="fern" to="mist" shape="crest" />
+        <Divider from="fern" to="haze" shape="crest" />
 
-        {/* Band E — mist, the deepest light band: the photographs sit better
-            on it than on a pale ground */}
+        {/* Band F — haze */}
         <Gallery />
-        <Divider from="mist" to="haze" shape="ripple" />
+        <Divider from="haze" to="mist" shape="ripple" />
 
-        {/* Band F — haze, deepening back into mist as the page closes */}
+        {/* Band G — mist, closing */}
         <Reviews />
         <FAQ />
         <BookingCTA />

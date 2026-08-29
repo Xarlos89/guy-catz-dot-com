@@ -5,8 +5,7 @@ export default function BookingCTA() {
   return (
     <section
       id="book"
-      className="relative pt-8 pb-24 sm:pb-32"
-      style={{ background: 'linear-gradient(180deg, #D4DDE0 0%, #CCD7DB 55%, #C4D0D5 100%)' }}
+      className="relative bg-mist pt-8 pb-24 sm:pb-32"
     >
       <div className="relative max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
