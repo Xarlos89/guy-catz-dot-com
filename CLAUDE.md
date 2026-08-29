@@ -40,10 +40,10 @@ src/
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
   sections/          one file per visible scroll section, assembled in App.jsx
     Hero.jsx         light dawn gradient, two breathing washes, no photo needed
-    Practice.jsx     hairline fact row, what a session holds, rates (#practice)
-    About.jsx        "Meet our doctor" — bio + portrait + `facts` credentials grid
+    Practice.jsx     hairline fact row + rates (#practice)
+    About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`)
     Programs.jsx     the three care settings — `tiers` array (#programs)
-    Approach.jsx     the Healing Path approach, `principles`, closing mission quote
+    Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
     Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
     Process.jsx      four-step timeline — `steps` array
     Gallery.jsx      masonry grid of the practice — `photos` array
@@ -74,11 +74,15 @@ The page is not eleven alternating light/dark slabs. It is **six colour bands**,
 |---|---|---|
 | A | Hero, Practice | dawn gradient `mist → linen`, then `linen` |
 | B | About, Programs | `oat` |
-| C | Approach, Services | `fern` — the one grounded, dark moment |
-| D | Process, Gallery | `linen`, warming into `clay` |
-| E | Reviews, FAQ | `oat` |
-| F | BookingCTA | gradient `oat → blush` |
+| C | Approach | `linen` |
+| D | Services | `fern` — the one grounded, dark moment |
+| E | Process, Gallery | `linen`, warming into `clay` |
+| F | Reviews, FAQ, BookingCTA | `oat`, ending on a gradient into `blush` |
 | — | Footer | `fern-deep` |
+
+Approach and About are long-form reading, so both sit on light bands: seven
+paragraphs of light-on-dark body text is a real readability cost, and that is
+why the dark band holds Services alone rather than Approach too.
 
 The seams are placed in `App.jsx`:
 
@@ -87,6 +91,23 @@ The seams are placed in `App.jsx`:
 ```
 
 `from` **must** match the background of the section above and `to` the section below — the SVG paints `to` over a `from` background, so a mismatch shows as a hard line. Four shapes exist in `Divider.jsx` (`dune`, `bowl`, `crest`, `ripple`), deliberately gentle; steep waves read as energetic, which is the opposite of the brief. **Reordering or inserting a section means re-pairing every divider below it.**
+
+### The client's own copy — do not rearrange it
+
+`Approach.jsx` and `About.jsx` each render a `paragraphs` array that is the
+client's writing, verbatim and in his order. He asked for these two sections
+specifically after an earlier draft split them up:
+
+> *"I don't like how the AI kind of spliced up what I wrote and even took bits
+> out of paragraphs and put it elsewhere. It takes away from the cohesiveness…
+> I did it with the intention that it would all kind of stay together."*
+
+So: **never** break these paragraphs across cards, pull a sentence out for a
+heading or pull-quote, move one into another section, or lift the closing
+education paragraph into a credentials grid — it belongs at the end of Meet Our
+Doctor as a paragraph, which is where professionals put it. Readability here
+comes from typography — measure, spacing, a larger opening paragraph — not from
+chopping the text up. Same goes for the testimonials in `Reviews.jsx`.
 
 Rules of thumb for anything new:
 
@@ -150,10 +171,11 @@ The Navbar links to `#practice`, `#about`, `#programs`, `#approach`, `#reviews` 
 
 - **Practice name, doctor, credentials, contact details** — `src/siteInfo.js`, imported everywhere. `index.html` keeps its own copy for `<meta>` tags and JSON-LD — **update both.**
 - **Rates** — `src/sections/Practice.jsx` — the `rates` array
-- **Session info** — `src/sections/Practice.jsx` — the `infoCards` and `included` arrays
+- **Session info** — `src/sections/Practice.jsx` — the `infoCards` array
 - **Care settings** (home / office / telehealth) — `src/sections/Programs.jsx` — the `tiers` array
 - **Specialties and treatments** — `src/sections/Services.jsx` — the `experience` and `provided` arrays
-- **Bio and credentials** — `src/sections/About.jsx` — the prose plus the `facts` array
+- **Bio** — `src/sections/About.jsx` — the `paragraphs` array (verbatim)
+- **Approach** — `src/sections/Approach.jsx` — the `paragraphs` array (verbatim)
 - **Intake steps** — `src/sections/Process.jsx` — the `steps` array
 - **FAQ** — `src/sections/FAQ.jsx` — the `faqs` array (mirrored in the `FAQPage` JSON-LD in `index.html`)
 - **Testimonials** — `src/sections/Reviews.jsx` — the `reviews` array
@@ -189,11 +211,22 @@ Still invented and needing replacement before launch:
 
 - **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, and the email and street address are made up. The office is in West Los Angeles; the exact address is not known
 - **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
-- **All prices** — the Practice rates ($225 / $175 / $960), including the superbill / HSA / FSA claims that sit under them. The out-of-network model itself is real (it comes from the client's copy); the numbers are not
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
 - **All photography** — `public/images/` is empty; every slot renders a placeholder
 - **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
 - **OG image** — `public/og-image.jpg` does not exist, so the `og:image` meta tags are commented out in `index.html` until it does
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
+
+### Rates — partly confirmed
+
+Confirmed by the practice: **$250** initial evaluation, **$200** treatment,
+**+$50** outside the local area. Still open, and shown on the site anyway:
+
+- **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". If a cheaper guidance-only tier is wanted, it needs its own row
+- **Package pricing** — four- and eight-session bundles are real, but he has not done the math, so the site says "discounted" with no number
+- **The mileage radius** — "outside a certain mileage" needs an actual distance before it means anything to a patient
+
+Superbill / HSA / FSA wording was removed: the out-of-network model comes from
+the client's copy, but the billing specifics were invented and are unconfirmed.
 
 One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission**, and two of the three describe care given at a rehab hospital. Worth confirming the release before launch.

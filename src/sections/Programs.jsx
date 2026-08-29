@@ -20,8 +20,8 @@ const tiers = [
     name: 'Telehealth',
     kicker: 'Wherever you are',
     blurb:
-      'Assessment, coaching and progression by secure video — for travel weeks, for follow-ups, and for anyone in California outside driving distance.',
-    points: ['The same one-on-one hour', 'Your program reviewed on screen', 'Available across California'],
+      'Assessment, coaching and progression by secure video — for anyone in California who has limited access to in-person care, or who simply prefers it.',
+    points: ['The same one-on-one session', 'Your program reviewed on screen', 'Available anywhere in California'],
   },
 ]
 

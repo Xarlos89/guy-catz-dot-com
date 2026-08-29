@@ -3,17 +3,17 @@ import Reveal from '../components/Reveal'
 const steps = [
   {
     title: 'The consult',
-    time: '15 minutes · free · by phone',
+    time: 'free · by phone',
     body: 'You tell me what is going on and what you want to get back to. I tell you honestly whether this is the right place for it — and if it is not, where to go instead.',
   },
   {
     title: 'The evaluation',
-    time: '90 minutes · home, office or video',
+    time: 'home, office or video',
     body: 'Time to understand your story, then a full assessment of movement, strength and balance. We finish with hands-on work, a first set of exercises, and a plain-English explanation of what we found.',
   },
   {
     title: 'The work',
-    time: '60 minutes · weekly at first',
+    time: 'weekly at first',
     body: 'Manual therapy where it opens things up, then progressive loading to make the change hold. Your home program is updated every visit and built around your goals, not a generic handout.',
   },
   {
