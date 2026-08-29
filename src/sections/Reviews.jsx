@@ -23,28 +23,28 @@ const reviews = [
 
 function Attribution({ name, age }) {
   return (
-    <figcaption className="font-sans text-[13px] text-umber-soft">
-      <span className="font-medium text-umber">{name}</span>, {age}
+    <figcaption className="font-sans text-[13px] text-cream/75">
+      <span className="font-medium text-cream">{name}</span>, {age}
     </figcaption>
   )
 }
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="bg-oat py-24 sm:py-32">
+    <section id="reviews" className="bg-fern py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <p className="label mb-6">Testimonials</p>
-            <h2 className="section-heading">In their words</h2>
+            <p className="label-light mb-6">Testimonials</p>
+            <h2 className="section-heading-light">In their words</h2>
           </div>
         </Reveal>
 
         {/* The long one, given room */}
         <Reveal>
           <figure className="max-w-3xl mb-16">
-            <span aria-hidden="true" className="block font-serif text-6xl text-sage leading-none mb-4">&rdquo;</span>
-            <blockquote className="font-serif text-xl sm:text-2xl text-umber leading-[1.55] mb-6">
+            <span aria-hidden="true" className="block font-serif text-6xl text-ochre/60 leading-none mb-4">&rdquo;</span>
+            <blockquote className="font-serif text-xl sm:text-2xl text-cream leading-[1.55] mb-6">
               {featured.text}
             </blockquote>
             <Attribution name={featured.name} age={featured.age} />
@@ -54,8 +54,8 @@ export default function Reviews() {
         <div className="grid md:grid-cols-[1.35fr_1fr] gap-x-12 gap-y-12 items-start">
           <Reveal>
             <figure>
-              <span aria-hidden="true" className="block font-serif text-5xl text-sage leading-none mb-3">&rdquo;</span>
-              <blockquote className="font-sans text-[15px] text-umber-soft leading-[1.85] mb-5">
+              <span aria-hidden="true" className="block font-serif text-5xl text-ochre/60 leading-none mb-3">&rdquo;</span>
+              <blockquote className="font-sans text-[15px] text-cream/80 leading-[1.85] mb-5">
                 {reviews[0].text}
               </blockquote>
               <Attribution name={reviews[0].name} age={reviews[0].age} />
@@ -63,8 +63,8 @@ export default function Reviews() {
           </Reveal>
 
           <Reveal delay={110}>
-            <figure className="soft-card sm:p-9 md:mt-10">
-              <blockquote className="font-serif text-lg sm:text-xl text-umber leading-[1.6] mb-5">
+            <figure className="soft-card-dark sm:p-9 md:mt-10">
+              <blockquote className="font-serif text-lg sm:text-xl text-cream leading-[1.6] mb-5">
                 {reviews[1].text}
               </blockquote>
               <Attribution name={reviews[1].name} age={reviews[1].age} />

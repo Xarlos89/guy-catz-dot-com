@@ -35,8 +35,15 @@
     scroll-behavior: smooth;
   }
 
+  /* The navbar floats over the page, so an anchor jump has to stop short of
+     the section's own top or the pill lands on the heading. */
+  section[id],
+  footer[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
   body {
-    @apply font-sans font-normal text-umber bg-linen antialiased;
+    @apply font-sans font-normal text-ink bg-mist antialiased;
     letter-spacing: 0.005em;
   }
 
@@ -48,7 +55,7 @@
     inset: 0;
     z-index: 100;
     pointer-events: none;
-    opacity: 0.28;
+    opacity: 0.32;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
   }
@@ -62,7 +69,7 @@
 
   ::selection {
     background: theme('colors.sage.DEFAULT');
-    color: theme('colors.fern.deep');
+    color: theme('colors.fern.DEFAULT');
   }
 }
 
@@ -85,53 +92,81 @@
   }
 
   .section-heading {
-    @apply text-umber;
+    @apply text-ink;
   }
 
   .section-heading-light {
-    @apply text-linen;
+    @apply text-cream;
   }
 
   .lede {
-    @apply font-sans text-[15px] sm:text-base text-umber-soft leading-[1.85];
+    @apply font-sans text-[15px] sm:text-base text-ink-soft leading-[1.85];
   }
 
   .lede-light {
-    @apply font-sans text-[15px] sm:text-base text-linen/70 leading-[1.85];
+    @apply font-sans text-[15px] sm:text-base text-cream/80 leading-[1.85];
   }
 
   /* ── Buttons — pills, never sharp ──────────────────────── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
-           bg-terracotta text-linen font-sans font-medium text-sm
+           bg-terracotta text-cream font-sans font-medium text-sm
            rounded-full shadow-soft
            transition-all duration-500 ease-out hover:bg-terracotta-deep hover:shadow-lift;
   }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
-           border border-stone text-umber font-sans font-medium text-sm
-           rounded-full bg-white/40
-           transition-colors duration-500 ease-out hover:bg-white/80 hover:border-sage;
+           border border-line text-ink font-sans font-medium text-sm
+           rounded-full bg-cream/65 shadow-soft
+           transition-all duration-500 ease-out hover:bg-cream hover:border-sage hover:shadow-lift;
+  }
+
+  /* The dark-band primary. Terracotta on `fern` sits at 1.4:1 — the pill
+     all but disappears — so on `fern` the primary inverts to cream. */
+  .btn-primary-light {
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
+           bg-cream text-fern font-sans font-medium text-sm
+           rounded-full shadow-lift
+           transition-all duration-500 ease-out hover:bg-white/95;
   }
 
   .btn-ghost-light {
     @apply inline-flex items-center justify-center gap-2.5 px-8 py-3.5
-           border border-linen/30 text-linen font-sans font-medium text-sm
-           rounded-full transition-colors duration-500 ease-out hover:bg-linen/10 hover:border-linen/60;
+           border border-cream/30 text-cream font-sans font-medium text-sm
+           rounded-full transition-colors duration-500 ease-out hover:bg-cream/10 hover:border-cream/60;
   }
 
-  /* ── Surfaces — soft, borderless, warm shadow ──────────── */
+  /* ── Surfaces — soft, borderless, cool shadow ──────────── */
+  /* `cream` is the lightest tone on the page, so a card reads as raised
+     without a white panel appearing in the middle of a coloured band. */
   .soft-card {
-    @apply bg-white/70 rounded-soft p-7 shadow-soft;
+    @apply bg-cream rounded-soft p-7 shadow-lift;
   }
 
   .soft-card-dark {
-    @apply bg-linen/[0.06] rounded-soft p-7 border border-linen/10;
+    @apply bg-cream/[0.07] rounded-soft p-7 border border-cream/10 shadow-deep;
+  }
+
+  /* Every photo sits on the page rather than in it */
+  .photo-frame {
+    @apply overflow-hidden shadow-lift;
   }
 
   .hairline {
-    @apply bg-stone;
+    @apply bg-line;
+  }
+
+  /* svh keeps the hero honest on phones, where 100vh is taller than the
+     screen actually is until the address bar collapses. */
+  .hero-height {
+    min-height: 86vh;
+  }
+
+  @supports (min-height: 100svh) {
+    .hero-height {
+      min-height: 88svh;
+    }
   }
 
   /* ── Motion ────────────────────────────────────────────── */
@@ -162,8 +197,7 @@
     transition: none;
   }
 
-  .animate-breathe,
-  .animate-drift {
+  .animate-breathe {
     animation: none !important;
   }
 }

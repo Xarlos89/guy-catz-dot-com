@@ -28,33 +28,40 @@ export default function App() {
     <>
       <Navbar />
       <main>
-        {/* Band A — dawn */}
+        {/* Band A — fern. The page opens on the dark tone; the primary
+            button inverts to cream here, see .btn-primary-light */}
         <Hero />
+        <Divider from="fern" to="mist" shape="dune" />
+
+        {/* Band B — mist */}
         <Practice />
-        <Divider from="linen" to="oat" shape="dune" />
+        <Divider from="mist" to="fern" shape="ripple" />
 
-        {/* Band B — oat */}
+        {/* Band C — fern. His bio runs light-on-dark at the client's asking;
+            `.lede`-weight measure and cream/80 body do the work instead */}
         <About />
-        <Divider from="oat" to="linen" shape="ripple" />
+        <Divider from="fern" to="mist" shape="crest" />
 
-        {/* Band C — light: the approach is long-form reading, and long-form
-            reading wants dark type on a light ground */}
+        {/* Band D — mist */}
         <Approach />
-        <Divider from="linen" to="fern" shape="bowl" />
+        <Divider from="mist" to="fern" shape="bowl" />
 
-        {/* Band D — the one grounded, dark moment */}
+        {/* Band E — fern */}
         <Services />
-        <Divider from="fern" to="linen" shape="crest" />
+        <Divider from="fern" to="mist" shape="crest" />
 
-        {/* Band E — linen, warming into clay */}
+        {/* Band F — mist */}
         <Gallery />
-        <Divider from="clay" to="oat" shape="ripple" />
+        <Divider from="mist" to="fern" shape="ripple" />
 
-        {/* Band F — oat, closing */}
+        {/* Band G — fern */}
         <Reviews />
+        <Divider from="fern" to="mist" shape="dune" />
+
+        {/* Band H — mist, closing */}
         <FAQ />
         <BookingCTA />
-        <Divider from="blush" to="fernDeep" shape="dune" />
+        <Divider from="mist" to="fern" shape="dune" />
       </main>
       <Footer />
     </>
