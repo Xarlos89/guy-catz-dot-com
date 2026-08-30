@@ -324,14 +324,42 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
 
 ## Adding photos
 
-1. Drop the image into `public/images/` (JPG or WebP, keep under 400 KB)
-2. Set the `src` on the relevant slot:
+Photos ship at **several widths** and the browser picks one that matches the
+slot, so a 306px column does not pull down an 1800px file. That means a source
+photo becomes a small ladder of files, not one file.
+
+1. Resize and re-encode the source into its ladder. Widths in use:
+   - Gallery slots — `400, 700, 1100` (a slot is ~306px wide at three columns,
+     and full width on a phone)
+   - The Approach feature — `500, 900, 1400` (it sits in a 704px measure)
+   - The About portrait — `400, 800, 1200` (~381px wide at `lg`, capped by the
+     source width where that is smaller)
+   Requires Pillow (`pip install Pillow`); WebP at `quality=80, method=6` is
+   what the current set was encoded at, and lands each variant well under
+   400 KB:
+   ```python
+   from PIL import Image
+   im = Image.open(src).convert('RGB')
+   for w in widths:
+       h = round(im.height * w / im.width)
+       im.resize((w, h), Image.LANCZOS).save(
+           f'public/images/{name}-{w}.webp', 'WEBP', quality=80, method=6)
+   ```
+2. Drop the variants into `public/images/` as `name-<width>.webp`
+3. Point the slot at them. **Never write the URL by hand** — build it with
+   `responsivePhoto(name, widths)` (or `asset(path)` for a one-off file) from
+   `src/images.js`, which keeps the path relative. See Deployment below for why
+   an absolute `/images/…` breaks:
    - **Not the hero.** It takes no photo — the client asked for none, and a photo behind it would break the flat-band pattern the rest of the page keeps. There is no image slot there to fill
    - Portrait — the `<Photo>` in `src/sections/About.jsx`
    - Approach feature — the `<Photo>` in `src/sections/Approach.jsx` (that band is light, so the default `tone` is right)
    - Practice grid — the `photos` array in `src/sections/Gallery.jsx`. Slots render at the photo's own aspect ratio (`natural` on `<Photo>`), so the masonry staggers by itself — a fixed ratio cropped faces and hands out of frame. One column below `sm`, three at `md`
-3. Any slot with a falsy `src` renders the labelled "photo coming soon" placeholder via `src/components/Photo.jsx`, so partial photography is fine
-4. Push to `main` — Actions builds and deploys automatically
+4. Set `width`/`height` on the `<Photo>` to the **largest variant's** own pixel
+   dimensions, and pass a `sizes` string describing how wide the slot actually
+   is. Without `sizes` the browser assumes the photo is full-viewport-width and
+   downloads the largest file every time
+5. Any slot with a falsy `src` renders the labelled "photo coming soon" placeholder via `src/components/Photo.jsx`, so partial photography is fine
+6. Push to `main` — Actions builds and deploys automatically
 
 ## Deployment
 
@@ -339,21 +367,27 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
   - Actions pinned to exact versions: `checkout@v6.0.3`, `setup-node@v6.4.0`, `configure-pages@v6.0.0`, `upload-pages-artifact@v5.0.0`, `deploy-pages@v5.0.0`
   - Node 26, `npm ci`, `npm run build`, artifact from `dist/`
   - Enable at: Settings → Pages → Source → GitHub Actions
-  - **`base` is `./`** — a relative base, so the same build works both at a custom-domain root (`guy-catz.com/`) and under project pages (`xarlos89.github.io/guy-catz-dot-com/`). This is why the `@font-face` `url()`s are `../fonts/…` (the CSS lands in `/assets/`) and the `index.html` preloads are `./fonts/…`. **Absolute `/…` asset paths silently 404 under the sub-path** — keep new references relative
+  - **`base` is `./`** — a relative base, so the same build works both at a custom-domain root (`guy-catz.com/`) and under project pages (`xarlos89.github.io/guy-catz-dot-com/`). This is why the `@font-face` `url()`s are `../fonts/…` (the CSS lands in `/assets/`) and the `index.html` preloads are `./fonts/…`. **Absolute `/…` asset paths silently 404 under the sub-path** — keep new references relative. The photography did exactly this and 404'd on the `github.io` URL; everything in `public/` now goes through `asset()` / `responsivePhoto()` in `src/images.js`, which emit `./images/…`. Note `import.meta.env.BASE_URL` is **not** the fix — Vite resolves it to `/` for a relative base
   - `configure-pages` runs with `enablement: true`, so the first successful run switches Pages on itself. If it lacks permission, enable it by hand: Settings → Pages → Source → GitHub Actions
   - No `public/CNAME` yet — add one containing `guy-catz.com` once DNS points at Pages (adding it before then breaks the default `*.github.io` URL)
 - **Self-hosted**: see `Caddyfile` — drop `dist/` at `/var/www/guy-catz/`, Caddy handles HTTPS
 
 ## What's placeholder / not yet real
 
-Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, and the photography — five treatment-room frames in the gallery plus the feature photo in Approach, resized to webp under 400 KB. `public/og-image.jpg` is cut from the same set.
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
+
+The two portraits are `meet-the-doctor` (seated at the treatment table) and
+`dr-guy-catz-headshot` (the tighter frame). There is only one portrait slot on
+the page, so the seated one fills it — it is the warmer of the two and the page
+has no other environmental shot of him. The headshot is the `image` on the
+`Person` in the `index.html` JSON-LD, which is what a knowledge panel picks up.
+Both are cropped by `object-cover` into a `4/5` slot, and both survive it.
 
 Still invented and needing replacement before launch:
 
 - **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, and the email and street address are made up. The office is in West Los Angeles; the exact address is not known
 - **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
-- **The portrait** — `About.jsx` shows `portrait-placeholder.svg`, a drawn cat captioned "portrait coming soon", standing in until the real headshots arrive. Swap the `src` and the alt text when they do. The SVG is drawn for the dark band (a `fern-light` ground with a `cream` line); if About ever moves back to `mist`, recolour it or it becomes a dark block on a light ground
 - **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
 

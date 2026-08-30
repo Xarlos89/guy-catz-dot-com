@@ -1,18 +1,28 @@
 import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
+import { responsivePhoto } from '../images'
 import { site } from '../siteInfo'
 
-// Drop files into public/images/ and fill in `src` — a null src renders
-// the "photo coming soon" placeholder instead. Photos keep their own aspect
-// ratio here (`natural`); a fixed ratio cropped faces and hands out of frame.
-// `width`/`height` are the file's own pixel dimensions — they reserve the slot
-// so the column does not jump as each lazy image arrives.
+// Drop files into public/images/ at each of the widths below and add a row —
+// an entry with no `name` renders the "photo coming soon" placeholder instead.
+// Photos keep their own aspect ratio here (`natural`); a fixed ratio cropped
+// faces and hands out of frame. `width`/`height` are the largest variant's own
+// pixel dimensions — they reserve the slot so the column does not jump as each
+// lazy image arrives.
+const WIDTHS = [400, 700, 1100]
+
+// A slot is ~306px wide once the grid is three columns, ~half the viewport at
+// `sm`, and full width on a phone. Telling the browser that lets it pick a
+// 400px file for a 400px hole instead of an 1100px one.
+const SIZES =
+  '(min-width: 768px) 306px, (min-width: 640px) calc((100vw - 84px) / 2), calc(100vw - 48px)'
+
 const photos = [
-  { src: '/images/neck-manual-therapy.webp', alt: 'Hands-on work at the neck, talking the patient through it', width: 1200, height: 1800 },
-  { src: '/images/hip-knee-mobilization.webp', alt: 'Guiding a patient through hip and knee range of motion', width: 1800, height: 1508 },
-  { src: '/images/shoulder-range.webp', alt: 'Assessing shoulder range of motion', width: 1200, height: 1698 },
-  { src: '/images/breathing-coaching.webp', alt: 'Coaching a breathing pattern, hand on chest and belly', width: 1200, height: 1713 },
-  { src: '/images/low-back-manual-therapy.webp', alt: 'Manual therapy along the lower back', width: 1200, height: 1779 },
+  { name: 'neck-manual-therapy', alt: 'Hands-on work at the neck, talking the patient through it', width: 1100, height: 1650 },
+  { name: 'hip-knee-mobilization', alt: 'Guiding a patient through hip and knee range of motion', width: 1100, height: 922 },
+  { name: 'shoulder-range', alt: 'Assessing shoulder range of motion', width: 1100, height: 1556 },
+  { name: 'breathing-coaching', alt: 'Coaching a breathing pattern, hand on chest and belly', width: 1100, height: 1570 },
+  { name: 'low-back-manual-therapy', alt: 'Manual therapy along the lower back', width: 1100, height: 1631 },
 ]
 
 export default function Gallery() {
@@ -34,11 +44,12 @@ export default function Gallery() {
         </Reveal>
 
         <div className="columns-1 sm:columns-2 md:columns-3 gap-5 sm:gap-5 [column-fill:_balance]">
-          {photos.map(({ src, alt, width, height }, i) => (
+          {photos.map(({ name, alt, width, height }, i) => (
             <Reveal key={alt} delay={(i % 3) * 90} className="mb-5 break-inside-avoid">
               <div className="photo-frame rounded-[2rem]">
                 <Photo
-                  src={src}
+                  {...responsivePhoto(name, WIDTHS)}
+                  sizes={SIZES}
                   alt={alt}
                   natural
                   width={width}

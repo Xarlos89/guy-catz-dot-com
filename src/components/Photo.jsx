@@ -3,14 +3,20 @@
  * Every image slot on the site goes through this component, so the
  * page looks finished before the real photography arrives — drop a
  * file into public/images/ and set `src` to swap one in.
+ *
+ * `srcSet`/`sizes` are optional: pass both (build them with
+ * responsivePhoto() in src/images.js) and the browser picks the width that
+ * matches the slot instead of downloading the largest file we have.
  */
-export default function Photo({ src, alt, className = '', tone = 'light', imgClassName = '', natural = false, width, height }) {
+export default function Photo({ src, srcSet, sizes, alt, className = '', tone = 'light', imgClassName = '', natural = false, width, height }) {
   if (src) {
     // `natural` keeps the photo's own aspect ratio — used by the masonry
     // grid, where cropping to a fixed ratio cut off faces and hands.
     return (
       <img
         src={src}
+        srcSet={srcSet}
+        sizes={sizes}
         alt={alt}
         loading="lazy"
         decoding="async"
