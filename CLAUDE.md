@@ -324,14 +324,40 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
 
 ## Adding photos
 
-1. Drop the image into `public/images/` (JPG or WebP, keep under 400 KB)
-2. Set the `src` on the relevant slot:
+Photos ship at **several widths** and the browser picks one that matches the
+slot, so a 306px column does not pull down an 1800px file. That means a source
+photo becomes a small ladder of files, not one file.
+
+1. Resize and re-encode the source into its ladder. Widths in use:
+   - Gallery slots — `400, 700, 1100` (a slot is ~306px wide at three columns,
+     and full width on a phone)
+   - The Approach feature — `500, 900, 1400` (it sits in a 704px measure)
+   Requires Pillow (`pip install Pillow`); WebP at `quality=80, method=6` is
+   what the current set was encoded at, and lands each variant well under
+   400 KB:
+   ```python
+   from PIL import Image
+   im = Image.open(src).convert('RGB')
+   for w in widths:
+       h = round(im.height * w / im.width)
+       im.resize((w, h), Image.LANCZOS).save(
+           f'public/images/{name}-{w}.webp', 'WEBP', quality=80, method=6)
+   ```
+2. Drop the variants into `public/images/` as `name-<width>.webp`
+3. Point the slot at them. **Never write the URL by hand** — build it with
+   `responsivePhoto(name, widths)` (or `asset(path)` for a one-off file) from
+   `src/images.js`, which keeps the path relative. See Deployment below for why
+   an absolute `/images/…` breaks:
    - **Not the hero.** It takes no photo — the client asked for none, and a photo behind it would break the flat-band pattern the rest of the page keeps. There is no image slot there to fill
    - Portrait — the `<Photo>` in `src/sections/About.jsx`
    - Approach feature — the `<Photo>` in `src/sections/Approach.jsx` (that band is light, so the default `tone` is right)
    - Practice grid — the `photos` array in `src/sections/Gallery.jsx`. Slots render at the photo's own aspect ratio (`natural` on `<Photo>`), so the masonry staggers by itself — a fixed ratio cropped faces and hands out of frame. One column below `sm`, three at `md`
-3. Any slot with a falsy `src` renders the labelled "photo coming soon" placeholder via `src/components/Photo.jsx`, so partial photography is fine
-4. Push to `main` — Actions builds and deploys automatically
+4. Set `width`/`height` on the `<Photo>` to the **largest variant's** own pixel
+   dimensions, and pass a `sizes` string describing how wide the slot actually
+   is. Without `sizes` the browser assumes the photo is full-viewport-width and
+   downloads the largest file every time
+5. Any slot with a falsy `src` renders the labelled "photo coming soon" placeholder via `src/components/Photo.jsx`, so partial photography is fine
+6. Push to `main` — Actions builds and deploys automatically
 
 ## Deployment
 
@@ -339,7 +365,7 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
   - Actions pinned to exact versions: `checkout@v6.0.3`, `setup-node@v6.4.0`, `configure-pages@v6.0.0`, `upload-pages-artifact@v5.0.0`, `deploy-pages@v5.0.0`
   - Node 26, `npm ci`, `npm run build`, artifact from `dist/`
   - Enable at: Settings → Pages → Source → GitHub Actions
-  - **`base` is `./`** — a relative base, so the same build works both at a custom-domain root (`guy-catz.com/`) and under project pages (`xarlos89.github.io/guy-catz-dot-com/`). This is why the `@font-face` `url()`s are `../fonts/…` (the CSS lands in `/assets/`) and the `index.html` preloads are `./fonts/…`. **Absolute `/…` asset paths silently 404 under the sub-path** — keep new references relative
+  - **`base` is `./`** — a relative base, so the same build works both at a custom-domain root (`guy-catz.com/`) and under project pages (`xarlos89.github.io/guy-catz-dot-com/`). This is why the `@font-face` `url()`s are `../fonts/…` (the CSS lands in `/assets/`) and the `index.html` preloads are `./fonts/…`. **Absolute `/…` asset paths silently 404 under the sub-path** — keep new references relative. The photography did exactly this and 404'd on the `github.io` URL; everything in `public/` now goes through `asset()` / `responsivePhoto()` in `src/images.js`, which emit `./images/…`. Note `import.meta.env.BASE_URL` is **not** the fix — Vite resolves it to `/` for a relative base
   - `configure-pages` runs with `enablement: true`, so the first successful run switches Pages on itself. If it lacks permission, enable it by hand: Settings → Pages → Source → GitHub Actions
   - No `public/CNAME` yet — add one containing `guy-catz.com` once DNS points at Pages (adding it before then breaks the default `*.github.io` URL)
 - **Self-hosted**: see `Caddyfile` — drop `dist/` at `/var/www/guy-catz/`, Caddy handles HTTPS

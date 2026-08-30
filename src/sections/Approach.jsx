@@ -1,5 +1,6 @@
 import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
+import { responsivePhoto } from '../images'
 
 /**
  * The client's own copy, in his order, unbroken.
@@ -26,12 +27,14 @@ export default function Approach() {
 
         <Reveal delay={80}>
           <div className="photo-frame rounded-[2.5rem] sm:rounded-[3rem] mb-12 sm:mb-14">
+            {/* The photo sits in a 704px measure, full width on a phone. */}
             <Photo
-              src="/images/hip-assessment.webp"
+              {...responsivePhoto('hip-assessment', [500, 900, 1400])}
+              sizes="(min-width: 768px) 704px, calc(100vw - 48px)"
               alt="Guy Catz assessing a patient's hip and pelvis"
               natural
-              width={1800}
-              height={1422}
+              width={1400}
+              height={1106}
             />
           </div>
         </Reveal>

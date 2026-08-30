@@ -1,5 +1,6 @@
 import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
+import { asset } from '../images'
 import { site } from '../siteInfo'
 
 /**
@@ -28,7 +29,7 @@ export default function About() {
             <div className="photo-frame rounded-[2.5rem] sm:rounded-[3rem] aspect-[4/5] shadow-deep md:sticky md:top-24">
               {/* PLACEHOLDER — swap for the real headshot when it arrives. */}
               <Photo
-                src="/images/portrait-placeholder.svg"
+                src={asset('images/portrait-placeholder.svg')}
                 alt={`Placeholder illustration — portrait of ${site.doctor}, ${site.credentials}, coming soon`}
               />
             </div>
