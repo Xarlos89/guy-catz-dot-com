@@ -1,6 +1,6 @@
 import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
-import { asset } from '../images'
+import { responsivePhoto } from '../images'
 import { site } from '../siteInfo'
 
 /**
@@ -27,10 +27,14 @@ export default function About() {
           {/* Portrait */}
           <Reveal>
             <div className="photo-frame rounded-[2.5rem] sm:rounded-[3rem] aspect-[4/5] shadow-deep md:sticky md:top-24">
-              {/* PLACEHOLDER — swap for the real headshot when it arrives. */}
+              {/* The slot is 4/5 and object-cover; ~381px wide at `lg`,
+                  full container width once the grid stacks below `md`. */}
               <Photo
-                src={asset('images/portrait-placeholder.svg')}
-                alt={`Placeholder illustration — portrait of ${site.doctor}, ${site.credentials}, coming soon`}
+                {...responsivePhoto('meet-the-doctor', [400, 800, 1154])}
+                sizes="(min-width: 768px) 381px, calc(100vw - 48px)"
+                alt={`${site.doctor}, ${site.credentials}, at his ${site.neighborhood} office`}
+                width={1154}
+                height={1600}
               />
             </div>
           </Reveal>

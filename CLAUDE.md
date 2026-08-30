@@ -332,6 +332,8 @@ photo becomes a small ladder of files, not one file.
    - Gallery slots — `400, 700, 1100` (a slot is ~306px wide at three columns,
      and full width on a phone)
    - The Approach feature — `500, 900, 1400` (it sits in a 704px measure)
+   - The About portrait — `400, 800, 1200` (~381px wide at `lg`, capped by the
+     source width where that is smaller)
    Requires Pillow (`pip install Pillow`); WebP at `quality=80, method=6` is
    what the current set was encoded at, and lands each variant well under
    400 KB:
@@ -372,14 +374,20 @@ photo becomes a small ladder of files, not one file.
 
 ## What's placeholder / not yet real
 
-Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, and the photography — five treatment-room frames in the gallery plus the feature photo in Approach, resized to webp under 400 KB. `public/og-image.jpg` is cut from the same set.
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
+
+The two portraits are `meet-the-doctor` (seated at the treatment table) and
+`dr-guy-catz-headshot` (the tighter frame). There is only one portrait slot on
+the page, so the seated one fills it — it is the warmer of the two and the page
+has no other environmental shot of him. The headshot is the `image` on the
+`Person` in the `index.html` JSON-LD, which is what a knowledge panel picks up.
+Both are cropped by `object-cover` into a `4/5` slot, and both survive it.
 
 Still invented and needing replacement before launch:
 
 - **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, and the email and street address are made up. The office is in West Los Angeles; the exact address is not known
 - **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
-- **The portrait** — `About.jsx` shows `portrait-placeholder.svg`, a drawn cat captioned "portrait coming soon", standing in until the real headshots arrive. Swap the `src` and the alt text when they do. The SVG is drawn for the dark band (a `fern-light` ground with a `cream` line); if About ever moves back to `mist`, recolour it or it becomes a dark block on a light ground
 - **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
 
