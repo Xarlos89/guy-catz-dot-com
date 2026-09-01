@@ -10,7 +10,8 @@ export const site = {
   practiceShort: 'Healing Path',
   doctor: 'Guy H. Catz',
   credentials: 'PT, DPT',
-  tagline: 'Holistic healing through movement',
+  // From the practice's own logo lock-up — his words, not a written one.
+  tagline: 'Restore movement. Restore life.',
   city: 'Los Angeles, California',
   neighborhood: 'West Los Angeles',
 

@@ -15,9 +15,10 @@ export default function Footer() {
     <footer id="contact" className="bg-fern text-cream/80 font-sans">
       <div className="max-w-5xl mx-auto px-6 sm:px-8 pt-16 pb-14 grid sm:grid-cols-3 gap-12">
         <div>
-          <div className="font-serif text-cream text-xl mb-4">
+          <div className="font-serif text-cream text-xl mb-2">
             Healing Path <em className="text-ochre">Rehabilitation</em>
           </div>
+          <p className="font-serif italic text-[15px] text-cream/75 mb-4">{site.tagline}</p>
           <p className="text-[14px] leading-[1.8] text-cream/80 max-w-xs">
             {site.doctor}, {site.credentials} · {site.city}. One-on-one physical
             therapy in your home, at the {site.neighborhood} office, or by

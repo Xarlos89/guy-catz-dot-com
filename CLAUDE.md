@@ -40,14 +40,16 @@ src/
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
   sections/          one file per visible scroll section, assembled in App.jsx
     Hero.jsx         a flat `fern` band — no photo, no gradient, light-on-dark;
-                     laid out mobile-first — see "Mobile" below
+                     carries the recoloured logo mark; laid out mobile-first —
+                     see "Mobile" and "The logo" below
     Practice.jsx     hairline fact row + rates (#practice)
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`);
                      a `fern` band, so light-on-dark
     Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
     Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
     Gallery.jsx      masonry grid of the practice — `photos` array
-    Reviews.jsx      real patient testimonials — `featured` + `reviews`
+    Reviews.jsx      real patient testimonials — `featured` + `reviews` —
+                     plus the `award` (Care Hero of the Month), set in type
     FAQ.jsx          accordion — `faqs` array (uses useState per item)
     BookingCTA.jsx   closing call-to-action + map (#book)
   App.jsx            orders the sections and places the dividers between bands
@@ -55,10 +57,14 @@ src/
   index.css          @font-face, base layer, component classes
 public/
   fonts/             self-hosted Fraunces + DM Sans (latin subset, woff2)
-  images/            drop photos here — currently empty, so every slot renders a placeholder
+  images/            photography, plus the logo mark and lock-up
   favicon.svg
   robots.txt
   sitemap.xml
+brand/
+  healing-path-logo.jpg   the logo as the practice supplied it — the master
+scripts/
+  build-logo-mark.py      derives everything the site ships from that master
 .github/
   workflows/
     deploy.yml       push to main → npm ci → npm run build → GitHub Pages
@@ -130,6 +136,47 @@ The seams are placed in `App.jsx`:
 ```
 
 `from` **must** match the background of the section above and `to` the section below — the SVG paints `to` over a `from` background, so a mismatch shows as a hard line. Four shapes exist in `Divider.jsx` (`dune`, `bowl`, `crest`, `ripple`), deliberately gentle; steep waves read as energetic, which is the opposite of the brief. **Reordering or inserting a section means re-pairing every divider below it.**
+
+### The logo
+
+The practice supplied its logo as a JPEG of the full lock-up — the emblem over
+a "HEALING PATH REHABILITATION" wordmark — drawn navy-and-green on white. It is
+in `brand/healing-path-logo.jpg`, and **nothing on the page uses it as-is**.
+`scripts/build-logo-mark.py` derives what the site actually ships:
+
+| Output | Where |
+|---|---|
+| `healing-path-mark-{200,340,680}.webp` | the emblem, recoloured for `fern`, in the Hero |
+| `healing-path-logo-1200.webp` | the untouched lock-up, the `logo` in the JSON-LD |
+
+Two things were changed on the way in, and both are the page's rules rather
+than taste:
+
+- **The wordmark is dropped from the page.** "Healing Path" is already set in
+  Fraunces in the navbar and the practice name is in the hero label; shipping
+  it again as raster type would say it a third time, in a font that is not
+  this page's
+- **The colours are remapped.** The logo's navy is 1.3:1 against `fern` —
+  invisible — and its navy/green/slate would have been a third, fourth and
+  fifth colour on a page that has two. So the cool artwork becomes `cream`, the
+  greens become `ochre`, and the white ground becomes transparency. Those are
+  the same two inks every other dark band uses, which is why the mark sits on
+  the Hero as if it had been drawn for it
+
+The recolour is a per-pixel remap, not a trace: alpha comes from each pixel's
+distance from white (so the winding path and the snow on the peaks read as
+`fern` showing through), and the cream/ochre split comes from `g - b`. That
+discriminant is blurred before it is thresholded — the deep forest green in the
+bottom right sits within a few counts of the slate, and classified pixel by
+pixel the seam between them comes out as ochre/cream confetti. If you re-run
+the script against a new source and see speckle, that blur radius is the knob.
+
+**A vector original would be worth asking for.** What is here is traced out of
+a JPEG: fine at the sizes the page uses, not fine on a business card.
+
+The lock-up's own tagline — *"Restore movement. Restore life."* — is real
+copy, so it is now `site.tagline` (it replaced an invented one that nothing
+rendered) and it sits under the footer wordmark.
 
 ### The client's own copy — do not rearrange it
 
@@ -320,6 +367,8 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
 - **Approach** — `src/sections/Approach.jsx` — the `paragraphs` array (verbatim)
 - **FAQ** — `src/sections/FAQ.jsx` — the `faqs` array (mirrored in the `FAQPage` JSON-LD in `index.html`)
 - **Testimonials** — `src/sections/Reviews.jsx` — the `reviews` array
+- **The Care Hero award** — `src/sections/Reviews.jsx` — the `award` object
+- **Logo** — `brand/healing-path-logo.jpg`, rebuilt by `scripts/build-logo-mark.py`
 - **Map** — `src/sections/BookingCTA.jsx`
 
 ## Adding photos
@@ -334,6 +383,8 @@ photo becomes a small ladder of files, not one file.
    - The Approach feature — `500, 900, 1400` (it sits in a 704px measure)
    - The About portrait — `400, 800, 1200` (~381px wide at `lg`, capped by the
      source width where that is smaller)
+   - The hero logo mark — `200, 340, 680` (68px on a phone, 248–288px at `lg`);
+     built by `scripts/build-logo-mark.py`, not by the snippet below
    Requires Pillow (`pip install Pillow`); WebP at `quality=80, method=6` is
    what the current set was encoded at, and lands each variant well under
    400 KB:
@@ -374,7 +425,7 @@ photo becomes a small ladder of files, not one file.
 
 ## What's placeholder / not yet real
 
-Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, the Care Hero award and the two patient comments quoted on it, the logo, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
 
 The two portraits are `meet-the-doctor` (seated at the treatment table) and
 `dr-guy-catz-headshot` (the tighter frame). There is only one portrait slot on
@@ -390,6 +441,10 @@ Still invented and needing replacement before launch:
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
 - **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
 - **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
+- **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
+  object: `issuer` and `period` are empty and render nothing until they are
+  filled in. He said only "at the hospital last year", so neither a hospital
+  name nor a year was guessed
 
 ### Rates — partly confirmed
 
@@ -403,4 +458,16 @@ Confirmed by the practice: **$250** initial evaluation, **$200** treatment,
 Superbill / HSA / FSA wording was removed: the out-of-network model comes from
 the client's copy, but the billing specifics were invented and are unconfirmed.
 
-One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission**, and two of the three describe care given at a rehab hospital. Worth confirming the release before launch.
+One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission**, and two of the three describe care given at a rehab hospital. Worth confirming the release before launch. The Care Hero award is the same conversation twice over — the two comments on it are patients', and the award itself is the hospital's to publish, so their sign-off belongs alongside the patients'.
+
+The certificate as supplied is a rainbow-gradient graphic carrying the
+hospital's own lettering and a photo of him. It is not on the site and should
+not be: it would put a third, fourth and fifth colour on the page and read as
+somebody else's design. What is on the site is its substance — the award, its
+citation and the two patient comments — set in the page's own type. The
+original stays with the practice; there is no copy of it in the repo. His own
+long quote from the certificate ("My favourite thing about being a physical
+therapist…") is not on the page either: it is his voice, and Reviews is the
+patients' section. It is good writing and would sit well at the end of the
+Approach if he wants it there — but that is his verbatim block, so it is his
+call, not an edit to make for him.
