@@ -10,6 +10,7 @@ import Services from './sections/Services'
 import Gallery from './sections/Gallery'
 import Reviews from './sections/Reviews'
 import FAQ from './sections/FAQ'
+import Rates from './sections/Rates'
 import BookingCTA from './sections/BookingCTA'
 
 /**
@@ -58,8 +59,10 @@ export default function App() {
         <Reviews />
         <Divider from="fern" to="mist" shape="dune" />
 
-        {/* Band H — mist, closing */}
+        {/* Band H — mist, closing. Rates come last, once everything else
+            has been read, and immediately before the booking CTA */}
         <FAQ />
+        <Rates />
         <BookingCTA />
         <Divider from="mist" to="fern" shape="dune" />
       </main>

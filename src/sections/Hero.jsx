@@ -1,7 +1,7 @@
 import { site } from '../siteInfo'
 import { responsivePhoto } from '../images'
 
-const settings = ['In your home', `${site.neighborhood} office`, 'Telehealth']
+const settings = ['At your home', `${site.neighborhood} office`, 'Telehealth']
 
 // The practice's own emblem, recoloured for this band — cream for the cool
 // artwork, ochre for the greens, white ground dropped to transparency. The
@@ -55,17 +55,37 @@ export default function Hero() {
           />
 
           <div className="lg:col-span-2 lg:row-start-1 max-w-3xl">
-            <p className="label-light mb-5 sm:mb-7 leading-[1.9]">
-              <span className="block sm:inline">{site.practice}</span>
-              <span aria-hidden="true" className="hidden sm:inline"> · </span>
-              <span className="block sm:inline">{site.city}</span>
+            {/* The practice name leads the page now — it used to be the
+                small spaced-caps label above a very large headline, and the
+                client asked for that order of size reversed. */}
+            <p className="font-serif font-normal text-balance mb-5 sm:mb-7">
+              {/* Two lines at every width — the name never fits beside the
+                  city at this size, and a wrapped separator looked broken */}
+              <span
+                className="block text-cream leading-[1.15] tracking-[-0.015em]"
+                style={{
+                  fontSize: 'clamp(1.7rem, 6.2vw, 3.1rem)',
+                  fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'opsz' 30",
+                }}
+              >
+                {site.practice}
+              </span>
+              <span
+                className="block text-ochre leading-[1.3] mt-1.5"
+                style={{
+                  fontSize: 'clamp(1.05rem, 3vw, 1.5rem)',
+                  fontVariationSettings: "'SOFT' 100, 'WONK' 0, 'opsz' 26",
+                }}
+              >
+                {site.city}
+              </span>
             </p>
 
             <h1
               className="font-serif font-normal text-cream text-balance leading-[1.12] sm:leading-[1.06] tracking-[-0.02em] mb-6 sm:mb-8"
               style={{
-                fontSize: 'clamp(2.05rem, 8.4vw, 4.4rem)',
-                fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'opsz' 34",
+                fontSize: 'clamp(1.45rem, 4.6vw, 2.3rem)',
+                fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'opsz' 30",
               }}
             >
               {/* The break is deliberate on desktop and in the way on a phone */}

@@ -8,17 +8,6 @@ const infoCards = [
   { label: 'Payment', value: 'Without insurance', sub: 'paid at the time of the visit' },
 ]
 
-// Confirmed by the practice: $250 evaluation, $200 treatment, +$50 outside the
-// local area. Telehealth at $150 and the package discounts are NOT yet final —
-// see CLAUDE.md before quoting them anywhere else.
-const rates = [
-  { name: 'Initial evaluation', price: '$250' },
-  { name: 'Treatment session', price: '$200' },
-  { name: 'Telehealth session', price: '$150' },
-  { name: 'Travel outside the local area', price: '+$50', note: 'contact for details' },
-  { name: 'Four- and eight-session packages', price: 'Contact for details' },
-]
-
 // Stacked rows with a hairline above on a phone; columns divided by a hairline
 // to the left from sm up. Same fact row, laid out for the width it has.
 function factClasses(i) {
@@ -32,6 +21,11 @@ function factClasses(i) {
   ].filter(Boolean).join(' ')
 }
 
+/**
+ * The quiet fact row under the hero. The rates used to sit here too, which is
+ * why clicking "Practice" in the menu landed a visitor on a price list — they
+ * are now their own section at the foot of the page. See Rates.jsx.
+ */
 export default function Practice() {
   return (
     <section id="practice" className="bg-mist py-24 sm:py-32">
@@ -48,40 +42,6 @@ export default function Practice() {
                 {sub && <p className="font-sans text-[13px] text-ink-soft mt-1.5 leading-relaxed">{sub}</p>}
               </div>
             ))}
-          </div>
-        </Reveal>
-
-        <div className="h-px hairline my-14 sm:my-20" />
-
-        {/* Rates */}
-        <Reveal>
-          <div className="max-w-2xl">
-            <p className="label mb-6">Rates</p>
-            <h2 className="section-heading mb-10">What a session costs</h2>
-
-            <div className="divide-y divide-line mb-8">
-              {rates.map(({ name, price, note }) => (
-                <div key={name} className="flex items-baseline justify-between gap-4 sm:gap-6 py-5 first:pt-0">
-                  <div>
-                    <p className="font-sans text-[15px] sm:text-[16px] text-ink leading-snug">{name}</p>
-                    {note && <p className="font-sans text-[13px] text-ink-soft mt-1.5">{note}</p>}
-                  </div>
-                  <p className={`shrink-0 text-right ${price.startsWith('$') || price.startsWith('+')
-                    ? 'font-serif text-xl sm:text-2xl text-fern'
-                    : 'font-sans text-[14px] sm:text-[15px] text-ink-soft'}`}>{price}</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="lede mb-10">
-              The practice does not bill insurance. Paying directly is what makes
-              the full one-on-one session possible, and keeps your care guided by
-              your goals rather than by what a plan will cover.
-            </p>
-
-            <a href="#book" className="btn-primary w-full sm:w-auto">
-              Book a session
-            </a>
           </div>
         </Reveal>
       </div>

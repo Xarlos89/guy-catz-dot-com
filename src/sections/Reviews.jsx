@@ -1,4 +1,7 @@
+import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
+import { responsivePhoto } from '../images'
+import { site } from '../siteInfo'
 
 // Real patient testimonials, supplied by the practice.
 // Keep them verbatim — edit only with the patient's permission.
@@ -22,19 +25,31 @@ const reviews = [
 ]
 
 /**
- * The Care Hero award, from the certificate the practice supplied.
+ * The Care Hero award.
  *
- * The certificate itself is a rainbow-gradient graphic with the hospital's own
- * lettering on it — dropping the image straight into the page would put a
- * third, fourth and fifth colour on a site that has two — so the substance of
- * it is set in the page's own type instead, verbatim.
+ * The certificate photograph is now what closes the testimonials — the client
+ * asked for it directly, in place of the typeset version that stood here while
+ * the file was missing. It is somebody else's artwork on a rainbow ground, so
+ * it breaks the page's two-colour rule; that was his call, and it is contained
+ * inside one framed photo rather than allowed to spread into the band.
+ *
+ * The certificate is made of text, so the whole of it is transcribed into an
+ * `sr-only` block below the image: without that a screen reader gets a picture
+ * and nothing else. The transcript is the certificate verbatim, his own closing
+ * quote included, because that quote is on the page the moment the photograph
+ * is — this is an equivalent for the image, not an editorial placement of his
+ * writing.
  *
  * TODO — needs the practice to fill in: `issuer` is the hospital that gave the
  * award and `period` is when (he said "last year"). Both render only once they
- * are set; nothing is guessed. Keep the original certificate on file — an
- * employer award is the hospital's to publish, so their sign-off is worth
- * having alongside the patients' before this goes live.
+ * are set; nothing is guessed. An employer award is the hospital's to publish,
+ * so their sign-off is worth having alongside the patients' before this goes
+ * live — more so now that the hospital's own certificate is the artwork.
  */
+// The source is 642px wide, so the ladder caps there rather than upscaling.
+const AWARD_WIDTHS = [400, 642]
+const awardPhoto = responsivePhoto('care-hero-award', AWARD_WIDTHS)
+
 const award = {
   label: `Patient's Choice`,
   title: 'Care Hero of the Month',
@@ -45,6 +60,9 @@ const award = {
     `I love Guy — he's very kind.`,
     `Really good work outs and he explains everything. He's very uplifting.`,
   ],
+  // His own words, printed on the certificate. Rendered only in the
+  // transcript — it is in the photograph, so it is on the page either way.
+  closing: `My favorite thing about being a physical therapist is having the ability to not just be of service, but to be a bringer of hope and a source of light for patients enduring very dark times. The best advice I can give is to meet the patients where they're at, and treat them how you would treat your own family member. Meet them with kindness, compassion and a listening ear. Connect. Make sure they feel seen, heard and understood. When you are with them, be WITH them. They should feel safe, comfortable and cared for throughout their plan of care, and know that you are in their corner throughout their healing process.`,
 }
 
 function Attribution({ name, age }) {
@@ -63,8 +81,8 @@ export default function Reviews() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <p className="label-light mb-6">Testimonials</p>
-            <h2 className="section-heading-light">In their words</h2>
+            <h2 className="section-heading-light mb-3">Testimonials</h2>
+            <p className="section-sub-light">In their words</p>
           </div>
         </Reveal>
 
@@ -100,42 +118,43 @@ export default function Reviews() {
           </Reveal>
         </div>
 
-        {/* The award. A different kind of thing from a testimonial, so it sits
-            apart on its own card rather than in the run of quotes — but the two
-            patient comments on it are testimonials, and they read as such. */}
+        {/* The award. A different kind of thing from a testimonial, so it
+            sits apart at the end rather than in the run of quotes — but the two
+            patient comments on it are testimonials, and they read as such.
+            The certificate is the whole of it now; the transcript underneath
+            is what a screen reader gets in place of the picture. */}
         <Reveal>
-          <div className="soft-card-dark sm:p-10 mt-16 sm:mt-20 max-w-4xl">
-            {/* No badge or laurel glyph: the ochre label is the only accent
-                the rest of the page would give this, and a piece of award
-                clip-art is the one loud thing this design does not have */}
-            <div className="mb-7">
-              <p className="label-light mb-3">{award.label}</p>
-              <h3 className="font-serif text-2xl sm:text-[1.75rem] text-cream leading-[1.25]">
-                {award.title}
-              </h3>
-              {provenance && (
-                <p className="font-sans text-[13px] text-cream/75 mt-2.5">{provenance}</p>
-              )}
+          <figure className="mt-16 sm:mt-20 max-w-xl">
+            <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep">
+              <Photo
+                {...awardPhoto}
+                sizes="(min-width: 640px) 576px, calc(100vw - 48px)"
+                alt={`${award.label} — ${award.title}, awarded to ${site.doctor}, ${site.credentials}`}
+                natural
+                width={642}
+                height={617}
+                tone="dark"
+              />
             </div>
 
-            <blockquote className="font-sans text-[15px] text-cream/80 leading-[1.85] max-w-2xl mb-9">
-              {award.citation}
-            </blockquote>
+            {provenance && (
+              <figcaption className="font-sans text-[13px] text-cream/75 mt-4">
+                {provenance}
+              </figcaption>
+            )}
 
-            <ul className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
+            {/* The certificate is made of text — this is that text. */}
+            <div className="sr-only">
+              <p>{award.label} — {award.title}. {site.doctor}, {site.credentials}.</p>
+              <p>{award.citation}</p>
               {award.quotes.map((quote) => (
-                <li key={quote} className="flex items-start gap-3">
-                  <span aria-hidden="true" className="font-serif text-2xl text-ochre/60 leading-[0.9] shrink-0">
-                    &rdquo;
-                  </span>
-                  <blockquote className="font-serif text-lg text-cream leading-[1.55]">
-                    {quote}
-                  </blockquote>
-                </li>
+                <blockquote key={quote}>{quote}</blockquote>
               ))}
-            </ul>
-          </div>
+              <blockquote>{award.closing}</blockquote>
+            </div>
+          </figure>
         </Reveal>
+
       </div>
     </section>
   )

@@ -8,7 +8,7 @@ The domain is `guy-catz.com`; the practice name is Healing Path Rehabilitation. 
 
 The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is built from exactly **two background colours** — a deep blue-green and a cool light blue — alternating in bands joined by curved seams. See "Bands and seams" below before adding anything.
 
-> **The words are the client's; the contact details and prices are not.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. See "What's placeholder" at the bottom for what still needs replacing.
+> **The words are the client's, and so are the contact details and prices now.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. Phone, email, the office address and every rate but telehealth are confirmed; the opening hours are the last invented fact. See "What's placeholder" at the bottom.
 
 ## Commands
 
@@ -33,7 +33,8 @@ src/
   siteInfo.js        single source of truth for phone / email / address / hours
   palette.js         band colours as hex — <Divider> needs real colour strings
   components/
-    Navbar.jsx       floating translucent pill, appears after 120px of scroll
+    Navbar.jsx       floating translucent pill, fixed at the top from the first
+                     pixel; Services carries a Rates/FAQ submenu
     Footer.jsx       practice summary / explore links / contact
     Divider.jsx      the curved seam between two colour bands
     Reveal.jsx       scroll-triggered fade-and-rise wrapper
@@ -42,15 +43,18 @@ src/
     Hero.jsx         a flat `fern` band — no photo, no gradient, light-on-dark;
                      carries the recoloured logo mark; laid out mobile-first —
                      see "Mobile" and "The logo" below
-    Practice.jsx     hairline fact row + rates (#practice)
+    Practice.jsx     hairline fact row (#practice) — the rates moved out
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`);
                      a `fern` band, so light-on-dark
     Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
     Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
     Gallery.jsx      masonry grid of the practice — `photos` array
     Reviews.jsx      real patient testimonials — `featured` + `reviews` —
-                     plus the `award` (Care Hero of the Month), set in type
+                     closing on the Care Hero certificate photo, with the
+                     `award` text as its screen-reader transcript
     FAQ.jsx          accordion — `faqs` array (uses useState per item)
+    Rates.jsx        the price list + the insurance note (#rates), at the foot
+                     of the page — reached from the menu as Services → Rates
     BookingCTA.jsx   closing call-to-action + map (#book)
   App.jsx            orders the sections and places the dividers between bands
   main.jsx           ViteReactSSG entry; App adds `.reveal-ready` on mount
@@ -92,11 +96,13 @@ alternating.
 | E | Services | `fern` |
 | F | Gallery | `mist` |
 | G | Reviews | `fern` |
-| H | FAQ, BookingCTA | `mist` |
+| H | FAQ, Rates, BookingCTA | `mist` |
 | — | Footer | `fern` |
 
-One section per band, apart from the closing pair — the colour changes at
-every seam.
+One section per band, apart from the closing three — the colour changes at
+every seam. Rates sits inside that closing band deliberately: the client asked
+for the price list to come only after everything else has been read, and
+`.btn-primary` needs the light ground anyway.
 
 **`cream` is never a band background.** It is the surface tone — cards, the
 navbar pill, ghost buttons, light photo placeholders — and nothing else. An
@@ -178,6 +184,30 @@ The lock-up's own tagline — *"Restore movement. Restore life."* — is real
 copy, so it is now `site.tagline` (it replaced an invented one that nothing
 rendered) and it sits under the footer wordmark.
 
+### Heading pairs — the name leads, the phrase follows
+
+Sections used to open with a small spaced-caps `.label` over a large
+`.section-heading`, which put the *description* at display size and the
+section's own name in 11px capitals. The client asked for that reversed
+everywhere he saw it: "Testimonials" over "In their words", "The Practice" over
+"Where the work happens", "FAQ" over "Good to know", "Meet Our Doctor" over his
+name and credentials. So the pattern is now:
+
+```jsx
+<h2 className="section-heading mb-3">The Practice</h2>
+<p className="section-sub mb-6">Where the work happens</p>
+```
+
+The `h2` carries the section's name — which is also what the menu and the
+footer call it — and `.section-sub` sets the phrase beneath it in the same
+serif, around `1.35rem`. `.label` is still right for a small heading *inside* a
+section ("Experienced in", "What that involves", "Book a session"); it is no
+longer how a section introduces itself.
+
+The Hero follows the same instruction: the practice name is the largest thing
+on the page and "Recovery is more than healing an injury" sits under it at
+roughly half the size it used to be.
+
 ### The client's own copy — do not rearrange it
 
 `Approach.jsx` and `About.jsx` each render a `paragraphs` array that is the
@@ -233,10 +263,17 @@ without wincing, and does it tell them something true rather than sell them
 the idea of it? Note that the "televisions" line also broke the
 nothing-invented rule — the punchy sentences are usually the invented ones.
 
-**Insurance wording:** the practice does not bill insurance. Say that, in those
-words. "Out-of-network", "private pay", "cash-based" and "superbill" are
-industry terms that a patient reads as a hedge — and the billing specifics
-behind them are unconfirmed anyway.
+**Insurance wording:** the client gave the sentence himself — **"We currently
+do not accept insurance"** — and it is set that way in both places it appears,
+followed by the same explanation, verbatim: payment is due at the time of the
+visit, and *"this ensures significantly less wait time for appointments, and
+you will receive direct one-on-one care guided by your goals rather than what
+your plan covers."* Rates.jsx and the FAQ answer carry the identical wording;
+change one and change the other, plus the `FAQPage` JSON-LD in `index.html`.
+"Out-of-network", "private pay", "cash-based" and "superbill" are industry
+terms that a patient reads as a hedge — and the billing specifics behind them
+are unconfirmed anyway. "Does not bill insurance" was the earlier phrasing and
+he replaced it.
 
 Rules of thumb for anything new:
 
@@ -337,6 +374,7 @@ Both are **self-hosted** from `public/fonts/` (latin subset, variable woff2) wit
 
 - `.label` / `.label-light` — spaced-caps section label (terracotta on light, ochre on fern)
 - `.section-heading` / `.section-heading-light` — Fraunces h2 with the soft/wonk variation settings
+- `.section-sub` / `.section-sub-light` — the quiet second line under a heading (see "Heading pairs" above)
 - `.lede` / `.lede-light` — the relaxed 1.85 line-height intro paragraph
 - `.btn-primary` — terracotta pill, **on `mist` only**; `.btn-primary-light` — its cream inversion, the primary on `fern`; `.btn-ghost` — outlined pill on light; `.btn-ghost-light` — outlined pill on fern
 - `.soft-card` / `.soft-card-dark` — borderless rounded surface with a soft shadow. `.soft-card` is solid `cream`, **not** white or a white overlay
@@ -353,14 +391,18 @@ Texture: a fine SVG grain sits on `body::after` as one fixed, page-wide layer. I
 
 ## Section IDs (for anchor links)
 
-`#home` · `#practice` · `#about` · `#approach` · `#services` · `#gallery` · `#reviews` · `#faq` · `#book` · `#contact` (footer)
+`#home` · `#practice` · `#about` · `#approach` · `#services` · `#gallery` · `#reviews` · `#faq` · `#rates` · `#book` · `#contact` (footer)
 
-The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). `#gallery` and `#contact` exist for the footer and deep linking.
+The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). Services is the one entry with `children` — `#rates` then `#faq` — which open on hover and on focus-within, so the submenu is reachable by keyboard. Below `md` the links are hidden entirely and the pill keeps the wordmark, the call icon and Book. `#gallery` and `#contact` exist for the footer and deep linking.
+
+`#practice` is the fact row and nothing else. It used to be the fact row *and*
+the rates, which meant clicking "Practice" in the menu landed a visitor on a
+price list — the client's complaint, and the reason Rates.jsx exists.
 
 ## Where the content lives
 
 - **Practice name, doctor, credentials, contact details** — `src/siteInfo.js`, imported everywhere. `index.html` keeps its own copy for `<meta>` tags and JSON-LD — **update both.**
-- **Rates** — `src/sections/Practice.jsx` — the `rates` array
+- **Rates** — `src/sections/Rates.jsx` — the `rates` array
 - **Session info** — `src/sections/Practice.jsx` — the `infoCards` array
 - **Specialties and treatments** — `src/sections/Services.jsx` — the `experience` and `provided` arrays
 - **Bio** — `src/sections/About.jsx` — the `paragraphs` array (verbatim)
@@ -369,7 +411,7 @@ The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` 
 - **Testimonials** — `src/sections/Reviews.jsx` — the `reviews` array
 - **The Care Hero award** — `src/sections/Reviews.jsx` — the `award` object
 - **Logo** — `brand/healing-path-logo.jpg`, rebuilt by `scripts/build-logo-mark.py`
-- **Map** — `src/sections/BookingCTA.jsx`
+- **Map** — `src/sections/BookingCTA.jsx` — an embed query on the street address, without the suite number (`#` is a URL fragment delimiter, and the suite does not move the pin)
 
 ## Adding photos
 
@@ -425,7 +467,7 @@ photo becomes a small ladder of files, not one file.
 
 ## What's placeholder / not yet real
 
-Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, the Care Hero award and the two patient comments quoted on it, the logo, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, the Care Hero award, its certificate photograph and the two patient comments quoted on it, the logo, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
 
 The two portraits are `meet-the-doctor` (seated at the treatment table) and
 `dr-guy-catz-headshot` (the tighter frame). There is only one portrait slot on
@@ -436,23 +478,24 @@ Both are cropped by `object-cover` into a `4/5` slot, and both survive it.
 
 Still invented and needing replacement before launch:
 
-- **All contact details** — `src/siteInfo.js`: the phone number is in the reserved `555-01xx` fictional range, and the email and street address are made up. The office is in West Los Angeles; the exact address is not known
-- **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
+- **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed. It is the last invented fact in `siteInfo.js`; the phone, email and office address are all confirmed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
-- **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
-- **Social links** — `siteInfo.js` Instagram/Google links point at those sites' homepages
+- **Social links** — none are rendered. The personal Instagram is deliberately not linked; the practice is setting up a business Instagram and a LinkedIn. Put the URLs in `siteInfo.js` (`instagram`, `linkedin`) and add the links back to the footer
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are
   filled in. He said only "at the hospital last year", so neither a hospital
-  name nor a year was guessed
+  name nor a year was guessed. Now that the hospital's own certificate is on
+  the page as artwork, their sign-off matters more than it did
 
-### Rates — partly confirmed
+### Rates — one figure still open
 
 Confirmed by the practice: **$250** initial evaluation, **$200** treatment,
-**+$50** outside the local area. Still open, and shown on the site anyway:
+**+$50** outside the local area, **$750** for four sessions and **$1,400** for
+eight. The packages are their own rows now that they carry numbers — they were
+a single "contact for details" line while he was still doing the math. Still
+open, and shown on the site anyway:
 
-- **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". If a cheaper guidance-only tier is wanted, it needs its own row
-- **Package pricing** — four- and eight-session bundles are real, but he has not done the math. At his instruction the row reads "contact for details" rather than a number
+- **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". The last unsettled figure on the page. If a cheaper guidance-only tier is wanted, it needs its own row
 - **The mileage radius** — still undefined; at his instruction the travel row keeps the +$50 and adds "contact for details" instead of naming a boundary
 
 Superbill / HSA / FSA wording was removed: the out-of-network model comes from
@@ -461,11 +504,29 @@ the client's copy, but the billing specifics were invented and are unconfirmed.
 One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission**, and two of the three describe care given at a rehab hospital. Worth confirming the release before launch. The Care Hero award is the same conversation twice over — the two comments on it are patients', and the award itself is the hospital's to publish, so their sign-off belongs alongside the patients'.
 
 The certificate as supplied is a rainbow-gradient graphic carrying the
-hospital's own lettering and a photo of him. It is not on the site and should
-not be: it would put a third, fourth and fifth colour on the page and read as
-somebody else's design. What is on the site is its substance — the award, its
-citation and the two patient comments — set in the page's own type. The
-original stays with the practice; there is no copy of it in the repo. His own
+hospital's own lettering and a photo of him. It was kept off the page for a
+design reason — it puts a third, fourth and fifth colour on a site that has two,
+and reads as somebody else's artwork — but **the client asked for it directly,
+at the end of the testimonials, in place of the typeset version**, so that
+reasoning is overruled and the photograph is what closes Reviews. It ships as
+`care-hero-award-{400,642}.webp`; the ladder stops at 642 because that is the
+width of the file he supplied, and upscaling would only make a bigger blurry
+file. It sits in a `max-w-xl` `.photo-frame` — near its own size, so the small
+print stays as legible as the source allows.
+
+**That photo is the exception, not a precedent.** One framed image on the dark
+band is contained; a rainbow anywhere else on the page is not. Don't pull its
+colours into a heading, a border or a badge, and don't add a second copy of it.
+
+**The certificate is made of text, so `Reviews.jsx` carries a transcript** of it
+in an `sr-only` block under the image — the label, the citation, the two patient
+comments and his own closing quote. Without it a screen reader gets a picture
+and nothing else. Note this is the one place his long "My favorite thing about
+being a physical therapist…" quote appears: it is printed on the certificate,
+so publishing the photograph publishes it, and the transcript only makes the
+same words reachable. That is an equivalent for an image, not the editorial
+placement the verbatim-copy rule is about — if he wants it gone, the whole
+transcript goes with it. His own
 long quote from the certificate ("My favourite thing about being a physical
 therapist…") is not on the page either: it is his voice, and Reviews is the
 patients' section. It is good writing and would sit well at the end of the

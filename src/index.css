@@ -99,6 +99,26 @@
     @apply text-cream;
   }
 
+  /* The quiet second line under a section heading. The client asked for the
+     name of each section to lead — "Testimonials", "The Practice", "Meet Our
+     Doctor", "FAQ" — with the descriptive phrase set smaller beneath it, so
+     the old label/heading sizes are swapped: the heading carries the name and
+     this carries the phrase. */
+  .section-sub,
+  .section-sub-light {
+    @apply font-serif font-normal leading-[1.45] tracking-[-0.005em];
+    font-size: clamp(1.1rem, 2.1vw, 1.35rem);
+    font-variation-settings: 'SOFT' 100, 'WONK' 0, 'opsz' 26;
+  }
+
+  .section-sub {
+    @apply text-ink-soft;
+  }
+
+  .section-sub-light {
+    @apply text-cream/80;
+  }
+
   .lede {
     @apply font-sans text-[15px] sm:text-base text-ink-soft leading-[1.85];
   }
