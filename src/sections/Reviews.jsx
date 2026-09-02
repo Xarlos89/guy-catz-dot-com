@@ -1,4 +1,7 @@
+import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
+import { responsivePhoto } from '../images'
+import { site } from '../siteInfo'
 
 // Real patient testimonials, supplied by the practice.
 // Keep them verbatim — edit only with the patient's permission.
@@ -22,12 +25,19 @@ const reviews = [
 ]
 
 /**
- * The Care Hero award, from the certificate the practice supplied.
+ * The Care Hero award.
  *
- * The certificate itself is a rainbow-gradient graphic with the hospital's own
- * lettering on it — dropping the image straight into the page would put a
- * third, fourth and fifth colour on a site that has two — so the substance of
- * it is set in the page's own type instead, verbatim.
+ * The client asked for the certificate photograph — the one with his face on
+ * it — to close the testimonials in place of the typeset version below. That
+ * file is NOT in the repo: nothing named for it has ever been committed, and
+ * it cannot be invented. Drop
+ * public/images/care-hero-award-{600,1000,1600}.webp in (see CLAUDE.md →
+ * Adding photos for the encode) and set `awardPhoto` to
+ * responsivePhoto('care-hero-award', AWARD_WIDTHS) — the section swaps to the
+ * photograph and the typeset card stops rendering.
+ *
+ * Until then the typeset version stands, so the award is still on the page
+ * rather than replaced by a hole. It carries the same substance, verbatim.
  *
  * TODO — needs the practice to fill in: `issuer` is the hospital that gave the
  * award and `period` is when (he said "last year"). Both render only once they
@@ -35,6 +45,11 @@ const reviews = [
  * employer award is the hospital's to publish, so their sign-off is worth
  * having alongside the patients' before this goes live.
  */
+const AWARD_WIDTHS = [600, 1000, 1600]
+
+// Set to responsivePhoto('care-hero-award', AWARD_WIDTHS) once the files land.
+const awardPhoto = null
+
 const award = {
   label: `Patient's Choice`,
   title: 'Care Hero of the Month',
@@ -63,8 +78,8 @@ export default function Reviews() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <p className="label-light mb-6">Testimonials</p>
-            <h2 className="section-heading-light">In their words</h2>
+            <h2 className="section-heading-light mb-3">Testimonials</h2>
+            <p className="section-sub-light">In their words</p>
           </div>
         </Reveal>
 
@@ -101,8 +116,26 @@ export default function Reviews() {
         </div>
 
         {/* The award. A different kind of thing from a testimonial, so it sits
-            apart on its own card rather than in the run of quotes — but the two
+            apart at the end rather than in the run of quotes — but the two
             patient comments on it are testimonials, and they read as such. */}
+        {awardPhoto ? (
+          <Reveal>
+            <figure className="mt-16 sm:mt-20 max-w-2xl">
+              <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep">
+                <Photo
+                  {...awardPhoto}
+                  sizes="(min-width: 768px) 672px, calc(100vw - 48px)"
+                  alt={`${award.title} certificate awarded to ${site.doctor}, ${site.credentials}`}
+                  natural
+                  tone="dark"
+                />
+              </div>
+              <figcaption className="font-sans text-[13px] text-cream/75 mt-4">
+                {[award.title, provenance].filter(Boolean).join(' · ')}
+              </figcaption>
+            </figure>
+          </Reveal>
+        ) : (
         <Reveal>
           <div className="soft-card-dark sm:p-10 mt-16 sm:mt-20 max-w-4xl">
             {/* No badge or laurel glyph: the ochre label is the only accent
@@ -136,6 +169,7 @@ export default function Reviews() {
             </ul>
           </div>
         </Reveal>
+        )}
       </div>
     </section>
   )

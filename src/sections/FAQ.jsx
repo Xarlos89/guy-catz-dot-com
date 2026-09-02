@@ -4,11 +4,11 @@ import Reveal from '../components/Reveal'
 const faqs = [
   {
     q: 'Where do sessions take place?',
-    a: 'Three options: in your own home, at the West Los Angeles office, or by telehealth. Many people mix them — an in-home evaluation, office visits for the strength work, video calls when travel gets in the way.',
+    a: 'At your home, at the West Los Angeles office, or by telehealth.',
   },
   {
     q: 'Do you take insurance?',
-    a: 'No — the practice does not bill insurance, and payment is due at the time of the visit. Working this way is what makes the full one-on-one session possible, and keeps your care guided by your goals rather than by what a plan will cover.',
+    a: 'We currently do not accept insurance, and payment is due at the time of the visit. This ensures significantly less wait time for appointments, and you will receive direct one-on-one care guided by your goals rather than what your plan covers.',
   },
   {
     q: 'Do I need a referral from a doctor?',
@@ -69,8 +69,8 @@ export default function FAQ() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-start">
           <Reveal>
-            <p className="label mb-6">FAQ</p>
-            <h2 className="section-heading">Good to know</h2>
+            <h2 className="section-heading mb-3">FAQ</h2>
+            <p className="section-sub">Good to know</p>
           </Reveal>
 
           <Reveal delay={110}>

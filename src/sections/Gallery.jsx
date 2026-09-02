@@ -34,11 +34,10 @@ export default function Gallery() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <p className="label mb-6">The practice</p>
-            <h2 className="section-heading mb-6">Where the work happens</h2>
+            <h2 className="section-heading mb-3">The Practice</h2>
+            <p className="section-sub mb-6">Where the work happens</p>
             <p className="lede">
-              A private room in {site.neighborhood}, or your own front room —
-              wherever you are most comfortable moving.
+              A clinic in {site.neighborhood}, at your home, or via telehealth.
             </p>
           </div>
         </Reveal>

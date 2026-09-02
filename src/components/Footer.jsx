@@ -6,8 +6,9 @@ const explore = [
   { label: 'The Approach', href: '#approach' },
   { label: 'Services', href: '#services' },
   { label: 'Photos', href: '#gallery' },
-  { label: 'Reviews', href: '#reviews' },
+  { label: 'Testimonials', href: '#reviews' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Rates', href: '#rates' },
 ]
 
 export default function Footer() {
@@ -21,7 +22,7 @@ export default function Footer() {
           <p className="font-serif italic text-[15px] text-cream/75 mb-4">{site.tagline}</p>
           <p className="text-[14px] leading-[1.8] text-cream/80 max-w-xs">
             {site.doctor}, {site.credentials} · {site.city}. One-on-one physical
-            therapy in your home, at the {site.neighborhood} office, or by
+            therapy at your home, at the {site.neighborhood} office, or by
             telehealth.
           </p>
         </div>
@@ -49,21 +50,6 @@ export default function Footer() {
             <li className="pt-2 leading-[1.8] text-cream/75">
               {site.address}<br />
               {site.addressCity}
-            </li>
-            <li className="pt-2">
-              <a
-                href={site.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 hover:text-cream transition-colors duration-300"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                </svg>
-                Instagram
-              </a>
             </li>
           </ul>
         </div>

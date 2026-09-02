@@ -41,10 +41,9 @@ export default function About() {
 
           {/* His words, whole */}
           <Reveal delay={120}>
-            <p className="label-light mb-6">Meet Our Doctor</p>
-            <h2 className="section-heading-light mb-3">{site.doctor}</h2>
-            <p className="font-sans text-[13px] tracking-[0.18em] uppercase text-cream/75 mb-10">
-              {site.credentials}
+            <h2 className="section-heading-light mb-3">Meet Our Doctor</h2>
+            <p className="section-sub-light mb-10">
+              {site.doctor}, {site.credentials}
             </p>
 
             <div className="max-w-[62ch] space-y-7">
