@@ -480,7 +480,6 @@ Still invented and needing replacement before launch:
 
 - **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed. It is the last invented fact in `siteInfo.js`; the phone, email and office address are all confirmed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
-- **No postal code** — he gave the address without one, so none is set and the `PostalAddress` in the JSON-LD omits `postalCode` rather than carrying a guess. Worth asking for: it is one of the fields local search leans on
 - **Social links** — none are rendered. The personal Instagram is deliberately not linked; the practice is setting up a business Instagram and a LinkedIn. Put the URLs in `siteInfo.js` (`instagram`, `linkedin`) and add the links back to the footer
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are

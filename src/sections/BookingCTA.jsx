@@ -55,7 +55,7 @@ export default function BookingCTA() {
             <div className="photo-frame rounded-[2rem] sm:rounded-[2.5rem] shadow-deep bg-cream">
               <iframe
                 title={`${site.practice} — ${site.neighborhood}`}
-                src="https://maps.google.com/maps?q=11040+Santa+Monica+Blvd,+Los+Angeles,+CA&z=16&output=embed"
+                src="https://maps.google.com/maps?q=11040+Santa+Monica+Blvd,+Los+Angeles,+CA+90025&z=16&output=embed"
                 width="100%"
                 className="block w-full h-[300px] sm:h-[380px] lg:h-[420px]"
                 style={{ border: 0 }}

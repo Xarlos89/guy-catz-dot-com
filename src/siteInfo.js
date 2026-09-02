@@ -22,7 +22,7 @@ export const site = {
   emailHref: 'mailto:GuyHCatz@gmail.com',
 
   address: '11040 Santa Monica Blvd, #480',
-  addressCity: 'Los Angeles, CA',
+  addressCity: 'Los Angeles, CA 90025',
 
   // PLACEHOLDER — the hours are still assumed, not confirmed
   hours: 'Mon – Fri · 8am – 6pm',
