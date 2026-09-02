@@ -50,7 +50,8 @@ src/
     Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
     Gallery.jsx      masonry grid of the practice — `photos` array
     Reviews.jsx      real patient testimonials — `featured` + `reviews` —
-                     plus the `award` (Care Hero of the Month), set in type
+                     closing on the Care Hero certificate photo, with the
+                     `award` text as its screen-reader transcript
     FAQ.jsx          accordion — `faqs` array (uses useState per item)
     Rates.jsx        the price list + the insurance note (#rates), at the foot
                      of the page — reached from the menu as Services → Rates
@@ -466,7 +467,7 @@ photo becomes a small ladder of files, not one file.
 
 ## What's placeholder / not yet real
 
-Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, the Care Hero award and the two patient comments quoted on it, the logo, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, the Care Hero award, its certificate photograph and the two patient comments quoted on it, the logo, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
 
 The two portraits are `meet-the-doctor` (seated at the treatment table) and
 `dr-guy-catz-headshot` (the tighter frame). There is only one portrait slot on
@@ -485,7 +486,8 @@ Still invented and needing replacement before launch:
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are
   filled in. He said only "at the hospital last year", so neither a hospital
-  name nor a year was guessed
+  name nor a year was guessed. Now that the hospital's own certificate is on
+  the page as artwork, their sign-off matters more than it did
 
 ### Rates — partly confirmed
 
@@ -503,20 +505,28 @@ One thing to raise with the client rather than fix in code: **patient testimonia
 
 The certificate as supplied is a rainbow-gradient graphic carrying the
 hospital's own lettering and a photo of him. It was kept off the page for a
-design reason — it puts a third, fourth and fifth colour on a site that has
-two, and reads as somebody else's artwork — but **the client has since asked
-for it directly, at the end of the testimonials, in place of the typeset
-version**, so that reasoning has been overruled and the slot is wired for it:
-`Reviews.jsx` renders the photograph as soon as `awardPhoto` points at a file.
+design reason — it puts a third, fourth and fifth colour on a site that has two,
+and reads as somebody else's artwork — but **the client asked for it directly,
+at the end of the testimonials, in place of the typeset version**, so that
+reasoning is overruled and the photograph is what closes Reviews. It ships as
+`care-hero-award-{400,642}.webp`; the ladder stops at 642 because that is the
+width of the file he supplied, and upscaling would only make a bigger blurry
+file. It sits in a `max-w-xl` `.photo-frame` — near its own size, so the small
+print stays as legible as the source allows.
 
-**The file has still never reached the repo** — nothing named for it has been
-committed, and it cannot be invented — so the typeset version is what renders
-today, and the award is on the page rather than replaced by a hole. To finish
-the swap: encode the certificate to
-`public/images/care-hero-award-{600,1000,1600}.webp` (see "Adding photos"), then
-set `awardPhoto = responsivePhoto('care-hero-award', AWARD_WIDTHS)`. Frame the
-image inside a `.photo-frame` and leave the rest of the band alone; it is one
-photograph in a dark band, not a licence for a third colour anywhere else. His own
+**That photo is the exception, not a precedent.** One framed image on the dark
+band is contained; a rainbow anywhere else on the page is not. Don't pull its
+colours into a heading, a border or a badge, and don't add a second copy of it.
+
+**The certificate is made of text, so `Reviews.jsx` carries a transcript** of it
+in an `sr-only` block under the image — the label, the citation, the two patient
+comments and his own closing quote. Without it a screen reader gets a picture
+and nothing else. Note this is the one place his long "My favorite thing about
+being a physical therapist…" quote appears: it is printed on the certificate,
+so publishing the photograph publishes it, and the transcript only makes the
+same words reachable. That is an equivalent for an image, not the editorial
+placement the verbatim-copy rule is about — if he wants it gone, the whole
+transcript goes with it. His own
 long quote from the certificate ("My favourite thing about being a physical
 therapist…") is not on the page either: it is his voice, and Reviews is the
 patients' section. It is good writing and would sit well at the end of the
