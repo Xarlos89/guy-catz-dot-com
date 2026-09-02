@@ -8,7 +8,7 @@ The domain is `guy-catz.com`; the practice name is Healing Path Rehabilitation. 
 
 The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is built from exactly **two background colours** — a deep blue-green and a cool light blue — alternating in bands joined by curved seams. See "Bands and seams" below before adding anything.
 
-> **The words are the client's; the contact details and prices are not.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. See "What's placeholder" at the bottom for what still needs replacing.
+> **The words are the client's, and so are the contact details and prices now.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. Phone, email, the office address and every rate but telehealth are confirmed; the opening hours are the last invented fact. See "What's placeholder" at the bottom.
 
 ## Commands
 
@@ -411,7 +411,7 @@ price list — the client's complaint, and the reason Rates.jsx exists.
 - **Testimonials** — `src/sections/Reviews.jsx` — the `reviews` array
 - **The Care Hero award** — `src/sections/Reviews.jsx` — the `award` object
 - **Logo** — `brand/healing-path-logo.jpg`, rebuilt by `scripts/build-logo-mark.py`
-- **Map** — `src/sections/BookingCTA.jsx`
+- **Map** — `src/sections/BookingCTA.jsx` — an embed query on the street address, without the suite number (`#` is a URL fragment delimiter, and the suite does not move the pin)
 
 ## Adding photos
 
@@ -478,10 +478,9 @@ Both are cropped by `object-cover` into a `4/5` slot, and both survive it.
 
 Still invented and needing replacement before launch:
 
-- **The street address** — `src/siteInfo.js`: the office is in West Los Angeles; the exact address is not known, and `1200 Placeholder Blvd` is invented. The phone `(323) 380-2039` and the email `GuyHCatz@gmail.com` are real and confirmed
-- **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed
+- **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed. It is the last invented fact in `siteInfo.js`; the phone, email and office address are all confirmed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
-- **Google Maps embed** — `BookingCTA.jsx` points at a generic West Los Angeles search; swap for a real place embed once the address is known
+- **No postal code** — he gave the address without one, so none is set and the `PostalAddress` in the JSON-LD omits `postalCode` rather than carrying a guess. Worth asking for: it is one of the fields local search leans on
 - **Social links** — none are rendered. The personal Instagram is deliberately not linked; the practice is setting up a business Instagram and a LinkedIn. Put the URLs in `siteInfo.js` (`instagram`, `linkedin`) and add the links back to the footer
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are
@@ -489,13 +488,15 @@ Still invented and needing replacement before launch:
   name nor a year was guessed. Now that the hospital's own certificate is on
   the page as artwork, their sign-off matters more than it did
 
-### Rates — partly confirmed
+### Rates — one figure still open
 
 Confirmed by the practice: **$250** initial evaluation, **$200** treatment,
-**+$50** outside the local area. Still open, and shown on the site anyway:
+**+$50** outside the local area, **$750** for four sessions and **$1,400** for
+eight. The packages are their own rows now that they carry numbers — they were
+a single "contact for details" line while he was still doing the math. Still
+open, and shown on the site anyway:
 
-- **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". If a cheaper guidance-only tier is wanted, it needs its own row
-- **Package pricing** — four- and eight-session bundles are real, but he has not done the math. At his instruction the row reads "contact for details" rather than a number
+- **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". The last unsettled figure on the page. If a cheaper guidance-only tier is wanted, it needs its own row
 - **The mileage radius** — still undefined; at his instruction the travel row keeps the +$50 and adds "contact for details" instead of naming a boundary
 
 Superbill / HSA / FSA wording was removed: the out-of-network model comes from

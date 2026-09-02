@@ -1,14 +1,15 @@
 import Reveal from '../components/Reveal'
 
 // Confirmed by the practice: $250 evaluation, $200 treatment, +$50 outside the
-// local area. Telehealth at $150 and the package discounts are NOT yet final —
-// see CLAUDE.md before quoting them anywhere else.
+// local area, and the two package prices. Telehealth at $150 is still the one
+// figure he has not settled — see CLAUDE.md before quoting it anywhere else.
 const rates = [
   { name: 'Initial evaluation', price: '$250' },
   { name: 'Treatment session', price: '$200' },
   { name: 'Telehealth session', price: '$150' },
   { name: 'Travel outside the local area', price: '+$50', note: 'contact for details' },
-  { name: 'Four- and eight-session packages', price: 'Contact for details' },
+  { name: 'Four-session package', price: '$750' },
+  { name: 'Eight-session package', price: '$1,400' },
 ]
 
 /**

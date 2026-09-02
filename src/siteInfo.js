@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
-// Phone and email are the practice's real details. The street
-// address and hours are still PLACEHOLDER — see CLAUDE.md.
+// Phone, email and the office address are the practice's real
+// details. Only the hours are still PLACEHOLDER — see CLAUDE.md.
 // The practice name, doctor, credentials and service settings
 // below are real. Everything on the site reads from here, so one
 // edit updates the whole page.
@@ -21,9 +21,10 @@ export const site = {
   email: 'GuyHCatz@gmail.com',
   emailHref: 'mailto:GuyHCatz@gmail.com',
 
-  // PLACEHOLDER
-  address: '1200 Placeholder Blvd, Suite 3',
-  addressCity: 'Los Angeles, CA 90025',
+  address: '11040 Santa Monica Blvd, #480',
+  addressCity: 'Los Angeles, CA',
+
+  // PLACEHOLDER — the hours are still assumed, not confirmed
   hours: 'Mon – Fri · 8am – 6pm',
   hoursNote: 'Saturday mornings by request',
 
