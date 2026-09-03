@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
-// Phone, email and the office address are the practice's real
-// details. Only the hours are still PLACEHOLDER — see CLAUDE.md.
+// Phone, email, the office address and the hours are all the
+// practice's real details.
 // The practice name, doctor, credentials and service settings
 // below are real. Everything on the site reads from here, so one
 // edit updates the whole page.
@@ -24,9 +24,8 @@ export const site = {
   address: '11040 Santa Monica Blvd, #480',
   addressCity: 'Los Angeles, CA 90025',
 
-  // PLACEHOLDER — the hours are still assumed, not confirmed
-  hours: 'Mon – Fri · 8am – 6pm',
-  hoursNote: 'Saturday mornings by request',
+  hours: 'Mon – Thu · 8am – 6pm',
+  hoursNote: 'Weekend availability varies',
 
   // No social links for now. The personal Instagram is deliberately not
   // linked; a business Instagram and a LinkedIn are coming from the

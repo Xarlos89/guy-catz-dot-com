@@ -60,7 +60,8 @@ export default function Hero() {
                 client asked for that order of size reversed. */}
             <p className="font-serif font-normal text-balance mb-5 sm:mb-7">
               {/* Two lines at every width — the name never fits beside the
-                  city at this size, and a wrapped separator looked broken */}
+                  doctor's line at this size, and a wrapped separator looked
+                  broken */}
               <span
                 className="block text-cream leading-[1.15] tracking-[-0.015em]"
                 style={{
@@ -77,7 +78,7 @@ export default function Hero() {
                   fontVariationSettings: "'SOFT' 100, 'WONK' 0, 'opsz' 26",
                 }}
               >
-                {site.city}
+                Dr. {site.doctor}, {site.credentials}
               </span>
             </p>
 
@@ -97,9 +98,9 @@ export default function Hero() {
 
           <div className="lg:col-start-1 lg:row-start-2 max-w-xl">
             <p className="font-sans text-[17px] sm:text-xl text-cream/80 leading-[1.75] mb-9 sm:mb-10">
-              It's about restoring peace to mind and body — restoring confidence,
-              strength, and quality of life. One-on-one physical therapy with
-              {' '}{site.doctor}, {site.credentials}.
+              It's about restoring peace to mind and body — improving strength,
+              confidence and quality of life. Compassionate care, a holistic
+              approach, and one-on-one physical therapy with Dr. Guy Catz.
             </p>
 
             {/* Stacked and full-width on a phone, side by side from sm up */}

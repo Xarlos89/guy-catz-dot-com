@@ -8,7 +8,7 @@ The domain is `guy-catz.com`; the practice name is Healing Path Rehabilitation. 
 
 The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is built from exactly **two background colours** — a deep blue-green and a cool light blue — alternating in bands joined by curved seams. See "Bands and seams" below before adding anything.
 
-> **The words are the client's, and so are the contact details and prices now.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. Phone, email, the office address and every rate but telehealth are confirmed; the opening hours are the last invented fact. See "What's placeholder" at the bottom.
+> **The words are the client's, and so are the contact details and prices now.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. Phone, email, the office address, the opening hours and every rate but telehealth are confirmed. See "What's placeholder" at the bottom.
 
 ## Commands
 
@@ -43,7 +43,8 @@ src/
     Hero.jsx         a flat `fern` band — no photo, no gradient, light-on-dark;
                      carries the recoloured logo mark; laid out mobile-first —
                      see "Mobile" and "The logo" below
-    Practice.jsx     hairline fact row (#practice) — the rates moved out
+    Practice.jsx     hairline fact row (#glance) — the rates moved out, and so
+                     did the #practice anchor: see "Section IDs" below
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`);
                      a `fern` band, so light-on-dark
     Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
@@ -391,13 +392,20 @@ Texture: a fine SVG grain sits on `body::after` as one fixed, page-wide layer. I
 
 ## Section IDs (for anchor links)
 
-`#home` · `#practice` · `#about` · `#approach` · `#services` · `#gallery` · `#reviews` · `#faq` · `#rates` · `#book` · `#contact` (footer)
+`#home` · `#glance` · `#about` · `#approach` · `#services` · `#practice` · `#reviews` · `#faq` · `#rates` · `#book` · `#contact` (footer)
 
-The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). Services is the one entry with `children` — `#rates` then `#faq` — which open on hover and on focus-within, so the submenu is reachable by keyboard. Below `md` the links are hidden entirely and the pill keeps the wordmark, the call icon and Book. `#gallery` and `#contact` exist for the footer and deep linking.
+The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). Services is the one entry with `children` — `#rates` then `#faq` — which open on hover and on focus-within, so the submenu is reachable by keyboard. Below `md` the links are hidden entirely and the pill keeps the wordmark, the call icon and Book. `#contact` exists for the footer and deep linking.
 
-`#practice` is the fact row and nothing else. It used to be the fact row *and*
-the rates, which meant clicking "Practice" in the menu landed a visitor on a
-price list — the client's complaint, and the reason Rates.jsx exists.
+**`#practice` is Gallery.jsx — the section actually headed "The Practice".**
+The hairline fact row under the hero is `#glance`, and the photo section is the
+`#practice` anchor, because that is the only heading on the page reading "The
+Practice" and the client asked for the menu link to land on it. (Gallery.jsx
+therefore has no `#gallery` id any more; the footer's separate "Photos" link
+went with it, since it now names the same section as "The Practice".) The
+anchor moved once before for the same reason: it used to cover the fact row
+*and* the rates, so clicking "Practice" landed a visitor on a price list, which
+is why Rates.jsx exists. Whatever section carries that heading owns the id —
+re-point the navbar and the footer together if it moves again.
 
 ## Where the content lives
 
@@ -476,9 +484,12 @@ has no other environmental shot of him. The headshot is the `image` on the
 `Person` in the `index.html` JSON-LD, which is what a knowledge panel picks up.
 Both are cropped by `object-cover` into a `4/5` slot, and both survive it.
 
+The hours are the client's too: `Mon – Thu · 8am – 6pm`, with weekend
+availability that varies. `siteInfo.js` and the `openingHoursSpecification` in
+`index.html` both carry them — change one and change the other.
+
 Still invented and needing replacement before launch:
 
-- **Hours** — `Mon–Fri 8am–6pm, Saturday mornings by request` is assumed. It is the last invented fact in `siteInfo.js`; the phone, email and office address are all confirmed
 - **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
 - **Social links** — none are rendered. The personal Instagram is deliberately not linked; the practice is setting up a business Instagram and a LinkedIn. Put the URLs in `siteInfo.js` (`instagram`, `linkedin`) and add the links back to the footer
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
