@@ -15,8 +15,8 @@ export default function BookingCTA() {
             <p className="label mb-6">Book a session</p>
             <h2 className="section-heading mb-6">Start with a conversation</h2>
             <p className="lede mb-10 max-w-md">
-              Call or email to ask about availability, rates, or whether this
-              is the right place for what you are dealing with.
+              Call or email to learn about availability, rates, or whether
+              this is the right place to fulfill your needs.
             </p>
 
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10">
@@ -37,13 +37,13 @@ export default function BookingCTA() {
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <dt className="label mb-2.5">Office</dt>
-                <dd className="font-sans text-[15px] text-ink-soft leading-relaxed">
+                <dd className="font-sans font-medium text-[15px] text-ink leading-relaxed">
                   {site.address}<br />{site.addressCity}
                 </dd>
               </div>
               <div>
                 <dt className="label mb-2.5">Hours</dt>
-                <dd className="font-sans text-[15px] text-ink-soft leading-relaxed">
+                <dd className="font-sans font-medium text-[15px] text-ink leading-relaxed">
                   {site.hours}<br />{site.hoursNote}
                 </dd>
               </div>

@@ -135,7 +135,7 @@ export default function Services() {
             <p className="label-light mb-7">What that involves</p>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-3.5">
               {provided.map((item) => (
-                <li key={item} className="flex items-start gap-3 font-sans text-[14px] text-cream/80 leading-relaxed">
+                <li key={item} className="flex items-start gap-3 font-sans text-[15px] sm:text-[16px] text-cream/80 leading-relaxed">
                   <span aria-hidden="true" className="mt-2 w-1 h-1 rounded-full bg-ochre shrink-0" />
                   {item}
                 </li>

@@ -28,7 +28,7 @@ const photos = [
 export default function Gallery() {
   return (
     <section
-      id="gallery"
+      id="practice"
       className="bg-mist pt-24 sm:pt-32 pb-24 sm:pb-32"
     >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
