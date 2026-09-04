@@ -4,7 +4,7 @@
 
 Static marketing website for **Healing Path Rehabilitation** — the practice of Guy H. Catz, PT, DPT, in Los Angeles. One-on-one physical therapy delivered three ways: in the patient's home, at the West Los Angeles office, or by telehealth. Single-page scroll. No backend, no router, no database. Builds to `dist/` and deploys to GitHub Pages via GitHub Actions.
 
-The domain is `guy-catz.com`; the practice name is Healing Path Rehabilitation. The wordmark reads "Healing Path" — don't "correct" it to the doctor's name.
+The domain is `guycatz.com`; the practice name is Healing Path Rehabilitation. The wordmark reads "Healing Path" — don't "correct" it to the doctor's name.
 
 The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is built from exactly **two background colours** — a deep blue-green and a cool light blue — alternating in bands joined by curved seams. See "Bands and seams" below before adding anything.
 
@@ -63,13 +63,21 @@ src/
 public/
   fonts/             self-hosted Fraunces + DM Sans (latin subset, woff2)
   images/            photography, plus the logo mark and lock-up
-  favicon.svg
+  favicon.svg        the icon master
+  favicon-32.png     the four PNGs are derived from favicon.svg by
+  apple-touch-icon.png   scripts/build-icons.py — don't hand-edit them
+  icon-192.png
+  icon-512.png
+  site.webmanifest   name, theme colour and the two manifest icons
+  404.html           self-contained, noindex; see "The 404 page" below
+  CNAME              guycatz.com — what points GitHub Pages at the domain
   robots.txt
   sitemap.xml
 brand/
   healing-path-logo.jpg   the logo as the practice supplied it — the master
 scripts/
   build-logo-mark.py      derives everything the site ships from that master
+  build-icons.py          rasterises favicon.svg into the PNG icon set
 .github/
   workflows/
     deploy.yml       push to main → npm ci → npm run build → GitHub Pages
@@ -468,10 +476,130 @@ photo becomes a small ladder of files, not one file.
   - Actions pinned to exact versions: `checkout@v6.0.3`, `setup-node@v6.4.0`, `configure-pages@v6.0.0`, `upload-pages-artifact@v5.0.0`, `deploy-pages@v5.0.0`
   - Node 26, `npm ci`, `npm run build`, artifact from `dist/`
   - Enable at: Settings → Pages → Source → GitHub Actions
-  - **`base` is `./`** — a relative base, so the same build works both at a custom-domain root (`guy-catz.com/`) and under project pages (`xarlos89.github.io/guy-catz-dot-com/`). This is why the `@font-face` `url()`s are `../fonts/…` (the CSS lands in `/assets/`) and the `index.html` preloads are `./fonts/…`. **Absolute `/…` asset paths silently 404 under the sub-path** — keep new references relative. The photography did exactly this and 404'd on the `github.io` URL; everything in `public/` now goes through `asset()` / `responsivePhoto()` in `src/images.js`, which emit `./images/…`. Note `import.meta.env.BASE_URL` is **not** the fix — Vite resolves it to `/` for a relative base
+  - **`base` is `./`** — a relative base, so the same build works both at a custom-domain root (`guycatz.com/`) and under project pages (`xarlos89.github.io/guy-catz-dot-com/`). This is why the `@font-face` `url()`s are `../fonts/…` (the CSS lands in `/assets/`) and the `index.html` preloads are `./fonts/…`. **Absolute `/…` asset paths silently 404 under the sub-path** — keep new references relative. The photography did exactly this and 404'd on the `github.io` URL; everything in `public/` now goes through `asset()` / `responsivePhoto()` in `src/images.js`, which emit `./images/…`. Note `import.meta.env.BASE_URL` is **not** the fix — Vite resolves it to `/` for a relative base
   - `configure-pages` runs with `enablement: true`, so the first successful run switches Pages on itself. If it lacks permission, enable it by hand: Settings → Pages → Source → GitHub Actions
-  - No `public/CNAME` yet — add one containing `guy-catz.com` once DNS points at Pages (adding it before then breaks the default `*.github.io` URL)
-- **Self-hosted**: see `Caddyfile` — drop `dist/` at `/var/www/guy-catz/`, Caddy handles HTTPS
+  - `public/CNAME` contains `guycatz.com` and is what tells Pages to serve the
+    custom domain. **DNS has to be in place for it to resolve** — see below
+- **Self-hosted**: see `Caddyfile` — drop `dist/` at `/var/www/guycatz/`, Caddy handles HTTPS
+
+### The domain
+
+`guycatz.com` — the apex, with no `www`. That is the canonical everywhere:
+`index.html` (the `<link rel="canonical">`, `og:url`, every `@id` in the
+JSON-LD), `public/sitemap.xml`, `public/robots.txt`, `public/404.html` and the
+`Caddyfile`. **If it ever changes, all six change together** — the JSON-LD
+`@id`s are the easy ones to miss, and a canonical pointing at a domain that
+does not resolve de-indexes the site.
+
+Apex over `www` because that is what the practice bought and what a patient
+will type. GitHub Pages redirects `www` to the apex on its own once the `www`
+record exists, so adding it costs nothing and catches people who type it.
+
+**DNS records** (verified against what `xarlos89.github.io` resolves to):
+
+| Type | Host | Value |
+|---|---|---|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| AAAA | `@` | `2606:50c0:8000::153` |
+| AAAA | `@` | `2606:50c0:8001::153` |
+| AAAA | `@` | `2606:50c0:8002::153` |
+| AAAA | `@` | `2606:50c0:8003::153` |
+| CNAME | `www` | `xarlos89.github.io.` |
+
+Then Settings → Pages → Custom domain → `guycatz.com`, and tick **Enforce
+HTTPS** once the certificate is issued (it can take an hour, and the tickbox is
+greyed out until then).
+
+**Order matters.** `public/CNAME` now ships, so from the next deploy Pages
+serves the site as `guycatz.com` and **redirects `xarlos89.github.io/guy-catz-dot-com/`
+to it**. Until the DNS records above resolve, that redirect leads nowhere and
+the site is unreachable at both URLs. Point the DNS first, or accept a gap.
+Deleting `public/CNAME` reverts to the `github.io` URL if you need it back.
+
+`base` is still `./`, so the build works at either URL and nothing about the
+relative-asset rule changes.
+
+## SEO
+
+The page is prerendered by `vite-react-ssg`, so everything below is in the HTML
+a crawler receives — there is no client-side rendering to wait for. Check that
+first if a change ever seems invisible to a validator: view source, not devtools.
+
+### What the `<head>` carries
+
+- **`<title>`** — `Physical Therapy in Los Angeles | Healing Path Rehabilitation`,
+  61 characters. Service and city first because the practice has no brand
+  recognition to trade on yet; the doctor's name is not in the title and does
+  not need to be — it is the `<h1>` block, the `og:title`, the `author` meta and
+  the `Person` node, which is what a branded search and a knowledge panel read.
+  **Keep it under ~60 characters** or Google truncates the practice name off the end
+- **`<meta name="description">`** — 140 characters, ending on the phone number.
+  Google shows roughly 155; anything longer is cut mid-sentence. This is not a
+  ranking factor, it is the click-through pitch, so it gets the same voice rules
+  as the rest of the page — plain, no catch lines
+- **Canonical, Open Graph and Twitter** — all absolute to `https://guycatz.com/`.
+  Absolute is correct here and is *not* a violation of the relative-asset rule:
+  that rule is about files the browser fetches, and these are identity claims a
+  crawler resolves against the canonical host
+- **Icons and manifest** — see the layout above
+
+### Structured data
+
+One `@graph` in `index.html` with seven linked nodes: `WebSite` → `WebPage`
+(also a `MedicalWebPage`) → `ImageObject`, and the `PhysicalTherapy` /
+`LocalBusiness` practice with its `Person`, `Service` and `FAQPage`. They refer
+to each other by `@id`, so a parser reads them as one description of one
+business rather than seven unrelated blobs.
+
+**Everything in it is on the page and confirmed.** Four things are deliberately
+absent, and each is a trap rather than an oversight:
+
+- **`aggregateRating` / `Review`** — the testimonials are real, but reviews a
+  business publishes about itself are "self-serving" under Google's
+  review-snippet policy: ignored at best, a manual action at worst. Patient
+  reviews earn stars from the Google Business Profile, not from here
+- **`geo`** — nobody has verified coordinates for the office, and a wrong pin is
+  worse than none. The Business Profile sets the real one
+- **`paymentAccepted`** — unconfirmed, and the same invented-billing-detail
+  problem that removed the superbill/HSA wording
+- **`sameAs`** — no social accounts exist yet. **The moment the business
+  Instagram and LinkedIn land, put them in `siteInfo.js` *and* add a `sameAs`
+  array to the `#practice` node.** It is the strongest entity signal still
+  missing
+
+Keep in sync, or the markup starts lying: contact details with `siteInfo.js`,
+the three `Offer` prices with the `rates` array in `Rates.jsx`, the questions
+with the `faqs` array in `FAQ.jsx`, and the hours with
+`openingHoursSpecification`. After editing, paste the page source into the
+Rich Results Test and Schema.org's validator — both, they catch different things.
+
+### The 404 page
+
+`public/404.html` is what GitHub Pages serves for an unknown path. It is
+deliberately **self-contained** — its own inline styles, every URL absolute to
+`guycatz.com` — because Pages serves it at whatever depth was requested
+(`/a/b/c`), where a relative path would resolve somewhere that does not exist.
+It is `noindex, follow`, and it **does not redirect**: a redirect to the home
+page turns a 404 into a soft 404, which is worse than the 404 was. It borrows
+the palette but not the build, so a token change here will not reach it.
+
+### Not code, and worth more than any of the above
+
+**A Google Business Profile is the single biggest lever for a local practice**
+and none of this substitutes for it. Verify the office address, set the service
+area, choose "Physical therapist" as the primary category, load the same
+photography, and point the website field at `https://guycatz.com/`. Patient
+reviews there are what produce stars in local results. After launch, add the
+property in Search Console (the DNS-record method verifies the whole domain at
+once) and submit `https://guycatz.com/sitemap.xml`.
+
+`sitemap.xml` lists one URL because the site is one page — the anchors are
+fragments of it, not separate URLs, and listing them would be spam. Its
+`lastmod` is hand-maintained: update it when the copy meaningfully changes,
+not on every deploy.
 
 ## What's placeholder / not yet real
 

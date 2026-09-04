@@ -4,55 +4,111 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary meta -->
-    <title>Healing Path Rehabilitation — Guy H. Catz, PT, DPT | Los Angeles</title>
-    <meta name="description" content="Healing Path Rehabilitation — one-on-one physical therapy with Guy H. Catz, PT, DPT. At your home, at the West Los Angeles office, or by telehealth. Orthopedic, neurological, vestibular, cardiac and degenerative conditions." />
-    <link rel="canonical" href="https://guy-catz.com/" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <!-- Primary meta.
+         The title leads on what someone actually searches for — the service
+         and the city — and closes on the practice name; the doctor's name is
+         carried by the H1 block, the og:title and the Person below, which is
+         what a branded search and a knowledge panel read. The description is
+         kept under ~155 characters so Google shows all of it, and ends on the
+         phone number because that is the action most visitors want. -->
+    <title>Physical Therapy in Los Angeles | Healing Path Rehabilitation</title>
+    <meta name="description" content="One-on-one physical therapy with Guy H. Catz, PT, DPT — at your home, at the West Los Angeles office, or by telehealth. Call (323) 380-2039." />
+    <link rel="canonical" href="https://guycatz.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="Guy H. Catz, PT, DPT" />
     <meta name="theme-color" content="#3C4F49" />
 
-    <!-- Icons -->
+    <!-- Icons — favicon.svg is the master; the PNGs are derived from it by
+         scripts/build-icons.py, for iOS and for crawlers that will not
+         rasterise an SVG. -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./site.webmanifest" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Healing Path Rehabilitation" />
     <meta property="og:title" content="Healing Path Rehabilitation — Guy H. Catz, PT, DPT" />
     <meta property="og:description" content="Recovery is more than healing an injury. One-on-one physical therapy at your home, at the West Los Angeles office, or by telehealth." />
-    <meta property="og:url" content="https://guy-catz.com/" />
+    <meta property="og:url" content="https://guycatz.com/" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://guycatz.com/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Guy H. Catz, PT, DPT, working with a patient at the West Los Angeles office" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Healing Path Rehabilitation — Guy H. Catz, PT, DPT" />
     <meta name="twitter:description" content="Recovery is more than healing an injury. One-on-one physical therapy at your home, at the West Los Angeles office, or by telehealth." />
-
-    <meta property="og:image" content="https://guy-catz.com/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Guy H. Catz, PT, DPT, working with a patient at the West Los Angeles office" />
-    <meta name="twitter:image" content="https://guy-catz.com/og-image.jpg" />
+    <meta name="twitter:image" content="https://guycatz.com/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Guy H. Catz, PT, DPT, working with a patient at the West Los Angeles office" />
 
     <!-- Fonts — self-hosted, see public/fonts/ and the @font-face block in src/index.css -->
     <link rel="preload" as="font" type="font/woff2" href="./fonts/fraunces-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="./fonts/dmsans-latin.woff2" crossorigin />
 
-    <!-- Structured data — contact details are real. Keep in sync with src/siteInfo.js -->
+    <!-- Structured data. Every fact here is on the page and confirmed by the
+         practice — keep it in sync with src/siteInfo.js, src/sections/Rates.jsx
+         and src/sections/FAQ.jsx.
+
+         Deliberately absent: aggregateRating and Review. The testimonials are
+         real, but reviews a business publishes about itself are "self-serving"
+         under Google's review-snippet policy and are ignored at best, a
+         manual action at worst — patient reviews belong on the Google
+         Business Profile. Also absent: geo coordinates, payment methods and
+         sameAs, none of which are confirmed yet. See CLAUDE.md → SEO. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": ["PhysicalTherapy", "LocalBusiness"],
-          "@id": "https://guy-catz.com/#practice",
+          "@type": "WebSite",
+          "@id": "https://guycatz.com/#website",
+          "url": "https://guycatz.com/",
           "name": "Healing Path Rehabilitation",
-          "url": "https://guy-catz.com/",
-          "logo": "https://guy-catz.com/images/healing-path-logo-1200.webp",
+          "description": "One-on-one physical therapy with Guy H. Catz, PT, DPT, in Los Angeles.",
+          "publisher": { "@id": "https://guycatz.com/#practice" },
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": ["WebPage", "MedicalWebPage"],
+          "@id": "https://guycatz.com/#webpage",
+          "url": "https://guycatz.com/",
+          "name": "Physical Therapy in Los Angeles | Healing Path Rehabilitation",
+          "description": "One-on-one physical therapy with Guy H. Catz, PT, DPT — at your home, at the West Los Angeles office, or by telehealth.",
+          "isPartOf": { "@id": "https://guycatz.com/#website" },
+          "about": { "@id": "https://guycatz.com/#practice" },
+          "primaryImageOfPage": { "@id": "https://guycatz.com/#primaryimage" },
+          "specialty": "https://schema.org/PhysicalTherapy",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "ImageObject",
+          "@id": "https://guycatz.com/#primaryimage",
+          "url": "https://guycatz.com/og-image.jpg",
+          "contentUrl": "https://guycatz.com/og-image.jpg",
+          "width": 1200,
+          "height": 630,
+          "caption": "Guy H. Catz, PT, DPT, working with a patient at the West Los Angeles office"
+        },
+        {
+          "@type": ["PhysicalTherapy", "LocalBusiness"],
+          "@id": "https://guycatz.com/#practice",
+          "name": "Healing Path Rehabilitation",
+          "url": "https://guycatz.com/",
+          "mainEntityOfPage": { "@id": "https://guycatz.com/#webpage" },
+          "logo": "https://guycatz.com/images/healing-path-logo-1200.webp",
+          "image": { "@id": "https://guycatz.com/#primaryimage" },
+          "slogan": "Restore movement. Restore life.",
           "description": "One-on-one physical therapy with Guy H. Catz, PT, DPT — at your home, at the West Los Angeles office, or via telehealth. Personalized, evidence-based care for adults with orthopedic, neurological, vestibular, cardiac and degenerative conditions.",
+          "medicalSpecialty": "https://schema.org/PhysicalTherapy",
           "telephone": "+13233802039",
           "email": "GuyHCatz@gmail.com",
           "priceRange": "$$",
+          "currenciesAccepted": "USD",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "11040 Santa Monica Blvd, #480",
@@ -61,6 +117,7 @@
             "postalCode": "90025",
             "addressCountry": "US"
           },
+          "hasMap": "https://maps.google.com/maps?q=11040+Santa+Monica+Blvd,+Los+Angeles,+CA+90025",
           "areaServed": ["West Los Angeles", "Los Angeles, California", "California"],
           "availableService": [
             { "@type": "MedicalTherapy", "name": "In-home physical therapy" },
@@ -75,17 +132,18 @@
               "closes": "18:00"
             }
           ],
-          "founder": { "@id": "https://guy-catz.com/#guy" },
-          "employee": { "@id": "https://guy-catz.com/#guy" }
+          "makesOffer": { "@id": "https://guycatz.com/#session" },
+          "founder": { "@id": "https://guycatz.com/#guy" },
+          "employee": { "@id": "https://guycatz.com/#guy" }
         },
         {
           "@type": "Person",
-          "@id": "https://guy-catz.com/#guy",
+          "@id": "https://guycatz.com/#guy",
           "name": "Guy H. Catz",
           "honorificSuffix": "PT, DPT",
-          "image": "https://guy-catz.com/images/dr-guy-catz-headshot-1200.webp",
+          "image": "https://guycatz.com/images/dr-guy-catz-headshot-1200.webp",
           "jobTitle": "Doctor of Physical Therapy",
-          "worksFor": { "@id": "https://guy-catz.com/#practice" },
+          "worksFor": { "@id": "https://guycatz.com/#practice" },
           "alumniOf": [
             { "@type": "CollegeOrUniversity", "name": "California State University, Northridge" },
             { "@type": "CollegeOrUniversity", "name": "Russell Sage College" }
@@ -101,23 +159,44 @@
         },
         {
           "@type": "Service",
-          "@id": "https://guy-catz.com/#session",
+          "@id": "https://guycatz.com/#session",
           "name": "One-on-One Physical Therapy",
           "serviceType": "Physical therapy",
           "description": "A private one-on-one physical therapy session combining assessment, manual therapy, progressive loading and a personalized plan of care. Available in-home, at the West Los Angeles office, or by telehealth.",
-          "provider": { "@id": "https://guy-catz.com/#practice" },
+          "provider": { "@id": "https://guycatz.com/#practice" },
           "areaServed": "California",
-          "offers": {
-            "@type": "Offer",
-            "price": "200",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock",
-            "url": "https://guy-catz.com/#book"
-          }
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Initial evaluation",
+              "price": "250",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://guycatz.com/#rates"
+            },
+            {
+              "@type": "Offer",
+              "name": "Treatment session",
+              "price": "200",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://guycatz.com/#rates"
+            },
+            {
+              "@type": "Offer",
+              "name": "Telehealth session",
+              "price": "150",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://guycatz.com/#rates"
+            }
+          ]
         },
         {
           "@type": "FAQPage",
-          "@id": "https://guy-catz.com/#faq",
+          "@id": "https://guycatz.com/#faq",
+          "inLanguage": "en-US",
+          "about": { "@id": "https://guycatz.com/#practice" },
           "mainEntity": [
             {
               "@type": "Question",
