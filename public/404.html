@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — Healing Path Rehabilitation</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#3C4F49" />
+    <link rel="icon" type="image/svg+xml" href="https://guycatz.com/favicon.svg" />
+
+    <!--
+      GitHub Pages serves this for any unknown path, so it can be requested at
+      any depth (/a/b/c). Relative asset paths would break there — every URL
+      here is absolute to the canonical domain, and the page carries its own
+      styles so it needs nothing else to render. It keeps the 404 status rather
+      than redirecting: a redirect to the home page reads as a soft 404.
+    -->
+    <style>
+      @font-face {
+        font-family: 'Fraunces404';
+        src: url('https://guycatz.com/fonts/fraunces-latin.woff2') format('woff2');
+        font-weight: 100 900;
+        font-display: swap;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+        background: #3C4F49;
+        color: #E1E8EA;
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      main { max-width: 34rem; }
+      h1 {
+        font-family: 'Fraunces404', ui-serif, Georgia, serif;
+        font-weight: 400;
+        font-size: clamp(1.6rem, 5vw, 2.4rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        margin: 0 0 1.25rem;
+      }
+      p {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        color: rgba(225, 232, 234, 0.8);
+        margin: 0 0 2rem;
+      }
+      .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.875rem 1.75rem;
+        border-radius: 999px;
+        font-size: 0.9375rem;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .primary { background: #E1E8EA; color: #3C4F49; }
+      .primary:hover { background: #C4D0D5; }
+      .ghost { border: 1px solid rgba(225, 232, 234, 0.45); color: #E1E8EA; }
+      .ghost:hover { border-color: #E1E8EA; }
+      @media (prefers-reduced-motion: reduce) { a { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>That page isn&rsquo;t here</h1>
+      <p>
+        The link may be out of date. Everything about the practice &mdash; the
+        approach, services, rates and how to book &mdash; is on the home page.
+      </p>
+      <div class="actions">
+        <a class="primary" href="https://guycatz.com/">Go to the home page</a>
+        <a class="ghost" href="tel:+13233802039">Call (323) 380-2039</a>
+      </div>
+    </main>
+  </body>
+</html>
