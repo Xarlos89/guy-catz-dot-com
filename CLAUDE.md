@@ -78,6 +78,7 @@ brand/
 scripts/
   build-logo-mark.py      derives everything the site ships from that master
   build-icons.py          rasterises favicon.svg into the PNG icon set
+  trim-fonts.py           cuts the font files down to the axes actually used
 .github/
   workflows/
     deploy.yml       push to main → npm ci → npm run build → GitHub Pages
@@ -379,6 +380,30 @@ these blues reads as dirt.
 
 Both are **self-hosted** from `public/fonts/` (latin subset, variable woff2) with `@font-face` at the top of `src/index.css`, and the two upright faces are preloaded in `index.html`. No Google Fonts request at runtime. To add a subset or axis, refetch from the Google Fonts CSS API and drop the woff2 alongside the others.
 
+**The shipped font files have had their axes trimmed** by
+`scripts/trim-fonts.py`: Google ships Fraunces and DM Sans with `wght 100..900`
+and, on Fraunces, `opsz 9..144`, and this page uses none of that range. They are
+cut to `wght 300..500` and `opsz 9..40`, which took the three files from 326 KB
+to 234 KB — fonts were half the page's bytes.
+
+Two consequences, and they are load-bearing:
+
+- **Do not reach for a weight outside 300–500.** No `font-bold`, no
+  `font-light`; the browser will clamp to the range rather than honour it, so
+  the failure is silent and looks like the utility class did nothing. The
+  design only ever used `font-normal` and `font-medium`, which is what made the
+  trim safe
+- **`opsz` above 40 is gone too.** Every serif element sets `opsz` explicitly
+  (the `.font-serif` rule, then 24/26/30 on the heading classes), which is why
+  automatic optical sizing never floats past the ceiling. Keep it that way, or
+  widen the limit in the script first
+
+**Replacing a font file re-inflates it** — a fresh Google Fonts download carries
+the full designspace — so re-run the script after any refetch. It is not
+byte-identical to the untrimmed rendering: instancing recomputes deltas, which
+moved 0.25% of pixels (antialiasing) and the navbar wordmark by 1px of advance
+width. Nothing rewraps. If you change the limits, redo that diff.
+
 ## Reusable CSS classes (src/index.css)
 
 - `.label` / `.label-light` — spaced-caps section label (terracotta on light, ochre on fern)
@@ -570,11 +595,21 @@ absent, and each is a trap rather than an oversight:
   array to the `#practice` node.** It is the strongest entity signal still
   missing
 
+`availableService` carries the three care settings **and the eight specialties
+from the `experience` array in `Services.jsx`** — Neurological, Orthopedic,
+Cardiopulmonary, Geriatric, Sports, Vestibular, Oncological and Complex
+medical, written out in full ("Vestibular rehabilitation" rather than the
+one-word label the page prints). Those are the long-tail local queries a new
+practice can realistically win — "vestibular rehab west los angeles" is winnable
+in a way that "physical therapy los angeles" is not — so if he adds or drops a
+specialty on the page, change it here in the same commit.
+
 Keep in sync, or the markup starts lying: contact details with `siteInfo.js`,
 the three `Offer` prices with the `rates` array in `Rates.jsx`, the questions
-with the `faqs` array in `FAQ.jsx`, and the hours with
-`openingHoursSpecification`. After editing, paste the page source into the
-Rich Results Test and Schema.org's validator — both, they catch different things.
+with the `faqs` array in `FAQ.jsx`, the specialties with `experience` in
+`Services.jsx`, and the hours with `openingHoursSpecification`. After editing,
+paste the page source into the Rich Results Test and Schema.org's validator —
+both, they catch different things.
 
 ### The 404 page
 
