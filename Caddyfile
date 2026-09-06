@@ -1,10 +1,24 @@
-guy-catz.com {
-	root * /var/www/guy-catz
+# The apex is canonical; www redirects to it, matching what GitHub Pages does.
+www.guycatz.com {
+	redir https://guycatz.com{uri} permanent
+}
+
+guycatz.com {
+	root * /var/www/guycatz
 	encode gzip
 
-	try_files {path} /index.html
-
 	file_server
+
+	# A single-page site: there are no client-side routes to rewrite, so an
+	# unknown path is genuinely missing and gets the 404 page with a 404
+	# status. Rewriting it to index.html would serve the home page at every
+	# URL that ever existed, which is a soft 404 on each one.
+	handle_errors {
+		rewrite * /{err.status_code}.html
+		file_server {
+			status {err.status_code}
+		}
+	}
 
 	@assets {
 		path /assets/*

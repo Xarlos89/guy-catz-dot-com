@@ -57,8 +57,19 @@ export default function Hero() {
           <div className="lg:col-span-2 lg:row-start-1 max-w-3xl">
             {/* The practice name leads the page now — it used to be the
                 small spaced-caps label above a very large headline, and the
-                client asked for that order of size reversed. */}
-            <p className="font-serif font-normal text-balance mb-5 sm:mb-7">
+                client asked for that order of size reversed.
+
+                It is the `h1` for the same reason it is the largest thing on
+                the page: it names what this page is about. The tagline below
+                is a `p`. That swap is purely semantic — the classes and the
+                inline `fontSize` are unchanged and nothing moved by a pixel —
+                but it puts the practice name and the doctor's credentials in
+                the one heading search engines weight most, and it stops a
+                screen reader jumping past the biggest text on the page to
+                land on a tagline. Don't put the heading back on the tagline
+                to "fix" the visual order; the order is already what he
+                asked for. */}
+            <h1 className="font-serif font-normal text-balance mb-5 sm:mb-7">
               {/* Two lines at every width — the name never fits beside the
                   doctor's line at this size, and a wrapped separator looked
                   broken */}
@@ -80,9 +91,10 @@ export default function Hero() {
               >
                 Dr. {site.doctor}, {site.credentials}
               </span>
-            </p>
+            </h1>
 
-            <h1
+            {/* Was the `h1`; see the note above. Styling is untouched. */}
+            <p
               className="font-serif font-normal text-cream text-balance leading-[1.12] sm:leading-[1.06] tracking-[-0.02em] mb-6 sm:mb-8"
               style={{
                 fontSize: 'clamp(1.45rem, 4.6vw, 2.3rem)',
@@ -93,7 +105,7 @@ export default function Hero() {
               Recovery is <em className="text-ochre">more</em> than{' '}
               <br className="hidden sm:block" />
               healing an injury
-            </h1>
+            </p>
           </div>
 
           <div className="lg:col-start-1 lg:row-start-2 max-w-xl">
