@@ -595,14 +595,23 @@ absent, and each is a trap rather than an oversight:
   array to the `#practice` node.** It is the strongest entity signal still
   missing
 
-`availableService` carries the three care settings **and the eight specialties
-from the `experience` array in `Services.jsx`** — Neurological, Orthopedic,
-Cardiopulmonary, Geriatric, Sports, Vestibular, Oncological and Complex
-medical, written out in full ("Vestibular rehabilitation" rather than the
-one-word label the page prints). Those are the long-tail local queries a new
+`availableService` carries three things, all of them printed on the page: the
+three care settings, **the eight specialties from the `experience` array in
+`Services.jsx`** — Neurological, Orthopedic, Cardiopulmonary, Geriatric,
+Sports, Vestibular, Oncological and Complex medical, written out in full
+("Vestibular rehabilitation" rather than the one-word label the page prints) —
+and eight treatments drawn from the `provided` array in the same file
+(post-operative, post-hospitalization, manual therapy, neuromuscular
+reeducation, balance training, return-to-sport, assistive device training and
+home exercise programming). Those are the long-tail local queries a new
 practice can realistically win — "vestibular rehab west los angeles" is winnable
 in a way that "physical therapy los angeles" is not — so if he adds or drops a
-specialty on the page, change it here in the same commit.
+specialty or a treatment on the page, change it here in the same commit.
+
+Everything in that list is a phrase the page already prints. It is not a place
+to park keywords the site does not otherwise support: `provided` has nineteen
+entries and only the eight that name a recognisable service are here, because
+"Strengthening" and "Conditioning" are not things anyone searches for by name.
 
 Keep in sync, or the markup starts lying: contact details with `siteInfo.js`,
 the three `Offer` prices with the `rates` array in `Rates.jsx`, the questions
@@ -645,6 +654,21 @@ That is close to the ceiling for one page. Adding more is keyword stuffing,
 which is both a ranking risk and a direct breach of the voice rules above —
 **do not** repeat "Los Angeles" into headings that do not need it, and do not
 invent service copy to host a phrase.
+
+**The Business Profile is where the specialty pages live until they exist.**
+Its Services section takes a custom entry per specialty with a description
+each, which is the same six-way split the client's map asks for, at two or
+three sentences apiece instead of the 300-plus words a real page needs. Build
+that before building routes.
+
+Three things in this file are blocked on the Business Profile existing, and all
+three unblock the moment it does: `geo` (verification confirms the
+coordinates), `sameAs` (the listing is the practice's canonical identity
+elsewhere on the web, and `hasMap` should point at the real place URL rather
+than a maps query on the address string), and `areaServed`, which should mirror
+whatever service area he sets there rather than being guessed at. The mileage
+radius the Rates travel row leaves open is the same unanswered question — the
+Business Profile forces an answer to it.
 
 The two things that would actually move the specialty terms are outside this
 file: a **Google Business Profile** (below), and, if the practice wants the
