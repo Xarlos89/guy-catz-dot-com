@@ -12,7 +12,7 @@
          kept under ~155 characters so Google shows all of it, and ends on the
          phone number because that is the action most visitors want. -->
     <title>Physical Therapy in Los Angeles | Healing Path Rehabilitation</title>
-    <meta name="description" content="One-on-one physical therapy with Guy H. Catz, PT, DPT — at your home, at the West Los Angeles office, or by telehealth. Call (323) 380-2039." />
+    <meta name="description" content="In-home physical therapy in Los Angeles with Guy H. Catz, PT, DPT — one-on-one at your home, at the West LA office, or by telehealth. Call (323) 380-2039." />
     <link rel="canonical" href="https://guycatz.com/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="Guy H. Catz, PT, DPT" />
@@ -59,7 +59,13 @@
          under Google's review-snippet policy and are ignored at best, a
          manual action at worst — patient reviews belong on the Google
          Business Profile. Also absent: geo coordinates, payment methods and
-         sameAs, none of which are confirmed yet. See CLAUDE.md → SEO. -->
+         sameAs, none of which are confirmed yet. See CLAUDE.md → SEO.
+
+         `openingHoursSpecification` carries `site.officeHours`, not
+         `site.hours` — this node has a postal address, so its hours are the
+         hours of the place at that address. The practice's wider general
+         availability is on the page, not in here, because a schema "open"
+         window that sends someone to a locked door is worse than none. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -135,9 +141,9 @@
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              "dayOfWeek": ["Tuesday", "Wednesday", "Sunday"],
               "opens": "08:00",
-              "closes": "18:00"
+              "closes": "11:00"
             }
           ],
           "makesOffer": { "@id": "https://guycatz.com/#session" },
@@ -177,7 +183,9 @@
             "Vestibular rehabilitation",
             "Cardiopulmonary rehabilitation",
             "Geriatric physical therapy",
+            "Sports physical therapy",
             "Oncological rehabilitation",
+            "Post-operative rehabilitation",
             "Manual therapy",
             "Strength and conditioning"
           ]
@@ -229,6 +237,14 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "At your home, at the West Los Angeles office, or by telehealth."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When is the West Los Angeles office open?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Tuesday, Wednesday and Sunday, 8 – 11am. Monday hours vary, so please call to check. If none of those times work, the session can take place at your home or by telehealth instead."
               }
             },
             {

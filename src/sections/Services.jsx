@@ -97,7 +97,14 @@ export default function Services() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <Reveal>
           <div className="max-w-2xl mb-14">
-            <h2 className="section-heading-light mb-8">Services</h2>
+            {/* The heading-pair pattern the rest of the page uses: the
+                section's name, then the plain phrase under it. It is also the
+                one place the primary search phrase sits in a heading rather
+                than in running copy — true as written, so it costs nothing. */}
+            <h2 className="section-heading-light mb-3">Services</h2>
+            <p className="section-sub-light mb-8">
+              Physical therapy in Los Angeles
+            </p>
             {/* The client's own paragraph, verbatim — do not split it. */}
             <p className="lede-light">
               I provide a holistic, patient-centered approach to ensure peak

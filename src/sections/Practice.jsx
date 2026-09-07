@@ -1,11 +1,15 @@
 import Reveal from '../components/Reveal'
 import { site } from '../siteInfo'
 
+// `subs` is a list because Hours carries two facts and the others carry one:
+// the practice's general availability, and the narrower window the office
+// itself keeps. See the note in siteInfo.js — they are not the same thing and
+// collapsing them into one line loses whichever half the reader needed.
 const infoCards = [
-  { label: 'Care', value: 'One-on-one', sub: 'you have my full attention' },
-  { label: 'Where', value: 'Home · Office · Telehealth', sub: `office in ${site.neighborhood}` },
-  { label: 'Hours', value: site.hours, sub: site.hoursNote },
-  { label: 'Payment', value: 'Without insurance', sub: 'paid at the time of the visit' },
+  { label: 'Care', value: 'One-on-one', subs: ['you have my full attention'] },
+  { label: 'Where', value: 'Home · Office · Telehealth', subs: [`office in ${site.neighborhood}`] },
+  { label: 'Hours', value: site.hours, subs: [site.hoursNote, `office · ${site.officeHours}`] },
+  { label: 'Payment', value: 'Without insurance', subs: ['paid at the time of the visit'] },
 ]
 
 // Stacked rows with a hairline above on a phone; columns divided by a hairline
@@ -36,12 +40,14 @@ export default function Practice() {
         {/* Quiet fact row — hairlines instead of boxes */}
         <Reveal>
           <div className="grid gap-y-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-0">
-            {infoCards.map(({ label, value, sub }, i) => (
+            {infoCards.map(({ label, value, subs }, i) => (
               <div key={label} className={factClasses(i)}>
                 <p className="label mb-3">{label}</p>
                 {/* min-height so the sub-lines keep one baseline across the row */}
                 <p className="font-serif text-xl lg:text-[19px] text-ink leading-snug lg:min-h-[3.4rem]">{value}</p>
-                {sub && <p className="font-sans text-[13px] text-ink-soft mt-1.5 leading-relaxed">{sub}</p>}
+                {subs.map((sub) => (
+                  <p key={sub} className="font-sans text-[13px] text-ink-soft mt-1.5 leading-relaxed">{sub}</p>
+                ))}
               </div>
             ))}
           </div>

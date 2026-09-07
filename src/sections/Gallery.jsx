@@ -37,7 +37,8 @@ export default function Gallery() {
             <h2 className="section-heading mb-3">The Practice</h2>
             <p className="section-sub mb-6">Where the work happens</p>
             <p className="lede">
-              A clinic in {site.neighborhood}, at your home, or via telehealth.
+              One-on-one physical therapy in {site.neighborhood}, at your
+              home, or via telehealth.
             </p>
           </div>
         </Reveal>

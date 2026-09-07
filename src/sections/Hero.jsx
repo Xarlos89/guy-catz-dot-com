@@ -82,14 +82,32 @@ export default function Hero() {
               >
                 {site.practice}
               </span>
+              {/* His own wording, and the one line on the page that says
+                  plainly what this is and where. It used to read just
+                  "Dr. Guy H. Catz, PT, DPT" — a name, to a stranger who has
+                  not heard it. Leading on the service and the city is what he
+                  asked for, and it happens to put the phrase people actually
+                  search into the `h1`.
+
+                  It wraps at every width below `lg`, which is why the
+                  separator is its own element and the name is held together
+                  with `whitespace-nowrap` — a line that broke after "Dr."
+                  or between "PT," and "DPT" looked like a mistake. The pipe
+                  is dimmed and `aria-hidden`, so a screen reader reads the
+                  two halves as one phrase rather than announcing "vertical
+                  line". */}
               <span
-                className="block text-ochre leading-[1.3] mt-1.5"
+                className="block text-ochre leading-[1.35] mt-2"
                 style={{
                   fontSize: 'clamp(1.05rem, 3vw, 1.5rem)',
                   fontVariationSettings: "'SOFT' 100, 'WONK' 0, 'opsz' 26",
                 }}
               >
-                Dr. {site.doctor}, {site.credentials}
+                Physical Therapist in Los Angeles, CA{' '}
+                <span aria-hidden="true" className="text-ochre/45">|</span>{' '}
+                <span className="whitespace-nowrap">
+                  Dr. {site.doctorShort}, {site.credentials}
+                </span>
               </span>
             </h1>
 
@@ -112,7 +130,7 @@ export default function Hero() {
             <p className="font-sans text-[17px] sm:text-xl text-cream/80 leading-[1.75] mb-9 sm:mb-10">
               It's about restoring peace to mind and body — improving strength,
               confidence and quality of life. Compassionate care, a holistic
-              approach, and one-on-one physical therapy with Dr. Guy Catz.
+              approach, and one-on-one physical therapy with Dr. {site.doctorShort}.
             </p>
 
             {/* Stacked and full-width on a phone, side by side from sm up */}

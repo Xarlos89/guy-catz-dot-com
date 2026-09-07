@@ -34,6 +34,9 @@ export default function BookingCTA() {
               </a>
             </div>
 
+            {/* Three facts, not two: the office keeps a narrower window than
+                the practice does, and this is the block someone reads just
+                before they get in the car. See the note in siteInfo.js. */}
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <dt className="label mb-2.5">Office</dt>
@@ -45,6 +48,13 @@ export default function BookingCTA() {
                 <dt className="label mb-2.5">Hours</dt>
                 <dd className="font-sans font-medium text-[15px] text-ink leading-relaxed">
                   {site.hours}<br />{site.hoursNote}
+                </dd>
+              </div>
+              <div>
+                <dt className="label mb-2.5">Office hours</dt>
+                <dd className="font-sans font-medium text-[15px] text-ink leading-relaxed">
+                  {site.officeHours}<br />
+                  <span className="font-normal text-ink-soft">{site.officeHoursNote}</span>
                 </dd>
               </div>
             </dl>

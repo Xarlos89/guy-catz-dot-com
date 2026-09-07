@@ -7,6 +7,13 @@ const faqs = [
     a: 'At your home, at the West Los Angeles office, or by telehealth.',
   },
   {
+    // Confirmed by the practice — most of the rest of this list is still
+    // written-from-his-copy and awaiting sign-off, but the hours are his.
+    // Mirrored in the FAQPage JSON-LD in index.html; change both.
+    q: 'When is the West Los Angeles office open?',
+    a: 'Tuesday, Wednesday and Sunday, 8 – 11am. Monday hours vary, so please call to check. If none of those times work, the session can take place at your home or by telehealth instead.',
+  },
+  {
     q: 'Do you take insurance?',
     a: 'We currently do not accept insurance, and payment is due at the time of the visit. This ensures significantly less wait time for appointments, and you will receive direct one-on-one care guided by your goals rather than what your plan covers.',
   },

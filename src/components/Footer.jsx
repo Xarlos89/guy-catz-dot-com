@@ -50,6 +50,12 @@ export default function Footer() {
               {site.address}<br />
               {site.addressCity}
             </li>
+            {/* The office window, not the practice's general hours — someone
+                reading the address here is the person who needs it. */}
+            <li className="pt-2 leading-[1.8] text-cream/75">
+              Office hours · {site.officeHours}<br />
+              {site.officeHoursNote}
+            </li>
           </ul>
         </div>
       </div>

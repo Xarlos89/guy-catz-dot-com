@@ -621,6 +621,40 @@ It is `noindex, follow`, and it **does not redirect**: a redirect to the home
 page turns a 404 into a soft 404, which is worse than the 404 was. It borrows
 the palette but not the build, so a token change here will not reach it.
 
+### The client's keyword list — what was used, and what it can't be
+
+The practice sent fifteen target phrases and a section-by-section keyword map.
+Both are sound; the map, though, is **an architecture for a multi-page site** —
+it assigns one primary keyword to each of seventeen sections, including a page
+per specialty (`orthopedic physical therapy Los Angeles`,
+`vestibular rehabilitation Los Angeles`, and so on). This site is one page at
+one URL. A single page ranks for one cluster of intent, not seventeen, so the
+map cannot be implemented as drawn without building the pages it assumes.
+
+What the single page **can** carry, and now does:
+
+| Phrase | Where it sits |
+|---|---|
+| physical therapist Los Angeles | the `<h1>` — *"Physical Therapist in Los Angeles, CA \| Dr. Guy Catz, PT, DPT"* |
+| physical therapy Los Angeles | the `<title>`, and the Services heading pair |
+| in-home / home physical therapy Los Angeles | the meta description, the hero's settings list, the FAQ |
+| West Los Angeles physical therapy | the Practice lede, the office FAQ, `areaServed` |
+| the eight specialty phrases | the Services list, `availableService`, `knowsAbout` |
+
+That is close to the ceiling for one page. Adding more is keyword stuffing,
+which is both a ranking risk and a direct breach of the voice rules above —
+**do not** repeat "Los Angeles" into headings that do not need it, and do not
+invent service copy to host a phrase.
+
+The two things that would actually move the specialty terms are outside this
+file: a **Google Business Profile** (below), and, if the practice wants the
+per-specialty rankings the map describes, real pages at real URLs
+(`/orthopedic-physical-therapy-los-angeles/` and siblings). That is a router, a
+per-route prerender config, a nav rethink, and — the binding constraint —
+300-plus words of the client's own copy per specialty, which under the
+nothing-invented rule has to come from him. It is a project to agree with him,
+not an edit to make on his behalf.
+
 ### Not code, and worth more than any of the above
 
 **A Google Business Profile is the single biggest lever for a local practice**
@@ -647,13 +681,31 @@ has no other environmental shot of him. The headshot is the `image` on the
 `Person` in the `index.html` JSON-LD, which is what a knowledge panel picks up.
 Both are cropped by `object-cover` into a `4/5` slot, and both survive it.
 
-The hours are the client's too: `Mon – Thu · 8am – 6pm`, with weekend
-availability that varies. `siteInfo.js` and the `openingHoursSpecification` in
-`index.html` both carry them — change one and change the other.
+The hours are the client's too, and they are **two facts, not one**. The
+practice's general availability is `Mon – Thu · 8am – 6pm` with weekend
+availability that varies (`site.hours` / `site.hoursNote`). The West Los
+Angeles **office** keeps a narrower window — `Tue, Wed & Sun · 8 – 11am`, with
+Monday varying (`site.officeHours` / `site.officeHoursNote`) — which he gave as
+*"Currently, the office has limited availability: Monday (variable), Tue, Wed &
+Sun 8-11am."* Both appear on the page: the fact row under the hero carries the
+general hours with the office window beneath, and the office hours get their own
+`<dt>` beside the address in BookingCTA and their own line in the footer, which
+is where someone about to drive to Santa Monica Blvd is reading.
+
+Do not collapse them into one line, and do not infer that the wider window
+belongs to home and telehealth visits — nobody has said that. The general hours
+line stays unscoped, and only the office line is scoped.
+
+The `openingHoursSpecification` in `index.html` carries **`officeHours`**, not
+`hours`: that node has a postal address, so its hours are the hours of the place
+at that address, and a schema "open" window that sends someone to a locked door
+is worse than no window at all. Monday is omitted there because "variable" has
+no schema representation. Change `siteInfo.js` and that block together. The
+hours are also the FAQ's one confirmed answer — see below.
 
 Still invented and needing replacement before launch:
 
-- **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
+- **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed. The exception is *"When is the West Los Angeles office open?"*, which is his own confirmed detail
 - **Social links** — none are rendered. The personal Instagram is deliberately not linked; the practice is setting up a business Instagram and a LinkedIn. Put the URLs in `siteInfo.js` (`instagram`, `linkedin`) and add the links back to the footer
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are
