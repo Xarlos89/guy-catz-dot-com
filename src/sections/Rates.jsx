@@ -45,12 +45,16 @@ export default function Rates() {
             </div>
 
             {/* The client's own wording — say it plainly, and say what it buys
-                the patient. Kept identical to the FAQ answer. */}
+                the patient. Kept identical to the FAQ answer. The superbill
+                sentence is his too, and is now confirmed: it is the one
+                out-of-network billing detail the practice will commit to. */}
             <p className="lede mb-10">
               We currently do not accept insurance, and payment is due at the
               time of the visit. This ensures significantly less wait time for
               appointments, and you will receive direct one-on-one care guided
-              by your goals rather than what your plan covers.
+              by your goals rather than what your plan covers. We can provide
+              superbills that you may submit to your PPO for out-of-network
+              coverage and possible reimbursement.
             </p>
 
             <a href="#book" className="btn-primary w-full sm:w-auto">

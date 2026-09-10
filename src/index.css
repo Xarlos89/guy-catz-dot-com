@@ -99,6 +99,14 @@
     @apply text-cream;
   }
 
+  /* Fraunces' WONK alternate draws "&" as a swash ornament — legible as a
+     flourish, not as a word-join, which is fine in a pull-quote and wrong in
+     a heading a patient is scanning. Headings run WONK 1, so the ampersand
+     in "Cancellation & No-Show Policy" opts out for that one character. */
+  .amp-plain {
+    font-variation-settings: 'SOFT' 100, 'WONK' 0, 'opsz' 30;
+  }
+
   /* The quiet second line under a section heading. The client asked for the
      name of each section to lead — "Testimonials", "The Practice", "Meet Our
      Doctor", "FAQ" — with the descriptive phrase set smaller beneath it, so

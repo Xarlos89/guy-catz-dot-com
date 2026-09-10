@@ -8,6 +8,7 @@ const explore = [
   { label: 'Testimonials', href: '#reviews' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Rates', href: '#rates' },
+  { label: 'Cancellation policy', href: '#cancellation' },
 ]
 
 export default function Footer() {

@@ -56,6 +56,8 @@ src/
     FAQ.jsx          accordion — `faqs` array (uses useState per item)
     Rates.jsx        the price list + the insurance note (#rates), at the foot
                      of the page — reached from the menu as Services → Rates
+    Cancellation.jsx the cancellation & no-show policy (#cancellation),
+                     verbatim client copy, directly after the rates
     BookingCTA.jsx   closing call-to-action + map (#book)
   App.jsx            orders the sections and places the dividers between bands
   main.jsx           ViteReactSSG entry; App adds `.reveal-ready` on mount
@@ -106,13 +108,16 @@ alternating.
 | E | Services | `fern` |
 | F | Gallery | `mist` |
 | G | Reviews | `fern` |
-| H | FAQ, Rates, BookingCTA | `mist` |
+| H | FAQ, Rates, Cancellation, BookingCTA | `mist` |
 | — | Footer | `fern` |
 
-One section per band, apart from the closing three — the colour changes at
+One section per band, apart from the closing four — the colour changes at
 every seam. Rates sits inside that closing band deliberately: the client asked
 for the price list to come only after everything else has been read, and
-`.btn-primary` needs the light ground anyway.
+`.btn-primary` needs the light ground anyway. The cancellation policy follows
+the rates for the same reason it is worded the way it is: its fee is "the full
+session value fee", which only means something once the session values are on
+screen.
 
 **`cream` is never a band background.** It is the surface tone — cards, the
 navbar pill, ghost buttons, light photo placeholders — and nothing else. An
@@ -228,6 +233,9 @@ specifically after an earlier draft split them up:
 > out of paragraphs and put it elsewhere. It takes away from the cohesiveness…
 > I did it with the intention that it would all kind of stay together."*
 
+`Cancellation.jsx` is his writing too — the policy, its headings and its
+closing line came from him whole, so it gets the same treatment.
+
 So: **never** break these paragraphs across cards, pull a sentence out for a
 heading or pull-quote, move one into another section, or lift the closing
 education paragraph into a credentials grid — it belongs at the end of Meet Our
@@ -278,12 +286,15 @@ do not accept insurance"** — and it is set that way in both places it appears,
 followed by the same explanation, verbatim: payment is due at the time of the
 visit, and *"this ensures significantly less wait time for appointments, and
 you will receive direct one-on-one care guided by your goals rather than what
-your plan covers."* Rates.jsx and the FAQ answer carry the identical wording;
-change one and change the other, plus the `FAQPage` JSON-LD in `index.html`.
-"Out-of-network", "private pay", "cash-based" and "superbill" are industry
-terms that a patient reads as a hedge — and the billing specifics behind them
-are unconfirmed anyway. "Does not bill insurance" was the earlier phrasing and
-he replaced it.
+your plan covers."* It now closes on his superbill sentence, also verbatim:
+*"We can provide superbills that you may submit to your PPO for out-of-network
+coverage and possible reimbursement."* Rates.jsx and the FAQ answer carry the
+identical wording; change one and change the other, plus the `FAQPage` JSON-LD
+in `index.html`. That sentence is the **one** billing specific the practice has
+confirmed — he supplied it — so it stays; "private pay" and "cash-based" are
+still industry hedges a patient shouldn't have to decode, and HSA/FSA wording
+remains unconfirmed and off the page. "Does not bill insurance" was the earlier
+phrasing and he replaced it.
 
 Rules of thumb for anything new:
 
@@ -409,6 +420,7 @@ width. Nothing rewraps. If you change the limits, redo that diff.
 - `.label` / `.label-light` — spaced-caps section label (terracotta on light, ochre on fern)
 - `.section-heading` / `.section-heading-light` — Fraunces h2 with the soft/wonk variation settings
 - `.section-sub` / `.section-sub-light` — the quiet second line under a heading (see "Heading pairs" above)
+- `.amp-plain` — switches Fraunces' `WONK` alternate off for a single glyph. Only the ampersand in "Cancellation & No-Show Policy" uses it: the swash `&` reads as an ornament in a heading
 - `.lede` / `.lede-light` — the relaxed 1.85 line-height intro paragraph
 - `.btn-primary` — terracotta pill, **on `mist` only**; `.btn-primary-light` — its cream inversion, the primary on `fern`; `.btn-ghost` — outlined pill on light; `.btn-ghost-light` — outlined pill on fern
 - `.soft-card` / `.soft-card-dark` — borderless rounded surface with a soft shadow. `.soft-card` is solid `cream`, **not** white or a white overlay
@@ -425,7 +437,7 @@ Texture: a fine SVG grain sits on `body::after` as one fixed, page-wide layer. I
 
 ## Section IDs (for anchor links)
 
-`#home` · `#glance` · `#about` · `#approach` · `#services` · `#practice` · `#reviews` · `#faq` · `#rates` · `#book` · `#contact` (footer)
+`#home` · `#glance` · `#about` · `#approach` · `#services` · `#practice` · `#reviews` · `#faq` · `#rates` · `#cancellation` · `#book` · `#contact` (footer)
 
 The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). Services is the one entry with `children` — `#rates` then `#faq` — which open on hover and on focus-within, so the submenu is reachable by keyboard. Below `md` the links are hidden entirely and the pill keeps the wordmark, the call icon and Book. `#contact` exists for the footer and deep linking.
 
@@ -444,6 +456,8 @@ re-point the navbar and the footer together if it moves again.
 
 - **Practice name, doctor, credentials, contact details** — `src/siteInfo.js`, imported everywhere. `index.html` keeps its own copy for `<meta>` tags and JSON-LD — **update both.**
 - **Rates** — `src/sections/Rates.jsx` — the `rates` array
+- **Cancellation policy** — `src/sections/Cancellation.jsx` — verbatim, with the
+  three `reasons` items; summarised by the FAQ answer and the `FAQPage` JSON-LD
 - **Session info** — `src/sections/Practice.jsx` — the `infoCards` array
 - **Specialties and treatments** — `src/sections/Services.jsx` — the `experience` and `provided` arrays
 - **Bio** — `src/sections/About.jsx` — the `paragraphs` array (verbatim)
@@ -653,7 +667,7 @@ availability that varies. `siteInfo.js` and the `openingHoursSpecification` in
 
 Still invented and needing replacement before launch:
 
-- **FAQ answers** — written from the client's copy and plausible, but the insurance, cancellation and direct-access policies must be confirmed
+- **FAQ answers** — written from the client's copy and plausible. The insurance and cancellation answers are now the client's own words (the superbill sentence and the 24-hour policy); the **direct-access** answer is still ours and needs confirming
 - **Social links** — none are rendered. The personal Instagram is deliberately not linked; the practice is setting up a business Instagram and a LinkedIn. Put the URLs in `siteInfo.js` (`instagram`, `linkedin`) and add the links back to the footer
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are
@@ -672,8 +686,10 @@ open, and shown on the site anyway:
 - **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". The last unsettled figure on the page. If a cheaper guidance-only tier is wanted, it needs its own row
 - **The mileage radius** — still undefined; at his instruction the travel row keeps the +$50 and adds "contact for details" instead of naming a boundary
 
-Superbill / HSA / FSA wording was removed: the out-of-network model comes from
-the client's copy, but the billing specifics were invented and are unconfirmed.
+HSA / FSA wording stays off the page — still unconfirmed. The **superbill**
+sentence came back at the client's instruction and in his words; it is the only
+out-of-network billing detail he has committed to, and it sits at the end of
+the insurance paragraph in both places (see "Insurance wording" above).
 
 One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission**, and two of the three describe care given at a rehab hospital. Worth confirming the release before launch. The Care Hero award is the same conversation twice over — the two comments on it are patients', and the award itself is the hospital's to publish, so their sign-off belongs alongside the patients'.
 
