@@ -8,7 +8,7 @@ The domain is `guycatz.com`; the practice name is Healing Path Rehabilitation. T
 
 The stack is borrowed from the `veli-bol-home` site; the design language is not. Where that site is a photo-led travel page built from hard-edged alternating slabs, this one is built from exactly **two background colours** — a deep blue-green and a cool light blue — alternating in bands joined by curved seams. See "Bands and seams" below before adding anything.
 
-> **The words are the client's, and so are the contact details and prices now.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. Phone, email, the office address, the opening hours and every rate but telehealth are confirmed. See "What's placeholder" at the bottom.
+> **The words are the client's, and so are the contact details and prices now.** Bio, approach, services and testimonials are real copy supplied by the practice — keep testimonials verbatim. Phone, email, the office address, the opening hours and every rate but the telehealth treatment session are confirmed. See "What's placeholder" at the bottom.
 
 ## Commands
 
@@ -619,7 +619,7 @@ in a way that "physical therapy los angeles" is not — so if he adds or drops a
 specialty on the page, change it here in the same commit.
 
 Keep in sync, or the markup starts lying: contact details with `siteInfo.js`,
-the three `Offer` prices with the `rates` array in `Rates.jsx`, the questions
+the four per-session `Offer` prices with the `rates` array in `Rates.jsx`, the questions
 with the `faqs` array in `FAQ.jsx`, the specialties with `experience` in
 `Services.jsx`, and the hours with `openingHoursSpecification`. After editing,
 paste the page source into the Rich Results Test and Schema.org's validator —
@@ -678,12 +678,12 @@ Still invented and needing replacement before launch:
 ### Rates — one figure still open
 
 Confirmed by the practice: **$250** initial evaluation, **$200** treatment,
-**+$50** outside the local area, **$750** for four sessions and **$1,400** for
-eight. The packages are their own rows now that they carry numbers — they were
+**$200** telehealth initial evaluation, **+$50** outside the local area, **$750**
+for four sessions and **$1,400** for eight. The packages are their own rows now that they carry numbers — they were
 a single "contact for details" line while he was still doing the math. Still
 open, and shown on the site anyway:
 
-- **Telehealth $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". The last unsettled figure on the page. If a cheaper guidance-only tier is wanted, it needs its own row
+- **Telehealth session $150** — he said "either 100 to 150 depending… if it's a treatment then definitely 150", and then "I gotta think about it". The last unsettled figure on the page. If a cheaper guidance-only tier is wanted, it needs its own row. The telehealth *initial evaluation* above it is settled at $200 — he gave that figure directly — so the two telehealth rows are separate lines and only the lower one is still open
 - **The mileage radius** — still undefined; at his instruction the travel row keeps the +$50 and adds "contact for details" instead of naming a boundary
 
 HSA / FSA wording stays off the page — still unconfirmed. The **superbill**
