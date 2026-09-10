@@ -11,6 +11,7 @@ import Gallery from './sections/Gallery'
 import Reviews from './sections/Reviews'
 import FAQ from './sections/FAQ'
 import Rates from './sections/Rates'
+import Cancellation from './sections/Cancellation'
 import BookingCTA from './sections/BookingCTA'
 
 /**
@@ -60,9 +61,11 @@ export default function App() {
         <Divider from="fern" to="mist" shape="dune" />
 
         {/* Band H — mist, closing. Rates come last, once everything else
-            has been read, and immediately before the booking CTA */}
+            has been read; the cancellation policy follows them, since its
+            fee is stated in terms of the session value, and then the CTA */}
         <FAQ />
         <Rates />
+        <Cancellation />
         <BookingCTA />
         <Divider from="mist" to="fern" shape="dune" />
       </main>

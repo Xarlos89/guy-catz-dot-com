@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: 'Do you take insurance?',
-    a: 'We currently do not accept insurance, and payment is due at the time of the visit. This ensures significantly less wait time for appointments, and you will receive direct one-on-one care guided by your goals rather than what your plan covers.',
+    a: 'We currently do not accept insurance, and payment is due at the time of the visit. This ensures significantly less wait time for appointments, and you will receive direct one-on-one care guided by your goals rather than what your plan covers. We can provide superbills that you may submit to your PPO for out-of-network coverage and possible reimbursement.',
   },
   {
     q: 'Do I need a referral from a doctor?',
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'What is the cancellation policy?',
-    a: 'Twenty-four hours notice, no charge. Inside that window the session is billed, though genuine emergencies are always handled reasonably.',
+    a: 'We require at least 24 hours’ notice for any cancellations or rescheduling requests. Cancellations with less than 24 hours’ notice, or missed appointments (no-shows), will be charged the full session value fee. Exceptions are considered on a case-by-case basis for true emergencies — the full policy is further down this page.',
   },
 ]
 
