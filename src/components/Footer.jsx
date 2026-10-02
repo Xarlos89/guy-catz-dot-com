@@ -1,5 +1,12 @@
 import { site } from '../siteInfo'
 
+// Rendered only once a URL is set in siteInfo.js.
+const social = [
+  { label: 'Instagram', text: site.instagramHandle, href: site.instagram },
+  { label: 'Yelp', text: 'Yelp', href: site.yelp },
+  { label: 'LinkedIn', text: 'LinkedIn', href: site.linkedin },
+].filter(({ href }) => href)
+
 const explore = [
   { label: 'The Practice', href: '#practice' },
   { label: 'Meet Our Doctor', href: '#about' },
@@ -51,6 +58,19 @@ export default function Footer() {
               {site.address}<br />
               {site.addressCity}
             </li>
+            {social.map(({ label, text, href }, i) => (
+              <li key={label} className={i === 0 ? 'pt-2' : undefined}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={text === label ? `${label} (opens in a new tab)` : `${label}: ${text} (opens in a new tab)`}
+                  className="hover:text-cream transition-colors duration-300"
+                >
+                  {text}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

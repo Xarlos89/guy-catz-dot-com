@@ -7,6 +7,15 @@ const faqs = [
     a: 'At your home, at the West Los Angeles office, or by telehealth.',
   },
   {
+    q: 'How long is a session?',
+    a: 'Approximately 1 hour.',
+  },
+  {
+    // The client's own sentence, verbatim.
+    q: 'Is your care trauma-informed?',
+    a: 'We provide trauma-informed care – ensuring that you feel safe, secure, at ease, and truly cared for throughout your recovery.',
+  },
+  {
     q: 'Do you take insurance?',
     a: 'We currently do not accept insurance, and payment is due at the time of the visit. This ensures significantly less wait time for appointments, and you will receive direct one-on-one care guided by your goals rather than what your plan covers. We can provide superbills that you may submit to your PPO for out-of-network coverage and possible reimbursement.',
   },
