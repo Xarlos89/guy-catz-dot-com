@@ -27,9 +27,12 @@ export const site = {
   hours: 'Mon – Thu · 8am – 6pm',
   hoursNote: 'Weekend availability varies',
 
-  // No social links for now. The personal Instagram is deliberately not
-  // linked; a business Instagram and a LinkedIn are coming from the
-  // practice — drop the URLs in here and the footer picks them up.
-  instagram: '',
+  // The practice's own accounts. The personal Instagram is deliberately not
+  // linked. LinkedIn is still to come — drop the URL in and the footer picks
+  // it up. index.html carries these in the JSON-LD `sameAs`: update both.
+  instagram: 'https://www.instagram.com/HealingPathRehab/',
+  instagramHandle: '@HealingPathRehab',
+  // Tracking parameter stripped from the link the practice sent.
+  yelp: 'https://www.yelp.com/biz/healing-path-rehabilitation-los-angeles',
   linkedin: '',
 }

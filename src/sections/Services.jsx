@@ -1,5 +1,46 @@
 import Reveal from '../components/Reveal'
 
+// The three care settings, in the client's words — verbatim, from his
+// website-edits document. Each `areas` item is a name, plus his explanation
+// where he gave one; `note` is the line he set in italics. Do not reword,
+// shorten or reorder any of it.
+const settings = [
+  {
+    title: 'Home Health/Post-Hospital Discharge',
+    text: 'A return-to-home session where I help you optimize your level of independence by restoring function: helping you get stronger, continue progressing well in your recovery, and feel safer moving around in your home again. This may also involve, but is not limited to, recommending the necessary equipment, training with assistive devices, muscular strengthening, balance training, fall recovery, cardiovascular conditioning, and caregiver or family training if necessary.',
+    note: 'Home Health is primarily for patients who are unsafe and/or unable to leave their home on their own.',
+    areas: [
+      { name: 'Neurological Rehabilitation', detail: '(e.g. stroke, TBI, nerve injury)' },
+      { name: 'Orthopedic Rehabilitation', detail: '(e.g. fracture, joint replacement, soft tissue injury)' },
+      { name: 'Oncological Rehabilitation' },
+      { name: 'Geriatric Rehabilitation' },
+    ],
+  },
+  {
+    title: 'In Office',
+    text: 'Using a wide range of interventions such as manual therapy, cupping, electric stimulation, and/or therapeutic exercises, I am able to help you in reducing your pain, improve your strength, balance, mobility and function.',
+    areas: [
+      {
+        name: 'Return-to-Sport:',
+        detail: 'I help you get back to doing what you love and performing at your best after an injury or operation – guiding you on the healing path every step of the way! I am well-versed in rock climbing, calisthenics, weightlifting, beach volleyball, slacklining and yoga, so I am familiar with the injuries associated with those disciplines, but can help individuals from any sport background.',
+      },
+      { name: 'Orthopedic Rehabilitation', detail: '(e.g. post-op recovery, muscular pain/tension, tendonitis, soft tissue injury)' },
+      { name: 'Neurological Rehabilitation', detail: '(e.g. sciatica, nerve injury, radiculopathy)' },
+      {
+        name: 'Vestibular Rehabilitation:',
+        detail: 'Using specific non-invasive head and body maneuvers to guide dislodged inner ear crystals back to their proper place.',
+      },
+      { name: 'Other:', detail: 'Tension Headaches, motor vehicle accident recovery, TMJ pain' },
+    ],
+  },
+  {
+    title: 'Telehealth',
+    qualifier: '(only for CA residents)',
+    text: 'A virtual visit on a secure web-based platform – the more affordable option ideal for those able to be self-accountable with their exercises, who are located too far away for in-person treatments, or who simply need more insight and guidance to ensure the best outcomes in their recovery.',
+    areas: [],
+  },
+]
+
 const experience = [
   {
     icon: (
@@ -113,6 +154,45 @@ export default function Services() {
             </p>
           </div>
         </Reveal>
+
+        {/* The three care settings — his words, one row each. Heading on the
+            left and his text on the right at `lg`; stacked on a phone. Rows
+            are divided by the same faint rule as the grid below, not boxed. */}
+        <div className="mb-20 border-t border-cream/10">
+          {settings.map(({ title, qualifier, text, note, areas }) => (
+            <Reveal key={title}>
+              <div className="grid lg:grid-cols-[0.75fr_1.25fr] gap-x-12 gap-y-5 py-10 sm:py-12 border-b border-cream/10">
+                <h3 className="font-serif text-2xl sm:text-[1.7rem] text-cream leading-snug text-balance">
+                  {title}
+                  {qualifier && (
+                    <span className="block font-sans text-[14px] text-ochre mt-2.5">{qualifier}</span>
+                  )}
+                </h3>
+
+                <div className="max-w-[62ch]">
+                  <p className="font-sans text-[15px] sm:text-[16px] text-cream/80 leading-[1.85]">{text}</p>
+                  {note && (
+                    <p className="font-sans italic text-[15px] sm:text-[16px] text-cream leading-[1.85] mt-4">{note}</p>
+                  )}
+
+                  {areas.length > 0 && (
+                    <ul className="mt-7 space-y-3.5">
+                      {areas.map(({ name, detail }) => (
+                        <li key={name} className="flex items-start gap-3 font-sans text-[15px] sm:text-[16px] text-cream/80 leading-relaxed">
+                          <span aria-hidden="true" className="mt-2.5 w-1 h-1 rounded-full bg-ochre shrink-0" />
+                          <span>
+                            <span className="text-cream">{name}</span>
+                            {detail && <> {detail}</>}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
 
         {/* Areas of experience */}
         <Reveal>

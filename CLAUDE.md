@@ -48,9 +48,11 @@ src/
     About.jsx        "Meet Our Doctor" — portrait + his bio, verbatim (`paragraphs`);
                      a `fern` band, so light-on-dark
     Approach.jsx     the Healing Path Approach, verbatim (`paragraphs`)
-    Services.jsx     `experience` (8 rehab specialties) + `provided` (what a plan involves)
+    Services.jsx     `settings` (the three care settings, verbatim) +
+                     `experience` (8 rehab specialties) + `provided` (what a plan involves)
     Gallery.jsx      masonry grid of the practice — `photos` array
-    Reviews.jsx      real patient testimonials — `featured` + `reviews` —
+    Reviews.jsx      real patient testimonials — `featured` + `reviews` +
+                     `moreReviews` —
                      closing on the Care Hero certificate photo, with the
                      `award` text as its screen-reader transcript
     FAQ.jsx          accordion — `faqs` array (uses useState per item)
@@ -234,7 +236,19 @@ specifically after an earlier draft split them up:
 > I did it with the intention that it would all kind of stay together."*
 
 `Cancellation.jsx` is his writing too — the policy, its headings and its
-closing line came from him whole, so it gets the same treatment.
+closing line came from him whole, so it gets the same treatment. So is the
+`settings` array in `Services.jsx` — the Home Health / In Office / Telehealth
+descriptions and their lists, from his website-edits document — and the
+trauma-informed FAQ answer. He is adamant that his wording is used as written.
+The only liberty taken: his `–` dashes, which he typed with no space before
+(`operation– guiding`), are set with a space either side.
+
+**His edits are additive.** When a new document adds detail, it goes in
+alongside what is there — it does not replace it. That is why Services carries
+both his three care settings *and* the older "Experienced in" grid and "What
+that involves" list, and why Cardiopulmonary and Complex medical stay in the
+grid even though the new breakdown does not expand on them. Don't drop
+something just because he didn't elaborate on it.
 
 So: **never** break these paragraphs across cards, pull a sentence out for a
 heading or pull-quote, move one into another section, or lift the closing
@@ -439,7 +453,7 @@ Texture: a fine SVG grain sits on `body::after` as one fixed, page-wide layer. I
 
 `#home` · `#glance` · `#about` · `#approach` · `#services` · `#practice` · `#reviews` · `#faq` · `#rates` · `#cancellation` · `#book` · `#contact` (footer)
 
-The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). Services is the one entry with `children` — `#rates` then `#faq` — which open on hover and on focus-within, so the submenu is reachable by keyboard. Below `md` the links are hidden entirely and the pill keeps the wordmark, the call icon and Book. `#contact` exists for the footer and deep linking.
+The Navbar links to `#practice`, `#about`, `#approach`, `#services`, `#reviews` (the `navLinks` array), plus the wordmark (`#home`) and the Book button (`#book`). The pill is 64px tall with 15px links — sized up at the client's request — and `scroll-margin-top` (`6.5rem`) clears it; grow both together. Services is the one entry with `children` — `#rates` then `#faq` — which open on hover and on focus-within, so the submenu is reachable by keyboard. Below `md` the links are hidden entirely and the pill keeps the wordmark, the call icon and Book. `#contact` exists for the footer and deep linking.
 
 **`#practice` is Gallery.jsx — the section actually headed "The Practice".**
 The hairline fact row under the hero is `#glance`, and the photo section is the
@@ -459,11 +473,15 @@ re-point the navbar and the footer together if it moves again.
 - **Cancellation policy** — `src/sections/Cancellation.jsx` — verbatim, with the
   three `reasons` items; summarised by the FAQ answer and the `FAQPage` JSON-LD
 - **Session info** — `src/sections/Practice.jsx` — the `infoCards` array
+- **Care settings** — `src/sections/Services.jsx` — the `settings` array (verbatim)
 - **Specialties and treatments** — `src/sections/Services.jsx` — the `experience` and `provided` arrays
 - **Bio** — `src/sections/About.jsx` — the `paragraphs` array (verbatim)
 - **Approach** — `src/sections/Approach.jsx` — the `paragraphs` array (verbatim)
 - **FAQ** — `src/sections/FAQ.jsx` — the `faqs` array (mirrored in the `FAQPage` JSON-LD in `index.html`)
-- **Testimonials** — `src/sections/Reviews.jsx` — the `reviews` array
+- **Testimonials** — `src/sections/Reviews.jsx` — `featured`, `reviews`, and
+  `moreReviews` (Chelsea, Andrija R, Mario — multi-paragraph, no ages given)
+- **Social links** — `src/siteInfo.js` (`instagram`, `yelp`, `linkedin`), rendered
+  in the footer only when set, and mirrored in the JSON-LD `sameAs`
 - **The Care Hero award** — `src/sections/Reviews.jsx` — the `award` object
 - **Logo** — `brand/healing-path-logo.jpg`, rebuilt by `scripts/build-logo-mark.py`
 - **Map** — `src/sections/BookingCTA.jsx` — an embed query on the street address, without the suite number (`#` is a URL fragment delimiter, and the suite does not move the pin)
@@ -593,7 +611,7 @@ One `@graph` in `index.html` with seven linked nodes: `WebSite` → `WebPage`
 to each other by `@id`, so a parser reads them as one description of one
 business rather than seven unrelated blobs.
 
-**Everything in it is on the page and confirmed.** Four things are deliberately
+**Everything in it is on the page and confirmed.** Three things are deliberately
 absent, and each is a trap rather than an oversight:
 
 - **`aggregateRating` / `Review`** — the testimonials are real, but reviews a
@@ -604,16 +622,17 @@ absent, and each is a trap rather than an oversight:
   worse than none. The Business Profile sets the real one
 - **`paymentAccepted`** — unconfirmed, and the same invented-billing-detail
   problem that removed the superbill/HSA wording
-- **`sameAs`** — no social accounts exist yet. **The moment the business
-  Instagram and LinkedIn land, put them in `siteInfo.js` *and* add a `sameAs`
-  array to the `#practice` node.** It is the strongest entity signal still
-  missing
+`sameAs` on the `#practice` node now carries the business Instagram
+(`@HealingPathRehab`) and the Yelp page, matching `siteInfo.js`. **When the
+LinkedIn lands, add it in both places.**
 
 `availableService` carries the three care settings **and the eight specialties
 from the `experience` array in `Services.jsx`** — Neurological, Orthopedic,
 Cardiopulmonary, Geriatric, Sports, Vestibular, Oncological and Complex
 medical, written out in full ("Vestibular rehabilitation" rather than the
-one-word label the page prints). Those are the long-tail local queries a new
+one-word label the page prints) — plus what his care-settings copy adds:
+home health / post-hospital discharge, return-to-sport, tension headaches,
+motor vehicle accident recovery and TMJ pain. Those are the long-tail local queries a new
 practice can realistically win — "vestibular rehab west los angeles" is winnable
 in a way that "physical therapy los angeles" is not — so if he adds or drops a
 specialty on the page, change it here in the same commit.
@@ -652,7 +671,7 @@ not on every deploy.
 
 ## What's placeholder / not yet real
 
-Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all three testimonials, the Care Hero award, its certificate photograph and the two patient comments quoted on it, the logo, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
+Real, supplied by the practice: the practice name and doctor, his bio and credentials, the approach copy, the specialty and treatment lists, all six testimonials, the Care Hero award, its certificate photograph and the two patient comments quoted on it, the logo, and the photography — five treatment-room frames in the gallery, the feature photo in Approach, and two portraits. `public/og-image.jpg` is cut from the same set.
 
 The two portraits are `meet-the-doctor` (seated at the treatment table) and
 `dr-guy-catz-headshot` (the tighter frame). There is only one portrait slot on
@@ -668,7 +687,7 @@ availability that varies. `siteInfo.js` and the `openingHoursSpecification` in
 Still invented and needing replacement before launch:
 
 - **FAQ answers** — written from the client's copy and plausible. The insurance and cancellation answers are now the client's own words (the superbill sentence and the 24-hour policy); the **direct-access** answer is still ours and needs confirming
-- **Social links** — none are rendered. The personal Instagram is deliberately not linked; the practice is setting up a business Instagram and a LinkedIn. Put the URLs in `siteInfo.js` (`instagram`, `linkedin`) and add the links back to the footer
+- **LinkedIn** — not yet supplied. Instagram and Yelp are live in the footer; put the LinkedIn URL in `siteInfo.js` and the `sameAs` array. The personal Instagram is deliberately not linked
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are
   filled in. He said only "at the hospital last year", so neither a hospital
@@ -679,7 +698,8 @@ Still invented and needing replacement before launch:
 
 Confirmed by the practice: **$250** initial evaluation, **$200** treatment,
 **$200** telehealth initial evaluation, **+$50** outside the local area, **$750**
-for four sessions and **$1,400** for eight. The packages are their own rows now that they carry numbers — they were
+for four sessions, **$1,500** for eight and **$2,200** for twelve (eight was
+$1,400 until his October edits raised it — deliberately). The packages are their own rows now that they carry numbers — they were
 a single "contact for details" line while he was still doing the math. Still
 open, and shown on the site anyway:
 
@@ -691,7 +711,7 @@ sentence came back at the client's instruction and in his words; it is the only
 out-of-network billing detail he has committed to, and it sits at the end of
 the insurance paragraph in both places (see "Insurance wording" above).
 
-One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission**, and two of the three describe care given at a rehab hospital. Worth confirming the release before launch. The Care Hero award is the same conversation twice over — the two comments on it are patients', and the award itself is the hospital's to publish, so their sign-off belongs alongside the patients'.
+One thing to raise with the client rather than fix in code: **patient testimonials in healthcare marketing usually need written, signed permission** — all six of them now, and Mario's also describes his girlfriend's condition, so hers is the consent that matters there. Two of the first three describe care given at a rehab hospital. Worth confirming the release before launch. The Care Hero award is the same conversation twice over — the two comments on it are patients', and the award itself is the hospital's to publish, so their sign-off belongs alongside the patients'.
 
 The certificate as supplied is a rainbow-gradient graphic carrying the
 hospital's own lettering and a photo of him. It was kept off the page for a

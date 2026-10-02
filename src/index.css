@@ -39,7 +39,7 @@
      the section's own top or the pill lands on the heading. */
   section[id],
   footer[id] {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 6.5rem;
   }
 
   body {

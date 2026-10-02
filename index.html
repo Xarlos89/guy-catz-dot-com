@@ -58,8 +58,10 @@
          real, but reviews a business publishes about itself are "self-serving"
          under Google's review-snippet policy and are ignored at best, a
          manual action at worst — patient reviews belong on the Google
-         Business Profile. Also absent: geo coordinates, payment methods and
-         sameAs, none of which are confirmed yet. See CLAUDE.md → SEO. -->
+         Business Profile. Also absent: geo coordinates and payment methods,
+         neither of which is confirmed yet. sameAs carries the Instagram and
+         Yelp URLs from src/siteInfo.js — add LinkedIn when it exists. See
+         CLAUDE.md → SEO. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -118,6 +120,10 @@
             "addressCountry": "US"
           },
           "hasMap": "https://maps.google.com/maps?q=11040+Santa+Monica+Blvd,+Los+Angeles,+CA+90025",
+          "sameAs": [
+            "https://www.instagram.com/HealingPathRehab/",
+            "https://www.yelp.com/biz/healing-path-rehabilitation-los-angeles"
+          ],
           "areaServed": ["West Los Angeles", "Los Angeles, California", "California"],
           "availableService": [
             { "@type": "MedicalTherapy", "name": "In-home physical therapy" },
@@ -130,7 +136,12 @@
             { "@type": "MedicalTherapy", "name": "Sports physical therapy" },
             { "@type": "MedicalTherapy", "name": "Vestibular rehabilitation" },
             { "@type": "MedicalTherapy", "name": "Oncological rehabilitation" },
-            { "@type": "MedicalTherapy", "name": "Complex medical rehabilitation" }
+            { "@type": "MedicalTherapy", "name": "Complex medical rehabilitation" },
+            { "@type": "MedicalTherapy", "name": "Home health and post-hospital discharge physical therapy" },
+            { "@type": "MedicalTherapy", "name": "Return-to-sport rehabilitation" },
+            { "@type": "MedicalTherapy", "name": "Tension headache physical therapy" },
+            { "@type": "MedicalTherapy", "name": "Motor vehicle accident recovery" },
+            { "@type": "MedicalTherapy", "name": "TMJ pain physical therapy" }
           ],
           "openingHoursSpecification": [
             {
@@ -237,6 +248,22 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "At your home, at the West Los Angeles office, or by telehealth."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long is a session?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Approximately 1 hour."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is your care trauma-informed?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We provide trauma-informed care – ensuring that you feel safe, secure, at ease, and truly cared for throughout your recovery."
               }
             },
             {

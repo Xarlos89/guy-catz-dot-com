@@ -24,6 +24,36 @@ const reviews = [
   },
 ]
 
+// The second set, added from the client's website-edits document. Verbatim,
+// paragraph breaks included (each string is one of the patient's paragraphs);
+// no ages were given, so none are shown.
+const moreReviews = [
+  {
+    name: 'Chelsea',
+    paragraphs: [
+      `I can't recommend Dr. Catz enough! He truly goes above and beyond, paying attention to even the smallest details and making sure I always felt heard and understood.`,
+      `His empathy, patience, and genuine care made such a difference in my experience. I never felt rushed or like just another patient. It's clear Dr. Catz truly cares about helping his patients feel their physically best.`,
+    ],
+  },
+  {
+    name: 'Andrija R',
+    paragraphs: [
+      `I highly recommend Dr Catz!`,
+      `I had a few sessions with healing path for sport related hip/back injury as well as a lower back injury I've carried for a longer period of time.`,
+      `The sessions incorporated not only reworking the way I move but future movement in connection with mind, body, spirit. He emphasizes being present and aware of how to move, tailored exercises for home, and motivation for improvement. I was very impressed with his experience and patience and sincere care for diagnosis of the injury and moving toward full recovery.`,
+      `He gave me the tools and guidance to heal on my own, and the peace of mind knowing there was light at the end of the tunnel which is especially important.`,
+    ],
+  },
+  {
+    name: 'Mario',
+    paragraphs: [
+      `We had a great experience here helping my girlfriend with her plantar fasciitis. The therapist was extremely informative and took the time to explain everything clearly, including what we should be doing, what we should avoid, and why certain things were important for her recovery.`,
+      `He was incredibly patient with us and made sure we understood everything before we left. The guidance and treatment made a significant difference, and we are very grateful for all the help.`,
+      `We would definitely come back and highly recommend this place to anyone looking for knowledgeable, patient, and caring physical therapy!`,
+    ],
+  },
+]
+
 /**
  * The Care Hero award.
  *
@@ -68,7 +98,7 @@ const award = {
 function Attribution({ name, age }) {
   return (
     <figcaption className="font-sans text-[13px] text-cream/75">
-      <span className="font-medium text-cream">{name}</span>, {age}
+      <span className="font-medium text-cream">{name}</span>{age != null && <>, {age}</>}
     </figcaption>
   )
 }
@@ -116,6 +146,24 @@ export default function Reviews() {
               <Attribution name={reviews[1].name} age={reviews[1].age} />
             </figure>
           </Reveal>
+        </div>
+
+        {/* The second set — three across at `lg`, stacked below it. Same
+            quiet treatment as Lina's: ochre mark, cream/80 body. */}
+        <div className="grid lg:grid-cols-3 gap-x-10 gap-y-12 mt-16 sm:mt-20 items-start">
+          {moreReviews.map(({ name, age, paragraphs }, i) => (
+            <Reveal key={name} delay={i * 110}>
+              <figure>
+                <span aria-hidden="true" className="block font-serif text-5xl text-ochre/60 leading-none mb-3">&rdquo;</span>
+                <blockquote className="font-sans text-[15px] text-cream/80 leading-[1.85] mb-5 space-y-4">
+                  {paragraphs.map((para) => (
+                    <p key={para}>{para}</p>
+                  ))}
+                </blockquote>
+                <Attribution name={name} age={age} />
+              </figure>
+            </Reveal>
+          ))}
         </div>
 
         {/* The award. A different kind of thing from a testimonial, so it
