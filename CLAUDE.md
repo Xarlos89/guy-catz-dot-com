@@ -506,9 +506,10 @@ The site has no server, so `ContactForm.jsx` posts JSON to
 `https://api.web3forms.com/submit`, which forwards each message to the inbox
 the access key was registered with. The key is **public by design** — it can
 only send to that one inbox — so it sits in `siteInfo.js` as
-`web3formsKey`. **While it is empty the form does not render** and the button
-falls back to "Email instead"; set the key and the button becomes "Send a
-message", jumping to the form (`#message`). If someone gives an email address,
+`web3formsKey`. The button beside "Call" reads "Send a message" and jumps to
+the form (`#message`). The `mailto:` fallback was dropped at the client's
+request, so **the key must stay set** — without it every message fails with
+the "call instead" error. The email address itself is still in the footer. If someone gives an email address,
 it is sent as `replyto`, so Reply in Gmail goes straight to them. A hidden
 `botcheck` box is the honeypot for spam bots.
 

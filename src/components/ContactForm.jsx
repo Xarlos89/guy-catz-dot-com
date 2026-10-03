@@ -16,7 +16,8 @@ const labelClasses = 'block font-sans font-medium text-[14px] text-ink mb-2'
 /**
  * The message form in the booking section. It replaced the "Email instead"
  * `mailto:` button, which does nothing on a computer with no desktop mail app —
- * the client's own laptop among them.
+ * the client's own laptop among them. That button is gone for good; the
+ * address itself is still in the footer for anyone who wants to write directly.
  *
  * The site has no server, so submissions go to Web3Forms, which forwards each
  * one to the inbox the access key was registered with (his Gmail). The key is
