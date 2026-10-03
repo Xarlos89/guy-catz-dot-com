@@ -498,7 +498,11 @@ link. On a computer with no desktop mail app — the client's own laptop, which
 uses Gmail in the browser — it does nothing, so he asked for a form instead.
 His fields, in his words: **Full name**, **Email or phone #**, **Brief
 description of the primary area of concern**, and **How did you hear about
-us?** with the tick boxes Friend/Relative, Google, Social Media and Yelp. The
+us?** with the tick boxes Friend/Relative, Google, Social Media and Yelp.
+The combined "Email or phone #" was later split, at the developer's request,
+into a required **Email**, a **Phone #**, and a required **Preferred method
+of contact** (Email / Phone). Phone # is optional unless they choose Phone,
+in which case the browser won't submit without it. The
 lines around them ("Leave your details…", the hint under the concern box, the
 thank-you) are ours.
 
@@ -509,8 +513,8 @@ only send to that one inbox — so it sits in `siteInfo.js` as
 `web3formsKey`. The button beside "Call" reads "Send a message" and jumps to
 the form (`#message`). The `mailto:` fallback was dropped at the client's
 request, so **the key must stay set** — without it every message fails with
-the "call instead" error. The email address itself is still in the footer. If someone gives an email address,
-it is sent as `replyto`, so Reply in Gmail goes straight to them. A hidden
+the "call instead" error. The email address itself is still in the footer. The patient's email is
+always sent as `replyto`, so Reply in Gmail goes straight to them. A hidden
 `botcheck` box is the honeypot for spam bots.
 
 **This is a contact form, not a medical intake — keep it that way.** Neither
