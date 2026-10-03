@@ -39,6 +39,8 @@ src/
     Divider.jsx      the curved seam between two colour bands
     Reveal.jsx       scroll-triggered fade-and-rise wrapper
     Photo.jsx        image slot — <img>, or a "photo coming soon" placeholder when src is falsy
+    ContactForm.jsx  the message form in BookingCTA, sent through Web3Forms —
+                     see "The contact form" below
   sections/          one file per visible scroll section, assembled in App.jsx
     Hero.jsx         a flat `fern` band — no photo, no gradient, light-on-dark;
                      carries the recoloured logo mark; laid out mobile-first —
@@ -60,7 +62,8 @@ src/
                      of the page — reached from the menu as Services → Rates
     Cancellation.jsx the cancellation & no-show policy (#cancellation),
                      verbatim client copy, directly after the rates
-    BookingCTA.jsx   closing call-to-action + map (#book)
+    BookingCTA.jsx   closing call-to-action + map (#book), and the message
+                     form under them (#message)
   App.jsx            orders the sections and places the dividers between bands
   main.jsx           ViteReactSSG entry; App adds `.reveal-ready` on mount
   index.css          @font-face, base layer, component classes
@@ -484,7 +487,39 @@ re-point the navbar and the footer together if it moves again.
   in the footer only when set, and mirrored in the JSON-LD `sameAs`
 - **The Care Hero award** — `src/sections/Reviews.jsx` — the `award` object
 - **Logo** — `brand/healing-path-logo.jpg`, rebuilt by `scripts/build-logo-mark.py`
+- **Contact form** — `src/components/ContactForm.jsx`; the Web3Forms key is
+  `web3formsKey` in `src/siteInfo.js`
 - **Map** — `src/sections/BookingCTA.jsx` — an embed query on the street address, without the suite number (`#` is a URL fragment delimiter, and the suite does not move the pin)
+
+## The contact form
+
+The booking section's second button used to be "Email instead", a `mailto:`
+link. On a computer with no desktop mail app — the client's own laptop, which
+uses Gmail in the browser — it does nothing, so he asked for a form instead.
+His fields, in his words: **Full name**, **Email or phone #**, **Brief
+description of the primary area of concern**, and **How did you hear about
+us?** with the tick boxes Friend/Relative, Google, Social Media and Yelp. The
+lines around them ("Leave your details…", the hint under the concern box, the
+thank-you) are ours.
+
+The site has no server, so `ContactForm.jsx` posts JSON to
+`https://api.web3forms.com/submit`, which forwards each message to the inbox
+the access key was registered with. The key is **public by design** — it can
+only send to that one inbox — so it sits in `siteInfo.js` as
+`web3formsKey`. The button beside "Call" reads "Send a message" and jumps to
+the form (`#message`). The `mailto:` fallback was dropped at the client's
+request, so **the key must stay set** — without it every message fails with
+the "call instead" error. The email address itself is still in the footer. If someone gives an email address,
+it is sent as `replyto`, so Reply in Gmail goes straight to them. A hidden
+`botcheck` box is the honeypot for spam bots.
+
+**This is a contact form, not a medical intake — keep it that way.** Neither
+Web3Forms nor a personal Gmail signs a HIPAA business associate agreement, and
+California's medical-privacy law applies to him regardless. The client chose
+this option knowing that, on the condition that the concern box asks for "a
+sentence or two" and no more. **Don't add fields for medical history,
+medications, date of birth or insurance** without first moving to a HIPAA-
+compliant form service and a Workspace inbox under a Google BAA.
 
 ## Adding photos
 
@@ -687,6 +722,10 @@ availability that varies. `siteInfo.js` and the `openingHoursSpecification` in
 Still invented and needing replacement before launch:
 
 - **FAQ answers** — written from the client's copy and plausible. The insurance and cancellation answers are now the client's own words (the superbill sentence and the 24-hour policy); the **direct-access** answer is still ours and needs confirming
+- **The contact form's first live message** — the Web3Forms key is set, so the
+  form is on the page, but no message has gone through the live site yet. Send
+  one test message once it deploys and confirm it lands in his inbox before
+  telling him it works
 - **LinkedIn** — not yet supplied. Instagram and Yelp are live in the footer; put the LinkedIn URL in `siteInfo.js` and the `sameAs` array. The personal Instagram is deliberately not linked
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are

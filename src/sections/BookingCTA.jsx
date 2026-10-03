@@ -1,3 +1,4 @@
+import ContactForm from '../components/ContactForm'
 import Reveal from '../components/Reveal'
 import { site } from '../siteInfo'
 
@@ -26,11 +27,13 @@ export default function BookingCTA() {
                 </svg>
                 Call {site.phone}
               </a>
-              <a href={site.emailHref} className="btn-ghost w-full sm:w-auto">
+              {/* Jumps to the form below. This was a mailto: link, dropped
+                  because it does nothing without a desktop mail app. */}
+              <a href="#message" className="btn-ghost w-full sm:w-auto">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
-                Email instead
+                Send a message
               </a>
             </div>
 
@@ -66,6 +69,19 @@ export default function BookingCTA() {
             </div>
           </Reveal>
         </div>
+
+        {/* The message form — replaces the mailto button, which does nothing
+            on a computer without a desktop mail app. Cream card on the mist
+            band, so .btn-primary is safe inside it. */}
+        <Reveal>
+          <div id="message" className="soft-card sm:p-10 mt-16 sm:mt-20 max-w-2xl scroll-mt-28">
+            <p className="label mb-3">Send a message</p>
+            <p className="font-sans text-[15px] text-ink-soft leading-[1.85] mb-8">
+              Leave your details and we will get back to you.
+            </p>
+            <ContactForm />
+          </div>
+        </Reveal>
       </div>
     </section>
   )
