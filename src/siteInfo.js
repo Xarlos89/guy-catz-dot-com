@@ -35,4 +35,10 @@ export const site = {
   // Tracking parameter stripped from the link the practice sent.
   yelp: 'https://www.yelp.com/biz/healing-path-rehabilitation-los-angeles',
   linkedin: '',
+
+  // Web3Forms access key — the contact form in BookingCTA sends through it,
+  // and Web3Forms forwards each message to the inbox the key was registered
+  // with. Public by design (it can only send to that inbox). While it is
+  // empty the form stays hidden and the old "Email instead" button shows.
+  web3formsKey: '',
 }
