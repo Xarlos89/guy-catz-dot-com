@@ -5,6 +5,8 @@ import { site } from '../siteInfo'
 // without him.
 const sources = ['Friend/Relative', 'Google', 'Social Media', 'Yelp']
 
+const contactMethods = ['Email', 'Phone']
+
 const ENDPOINT = 'https://api.web3forms.com/submit'
 
 const fieldClasses =
@@ -31,6 +33,8 @@ const labelClasses = 'block font-sans font-medium text-[14px] text-ink mb-2'
  */
 export default function ContactForm() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  // Phone # is only required when they would rather be phoned.
+  const [preferred, setPreferred] = useState('')
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -41,7 +45,8 @@ export default function ContactForm() {
     if (data.get('botcheck')) return
 
     const name = data.get('name').trim()
-    const contact = data.get('contact').trim()
+    const email = data.get('email').trim()
+    const phone = data.get('phone').trim()
     const heard = data.getAll('heard')
 
     const payload = {
@@ -49,12 +54,14 @@ export default function ContactForm() {
       subject: `New message from the website — ${name}`,
       from_name: 'guycatz.com',
       'Full name': name,
-      'Email or phone': contact,
+      Email: email,
+      'Phone #': phone || 'Not given',
+      'Preferred method of contact': data.get('preferred'),
       'Primary area of concern': data.get('concern').trim(),
       'How did you hear about us?': heard.length ? heard.join(', ') : 'Not answered',
+      // "Reply" in Gmail goes straight to them.
+      replyto: email,
     }
-    // When they gave an email, make "Reply" in Gmail go straight to them.
-    if (contact.includes('@')) payload.replyto = contact
 
     setStatus('sending')
     try {
@@ -66,6 +73,7 @@ export default function ContactForm() {
       const result = await response.json()
       if (!result.success) throw new Error(result.message)
       form.reset()
+      setPreferred('')
       setStatus('sent')
     } catch {
       setStatus('error')
@@ -90,10 +98,46 @@ export default function ContactForm() {
         <input id="cf-name" name="name" type="text" autoComplete="name" required className={fieldClasses} />
       </div>
 
-      <div>
-        <label htmlFor="cf-contact" className={labelClasses}>Email or phone #</label>
-        <input id="cf-contact" name="contact" type="text" autoComplete="email" required className={fieldClasses} />
+      <div className="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="cf-email" className={labelClasses}>Email</label>
+          <input id="cf-email" name="email" type="email" autoComplete="email" required className={fieldClasses} />
+        </div>
+        <div>
+          <label htmlFor="cf-phone" className={labelClasses}>
+            Phone #
+            {preferred !== 'Phone' && <span className="font-normal text-ink-soft"> (optional)</span>}
+          </label>
+          <input
+            id="cf-phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            required={preferred === 'Phone'}
+            className={fieldClasses}
+          />
+        </div>
       </div>
+
+      <fieldset>
+        <legend className={labelClasses}>Preferred method of contact</legend>
+        <div className="flex flex-col sm:flex-row gap-x-10 gap-y-3 mt-1">
+          {contactMethods.map((method) => (
+            <label key={method} className="flex items-center gap-3 font-sans text-[15px] text-ink cursor-pointer">
+              <input
+                type="radio"
+                name="preferred"
+                value={method}
+                required
+                checked={preferred === method}
+                onChange={() => setPreferred(method)}
+                className="w-4 h-4 accent-terracotta shrink-0"
+              />
+              {method}
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <div>
         <label htmlFor="cf-concern" className={labelClasses}>
