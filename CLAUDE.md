@@ -63,7 +63,7 @@ src/
     Cancellation.jsx the cancellation & no-show policy (#cancellation),
                      verbatim client copy, directly after the rates
     BookingCTA.jsx   closing call-to-action + map (#book), and the message
-                     form under them (#message) once the Web3Forms key is set
+                     form under them (#message)
   App.jsx            orders the sections and places the dividers between bands
   main.jsx           ViteReactSSG entry; App adds `.reveal-ready` on mount
   index.css          @font-face, base layer, component classes
@@ -721,10 +721,10 @@ availability that varies. `siteInfo.js` and the `openingHoursSpecification` in
 Still invented and needing replacement before launch:
 
 - **FAQ answers** — written from the client's copy and plausible. The insurance and cancellation answers are now the client's own words (the superbill sentence and the 24-hour policy); the **direct-access** answer is still ours and needs confirming
-- **The Web3Forms access key** — the client is registering it with his email.
-  Until `web3formsKey` in `siteInfo.js` is set, the form stays hidden and
-  "Email instead" shows. Once set, send one test message through the live site
-  before telling him it works
+- **The contact form's first live message** — the Web3Forms key is set, so the
+  form is on the page, but no message has gone through the live site yet. Send
+  one test message once it deploys and confirm it lands in his inbox before
+  telling him it works
 - **LinkedIn** — not yet supplied. Instagram and Yelp are live in the footer; put the LinkedIn URL in `siteInfo.js` and the `sameAs` array. The personal Instagram is deliberately not linked
 - **Who gave the Care Hero award, and when** — `Reviews.jsx`, the `award`
   object: `issuer` and `period` are empty and render nothing until they are

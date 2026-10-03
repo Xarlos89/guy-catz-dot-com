@@ -40,5 +40,5 @@ export const site = {
   // and Web3Forms forwards each message to the inbox the key was registered
   // with. Public by design (it can only send to that inbox). While it is
   // empty the form stays hidden and the old "Email instead" button shows.
-  web3formsKey: '',
+  web3formsKey: '5fa28fc8-dbd8-4be5-9338-34a35f0282f2',
 }
